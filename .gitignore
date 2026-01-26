@@ -1,0 +1,17 @@
+#База данных
+physics.db
+
+#Результаты компиляции LaTeX
+output.pdf
+output.tex
+output.log
+output.aux
+output.out
+
+#Вспомогательные папки
+/old_folders
+/output_versions
+
+#ОС
+.DS_Store
+Thumbs.db
