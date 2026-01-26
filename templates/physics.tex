@@ -1,0 +1,84 @@
+\documentclass[14pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{tocloft}
+
+\geometry{a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm}
+\setstretch{1.0}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\titleformat{\section}{\centering\large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\bfseries}{}{0em}{}
+
+\begin{document}
+
+% === ЗАГОЛОВОК ДОКУМЕНТА ===
+\begin{center}
+\Large\textbf{Справочник по физике}
+\end{center}
+\bigskip
+
+% === ОГЛАВЛЕНИЕ ===
+\tableofcontents
+\newpage
+
+% === СОДЕРЖАНИЕ ===
+{% for section in items %}
+\section{ {{ section.name|title }} }
+
+{% for subsection in section.subsections %}
+\subsection{ {{ subsection.name|title }} }
+
+% --- Формулы ---
+{% for formula in subsection.formulas %}
+\subsubsection*{ {{ formula.name }} }
+\begin{equation*}
+{{ formula.formula_latex }}
+\end{equation*}
+
+\begin{flushleft}
+\setstretch{1.0}
+{% for var in formula.variables %}
+${{ var.symbol }}$ — {{ var.desc }}
+{% if var.unit %}({{ var.unit }}){% endif %};
+\\
+{% endfor %}
+\end{flushleft}
+
+{% if formula.image_path %}
+\vspace{1em}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{ {{ formula.image_path }} }
+\end{center}
+{% endif %}
+
+\vspace{1em}
+{% endfor %}
+
+% --- Концепции (определения, правила) ---
+{% for concept in subsection.concepts %}
+\subsubsection*{ {{ concept.name }} }
+\begin{flushleft}
+{{ concept.definition }}
+\end{flushleft}
+
+{% if concept.image_path %}
+\vspace{1em}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{ {{ concept.image_path }} }
+\end{center}
+{% endif %}
+
+\vspace{1em}
+{% endfor %}
+
+{% endfor %}
+\newpage
+{% endfor %}
+
+\end{document}
