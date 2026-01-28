@@ -66,6 +66,8 @@ def main():
     parser.add_argument("--university", nargs='+', type=str, help="Курс(ы): 1, 2-4, 3+...")
     parser.add_argument("--description", nargs='+', type=str, help="Описание переменной")
     parser.add_argument("--unit", nargs='+', type=str, help="Единица измерения")
+    parser.add_argument("--toc", action="store_true", help="Добавить оглавление")
+    parser.add_argument("--bibliography", action="store_true", help="Добавить список литературы")
 
     args = parser.parse_args()
 
@@ -115,7 +117,6 @@ def main():
                 for k in keys if k in variables_dict
             )
         if desc_ok and unit_ok:
-            # Получить источники
             cursor.execute("SELECT source_id FROM formula_sources WHERE formula_id = ?", (f['id'],))
             source_ids = [r[0] for r in cursor.fetchall()]
             filtered_formulas.append((f, source_ids))
@@ -133,7 +134,6 @@ def main():
             continue
         if not filter_by_level(c['level'], school_set, univ_set):
             continue
-        # Получить источники
         cursor.execute("SELECT source_id FROM concept_sources WHERE concept_id = ?", (c['id'],))
         source_ids = [r[0] for r in cursor.fetchall()]
         filtered_concepts.append((c, source_ids))
@@ -143,36 +143,28 @@ def main():
     sections_dict = defaultdict(lambda: defaultdict(lambda: {'formulas': [], 'concepts': []}))
 
     for f, src_ids in filtered_formulas:
-        used_source_ids.update(src_ids)
-        keys = [k.strip() for k in f['variable_keys'].split(',')]
-        variables_list = []
-        for key in keys:
-            if key in variables_dict:
-                variables_list.append(variables_dict[key])
-            else:
-                variables_list.append({
-                    'symbol': f"[{key}]",
-                    'desc': "неизвестная переменная",
-                    'unit': ""
-                })
+        if args.bibliography:
+            used_source_ids.update(src_ids)
         sections_dict[f['section']][f['subsection']]['formulas'].append({
             'name': f['name'],
             'formula_latex': fix_latex_escapes(f['formula_latex']),
-            'variables': variables_list,
+            'variable_keys': f['variable_keys'],
+            'variables': variables_dict,
             'image_path': f['image_path'],
-            'sources': src_ids
+            'sources': src_ids if args.bibliography else []
         })
 
     for c, src_ids in filtered_concepts:
-        used_source_ids.update(src_ids)
+        if args.bibliography:
+            used_source_ids.update(src_ids)
         sections_dict[c['section']][c['subsection']]['concepts'].append({
             'name': c['name'],
             'definition': c['definition'],
             'image_path': c['image_path'],
-            'sources': src_ids
+            'sources': src_ids if args.bibliography else []
         })
 
-    # === Формирование items для шаблона ===
+    # === Формирование items ===
     items = []
     for section, subsections in sorted(sections_dict.items()):
         subsections_list = []
@@ -187,8 +179,8 @@ def main():
             'subsections': subsections_list
         })
 
-    # === Загрузка ТОЛЬКО используемых источников ===
-    if used_source_ids:
+    # === Загрузка только используемых источников ===
+    if args.bibliography and used_source_ids:
         placeholders = ','.join('?' * len(used_source_ids))
         cursor.execute(f"SELECT id, citation FROM sources WHERE id IN ({placeholders}) ORDER BY id", list(used_source_ids))
         used_sources = {row[0]: row[1] for row in cursor.fetchall()}
@@ -202,7 +194,12 @@ def main():
         template_str = f.read()
 
     template = Template(template_str)
-    latex_output = template.render(items=items, sources=used_sources)
+    latex_output = template.render(
+        items=items,
+        sources=used_sources,
+        toc=args.toc,
+        bibliography=args.bibliography
+    )
 
     with open('output.tex', 'w', encoding='utf-8') as f:
         f.write(latex_output)
