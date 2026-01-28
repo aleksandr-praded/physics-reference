@@ -17,7 +17,7 @@
 
 \begin{document}
 
-% === ЗАГОЛОВОК ДОКУМЕНТА ===
+% === ЗАГОЛОВОК ===
 \begin{center}
 \Large\textbf{Справочник по физике}
 \end{center}
@@ -50,6 +50,11 @@ ${{ var.symbol }}$ — {{ var.desc }}
 {% endfor %}
 \end{flushleft}
 
+{% if formula.sources %}
+\footnotesize{Источники: [{% for sid in formula.sources %}{{ sid }}{% if not loop.last %}, {% endif %}{% endfor %}]}
+\vspace{0.5em}
+{% endif %}
+
 {% if formula.image_path %}
 \vspace{1em}
 \begin{center}
@@ -60,12 +65,17 @@ ${{ var.symbol }}$ — {{ var.desc }}
 \vspace{1em}
 {% endfor %}
 
-% --- Концепции (определения, правила) ---
+% --- Концепции ---
 {% for concept in subsection.concepts %}
 \subsubsection*{ {{ concept.name }} }
 \begin{flushleft}
 {{ concept.definition }}
 \end{flushleft}
+
+{% if concept.sources %}
+\footnotesize{Источники: [{% for sid in concept.sources %}{{ sid }}{% if not loop.last %}, {% endif %}{% endfor %}]}
+\vspace{0.5em}
+{% endif %}
 
 {% if concept.image_path %}
 \vspace{1em}
@@ -80,5 +90,13 @@ ${{ var.symbol }}$ — {{ var.desc }}
 {% endfor %}
 \newpage
 {% endfor %}
+
+% === СПИСОК ЛИТЕРАТУРЫ ===
+\section*{Список литературы}
+\begin{enumerate}
+{% for id, citation in sources.items() %}
+  \item {{ citation }}
+{% endfor %}
+\end{enumerate}
 
 \end{document}

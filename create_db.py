@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS formulas (
 )
 ''')
 
-# === Таблица концепций (определения, правила) ===
+# === Таблица концепций ===
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS concepts (
     id INTEGER PRIMARY KEY,
@@ -50,7 +50,36 @@ CREATE TABLE IF NOT EXISTS variables (
 )
 ''')
 
-# === Загрузка переменных из CSV ===
+# === Таблица источников ===
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS sources (
+    id INTEGER PRIMARY KEY,
+    citation TEXT NOT NULL,
+    comment TEXT
+)
+''')
+
+# === Связи: формулы ↔ источники ===
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS formula_sources (
+    formula_id INTEGER,
+    source_id INTEGER,
+    FOREIGN KEY(formula_id) REFERENCES formulas(id),
+    FOREIGN KEY(source_id) REFERENCES sources(id)
+)
+''')
+
+# === Связи: концепции ↔ источники ===
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS concept_sources (
+    concept_id INTEGER,
+    source_id INTEGER,
+    FOREIGN KEY(concept_id) REFERENCES concepts(id),
+    FOREIGN KEY(source_id) REFERENCES sources(id)
+)
+''')
+
+# === Загрузка переменных ===
 if os.path.exists('data/variables.csv'):
     with open('data/variables.csv', 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
@@ -58,17 +87,36 @@ if os.path.exists('data/variables.csv'):
             cursor.execute('''
                 INSERT OR REPLACE INTO variables (key, symbol_latex, description_ru, unit)
                 VALUES (?, ?, ?, ?)
-            ''', (
-                row['key'],
-                row['symbol_latex'],
-                row['description_ru'],
-                row['unit']
-            ))
-    print("✅ Переменные загружены из data/variables.csv")
+            ''', (row['key'], row['symbol_latex'], row['description_ru'], row['unit']))
+    print("✅ Переменные загружены")
 else:
-    print("⚠️ Файл data/variables.csv не найден")
+    print("⚠️ variables.csv не найден")
 
-# === Загрузка формул из CSV ===
+# === Загрузка источников ===
+if os.path.exists('data/sources.csv'):
+    with open('data/sources.csv', 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            cursor.execute('''
+                INSERT OR REPLACE INTO sources (id, citation, comment)
+                VALUES (?, ?, ?)
+            ''', (int(row['id']), row['citation'], row.get('comment', '')))
+    print("✅ Источники загружены")
+else:
+    print("⚠️ sources.csv не найден")
+
+# === Вспомогательная функция: найти ID по имени ===
+def get_formula_id(name):
+    cursor.execute("SELECT id FROM formulas WHERE name = ?", (name,))
+    res = cursor.fetchone()
+    return res[0] if res else None
+
+def get_concept_id(name):
+    cursor.execute("SELECT id FROM concepts WHERE name = ?", (name,))
+    res = cursor.fetchone()
+    return res[0] if res else None
+
+# === Загрузка формул ===
 if os.path.exists('data/formulas.csv'):
     with open('data/formulas.csv', 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
@@ -87,11 +135,28 @@ if os.path.exists('data/formulas.csv'):
                 row.get('level', ''),
                 image_path
             ))
-    print("✅ Формулы загружены из data/formulas.csv")
+    print("✅ Формулы загружены")
 else:
-    print("⚠️ Файл data/formulas.csv не найден")
+    print("⚠️ formulas.csv не найден")
 
-# === Загрузка концепций из CSV ===
+# === Загрузка связей формул с источниками ===
+if os.path.exists('data/formula_sources.csv'):
+    with open('data/formula_sources.csv', 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            formula_id = get_formula_id(row['formula_name'])
+            if formula_id:
+                source_ids = [int(x.strip()) for x in row['source_ids'].split(',') if x.strip()]
+                for sid in source_ids:
+                    cursor.execute('''
+                        INSERT OR REPLACE INTO formula_sources (formula_id, source_id)
+                        VALUES (?, ?)
+                    ''', (formula_id, sid))
+    print("✅ Связи формул с источниками загружены")
+else:
+    print("⚠️ formula_sources.csv не найден")
+
+# === Загрузка концепций ===
 if os.path.exists('data/concepts.csv'):
     with open('data/concepts.csv', 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
@@ -109,9 +174,26 @@ if os.path.exists('data/concepts.csv'):
                 row.get('level', ''),
                 image_path
             ))
-    print("✅ Концепции загружены из data/concepts.csv")
+    print("✅ Концепции загружены")
 else:
-    print("⚠️ Файл data/concepts.csv не найден")
+    print("⚠️ concepts.csv не найден")
+
+# === Загрузка связей концепций с источниками ===
+if os.path.exists('data/concept_sources.csv'):
+    with open('data/concept_sources.csv', 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            concept_id = get_concept_id(row['concept_name'])
+            if concept_id:
+                source_ids = [int(x.strip()) for x in row['source_ids'].split(',') if x.strip()]
+                for sid in source_ids:
+                    cursor.execute('''
+                        INSERT OR REPLACE INTO concept_sources (concept_id, source_id)
+                        VALUES (?, ?)
+                    ''', (concept_id, sid))
+    print("✅ Связи концепций с источниками загружены")
+else:
+    print("⚠️ concept_sources.csv не найден")
 
 conn.commit()
 conn.close()
