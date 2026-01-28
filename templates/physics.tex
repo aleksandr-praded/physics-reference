@@ -1,4 +1,4 @@
-\documentclass[14pt,a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[russian]{babel}
 \usepackage{amsmath}
@@ -7,36 +7,60 @@
 \usepackage{titlesec}
 \usepackage{setspace}
 \usepackage{tocloft}
+\usepackage{etoolbox}  % ← ДОБАВЛЕНО
 
 \geometry{a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm}
 \setstretch{1.0}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
-\titleformat{\section}{\centering\large\bfseries}{}{0em}{}
-\titleformat{\subsection}{\bfseries}{}{0em}{}
+% Заголовки
+\titleformat{\section}{\centering\Large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\large\bfseries}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{}{0em}{}  % ← ДОБАВЛЕНО
+
+% Устанавливаем единый размер по умолчанию
+\AtBeginDocument{\normalsize\setstretch{1.0}}  % ← ДОБАВЛЕНО
 
 \begin{document}
 
-% === ЗАГОЛОВОК ===
 \begin{center}
 \Large\textbf{Справочник по физике}
 \end{center}
 \bigskip
 
-% === ОГЛАВЛЕНИЕ ===
 {% if toc %}
 \tableofcontents
 \newpage
 {% endif %}
 
-% === СОДЕРЖАНИЕ ===
 {% for section in items %}
-\section{ {{ section.name|title }} }
+\section{ {{ section.name }} }
 
 {% for subsection in section.subsections %}
-\subsection{ {{ subsection.name|title }} }
+\subsection{ {{ subsection.name }} }
 
-% --- Формулы ---
+{% for concept in subsection.concepts %}
+\subsubsection*{ {{ concept.name }} }
+\begin{flushleft}
+\normalsize  % ← ЯВНО задаем размер
+{{ concept.definition }}
+\end{flushleft}
+
+{% if bibliography and concept.sources %}
+\footnotesize{Источники: [{% for sid in concept.sources %}{{ sid }}{% if not loop.last %}, {% endif %}{% endfor %}]}
+\vspace{0.5em}
+{% endif %}
+
+{% if concept.image_path %}
+\vspace{1em}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{ {{ concept.image_path }} }
+\end{center}
+{% endif %}
+
+\vspace{1em}
+{% endfor %}
+
 {% for formula in subsection.formulas %}
 \subsubsection*{ {{ formula.name }} }
 \begin{equation*}
@@ -44,13 +68,13 @@
 \end{equation*}
 
 \begin{flushleft}
-\setstretch{1.0}
+\normalsize  % ← ЯВНО задаем размер
 {% for var_key in formula.variable_keys.split(',') %}
 {% set var = formula.variables.get(var_key.strip()) %}
 {% if var %}
 ${{ var.symbol }}$ — {{ var.desc }}
 {% if var.unit %}({{ var.unit }}){% endif %};
-\\
+{% if not loop.last %} \\ {% endif %}
 {% endif %}
 {% endfor %}
 \end{flushleft}
@@ -70,33 +94,10 @@ ${{ var.symbol }}$ — {{ var.desc }}
 \vspace{1em}
 {% endfor %}
 
-% --- Концепции ---
-{% for concept in subsection.concepts %}
-\subsubsection*{ {{ concept.name }} }
-\begin{flushleft}
-{{ concept.definition }}
-\end{flushleft}
-
-{% if bibliography and concept.sources %}
-\footnotesize{Источники: [{% for sid in concept.sources %}{{ sid }}{% if not loop.last %}, {% endif %}{% endfor %}]}
-\vspace{0.5em}
-{% endif %}
-
-{% if concept.image_path %}
-\vspace{1em}
-\begin{center}
-\includegraphics[width=0.6\textwidth]{ {{ concept.image_path }} }
-\end{center}
-{% endif %}
-
-\vspace{1em}
-{% endfor %}
-
 {% endfor %}
 \newpage
 {% endfor %}
 
-% === СПИСОК ЛИТЕРАТУРЫ ===
 {% if bibliography and sources %}
 \section*{Список литературы}
 \begin{enumerate}
