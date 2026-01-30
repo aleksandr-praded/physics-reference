@@ -1,22 +1,42 @@
 "name","formula_latex","variable_keys","section","subsection","level",image_path"
 "Кинематические уравнения движения точки в скалярной форме (общий вид)","\\begin{cases}x = x(t) \\\\ y = y(t) \\\\ z = z(t) \\end{cases}","abscissa,ordinate,applicate,time","Механика","Кинематика","school:10",""
 "Кинематические уравнения движения точки в векторной форме (общий вид)","\\vec{r} = \\vec{r}(t)","radius_vector,time","Механика","Кинематика","school:10",""
-"Средняя скорость","\\vec{\\langle v \\rangle} = \\frac{\\vec{\\Delta r}}{\\Delta t}","mean_velocity,radius_vector_change,time_change","Механика","Кинематика","school:9",""
-"Скорость","\\vec{v}=\\lim_{\\Delta t \\to 0}{\\vec{\\langle v \\rangle}} = \\frac{\\vec{dv}}{dt}","velocity,mean_velocity,radius_vector,time","Механика","Кинематика","school:10",""
-"Ускорение при равноускоренном движении","\\vec{a} = \\frac{\\vec{v_2} - \\vec{v_1}}{t}","acceleration,inicial_velocity,final_velocity,time","Механика","Кинематика","school:10",""
+"Перемещение (изменение радиус-вектора)","\\vec{s} = \\vec{\\Delta r} = \\vec{r_2} - \\vec{r_1}","displacement,radius_vector_difference,inicial_radius_vector,final_radius-vector","Механика","Кинематика","school:9",""
+
+"Средняя скорость","\\vec{\\langle v \\rangle} = \\frac{\\vec{\\Delta r}}{\\Delta t}","mean_velocity,radius_vector_difference,time_difference","Механика","Кинематика","school:9",""
+"Скорость (мгновенная скорость)","\\vec{v}=\\lim_{\\Delta t \\to 0}{\\vec{\\langle v \\rangle}} = \\frac{\\vec{dv}}{dt}","velocity,mean_velocity,radius_vector,time","Механика","Кинематика","school:10",""
+"Изменение скорости","\\vec{\\Delta v} = \\vec{v_2} - \\vec{v_1}","velocity_difference,inicial_velocity,final_velocity","Механика","Кинематика","school:9",""
+"Связь проекций скорости и координат материальной точки","\\begin{cases} v_x = \\frac{dx}{dt} \\\\ v_y = \\frac{dy}{dt} \\\\ v_z = \\frac{dz}{dt} \\end{cases}","velocity_abscissa,velocity_ordinate,velocity_applicate,abscissa,ordinate,applicate,time","Механика","Кинематика","school:10",""
+"Средняя путевая скорость","\\langle v \\rangle = \\frac{S}{\\Delta t}","mean_spostamento_velocity,spostamento,time_difference","Механика","Кинематика","school:9",""
+"Мгновенная путевая скорость","v = \\lim_{\\Delta t \\to 0}{\\langle v \\rangle} = \\frac{dS}{dt}","spostamento_velocity,mean_spostamento_velocity,spostamento,time","Механика","Кинематика","school:10",""
+
+"Среднее ускорение","\\vec{\\langle a \\rangle} = \\frac{\\vec{\\Delta v}}{\\Delta t}","mean_acceleration,velocity_difference,time_difference","Механика","Кинематика","school:9",""
+"Ускорение (мгновенное ускорение)","\\vec{a} = \\lim_{\\Delta t \\to 0}{\\vec{\\langle a \\rangle}} = \\frac{\\Delta v}{\\Delta t}","acceleration,mean_velocity,velocity,time","Механика","Кинематика","school:10",""
+
 "Плотность вещества","\rho = \\frac{m}{V}","density,mass,volume","Механика","Кинематика","school:7",""
 "Второй закон Ньютона","\\vec{F} = m\\cdot \\vec{a}","resulting_force,mass,acceleration","Механика","Динамика","school:9",""
+
 "Импульс тела","\\vec{p} = m\\cdot \\vec{v}","impulse,mass,velocity","Механика","Динамика","school:9",""
 "Кинетическая энергия","E_\\text{к} = \\frac{m\\cdot v^2}{2}","kinetic_energy,mass,absolute_velocity","Механика","Работа и энергия","school:9",""
 "Потенциальная энергия в поле тяжести","E_\\text{п} = m\\cdot g\\cdot h","potencial_energy,mass,free_fall_acceleration,height","Механика","Работа и энергия","school:9",""
+
 "Связь периода и частоты","T = \\frac{1}{\\nu}","period,frequency","Механика","Кинематика","school:9",""
-"Cвязь длины электромагнитной волны с частотой","c = \\lambda\\cdot \\nu","speed_of_light,wavelength,frequency","Механика","Колебания и волны","school:9",""
+"Связь скорости волны с частотой","v = \\lambda\\cdot \\nu","absolute_velocity,wavelength,frequency","Механика","Колебания и волны","school:9",""
+
+
 "Уравнение Менделеева-Клапейрона","p\\cdot V = \\nu\\cdot R\\cdot T","pressure,volume,amount_of_substance,gas_constant,kelvin_temperature","Молекулярная физика и термодинамика","Термодинамика","school:10",""
 "Первый закон термодинамики","\\Delta U = Q + A_{\\text{в}}","internal_energy_difference,quantity_of_heat,external_force_work","Молекулярная физика и термодинамика","Термодинамика","school:10",""
 "Первый закон термодинамики"," Q = \\Delta U + A_{\\text{г}}","internal_energy_difference,quantity_of_heat,gas_work","Молекулярная физика и термодинамика","Термодинамика","school:10",""
 "Количество теплоты при нагревании","Q = c\\cdot m\\cdot \\Delta t","quantity_of_heat,specific_heat_capacity,mass,temperature_difference","Молекулярная физика и термодинамика","Термодинамика","school:8",""
+
+
 "Закон Ома для полной цепи","\\mathcal{E} = I\\cdot (R + r)","electromotive_force,amperage,resistance,internal_resistance","Электричество и магнетизм","Постоянный ток","school:10","images/ohm.jpg"
 "Закон Ома для участка цепи","U = I\\cdot R","voltage,amperage,resistance","Электричество и магнетизм","Постоянный ток","school:10",""
+
 "Электроёмкость плоского конденсатора","C = \\frac{\\varepsilon_0\\cdot \\varepsilon\\cdot S}{d}","electric_capacity,electric_constant,dielectric_constant,capacitor_area,capacitor_gap","Электричество и магнетизм","Электростатика","school:10",""
 "Энергия заряженного конденсатора","W_C = \\frac{q^2}{2\\cdot C}","capacitor_energy,electric_charge,electric_capacity","Электричество и магнетизм","Электростатика","school:10",""
+
+"Связь скорости волны с частотой","c = \\lambda\\cdot \\nu","speed_of_light,wavelength,frequency","Электричество и магнетизм","Колебания и волны","school:9",""
+
+
 "Уравнения Максвелла (дивергенция E)","\\nabla \\cdot \\vec{E} = \\frac{\\rho}{\\varepsilon_0}","electric_field_divergence,density,electric_constant","Электродинамика","Электромагнетизм","university:2",""
