@@ -5,13 +5,20 @@
 
 "Средняя скорость","\\vec{\\langle v \\rangle} = \\frac{\\vec{\\Delta r}}{\\Delta t}","mean_velocity,radius_vector_difference,time_difference","Механика","Кинематика","school:9",""
 "Скорость (мгновенная скорость)","\\vec{v}=\\lim_{\\Delta t \\to 0}{\\vec{\\langle v \\rangle}} = \\frac{\\vec{dv}}{dt}","velocity,mean_velocity,radius_vector,time","Механика","Кинематика","school:10",""
+"Связь вектора скорости с её проекциями","\\vec{v} = v_x\\cdot \\vec{i} + v_y\\cdot \\vec{j} + v_z\\cdot \\vec{k}","velocity,x_ort,y_ort,z_ort,velocity_abscissa,velocity_applicate,velocity_ordinate","Механика","Кинематика","school:10",""
+"Связь модуля вектора скорости с его проекциями (в декартовых координатах)","v = \\sqrt{v_x^2 + v_y^2 + v_z^2}","absolute_velocity,velocity_abscissa,velocity_ordinate,velocity_applicate","Механика","Кинематика","school:10",""
 "Изменение скорости","\\vec{\\Delta v} = \\vec{v_2} - \\vec{v_1}","velocity_difference,inicial_velocity,final_velocity","Механика","Кинематика","school:9",""
 "Связь проекций скорости и координат материальной точки","\\begin{cases} v_x = \\frac{dx}{dt} \\\\ v_y = \\frac{dy}{dt} \\\\ v_z = \\frac{dz}{dt} \\end{cases}","velocity_abscissa,velocity_ordinate,velocity_applicate,abscissa,ordinate,applicate,time","Механика","Кинематика","school:10",""
 "Средняя путевая скорость","\\langle v \\rangle = \\frac{S}{\\Delta t}","mean_spostamento_velocity,spostamento,time_difference","Механика","Кинематика","school:9",""
 "Мгновенная путевая скорость","v = \\lim_{\\Delta t \\to 0}{\\langle v \\rangle} = \\frac{dS}{dt}","spostamento_velocity,mean_spostamento_velocity,spostamento,time","Механика","Кинематика","school:10",""
+"Разложение скорости на лучевую и поперечную составляющие","\\vec{v} = \\vec{v}_{\\rho} + \\vec{v}_{\\varphi}","velocity,radial_velocity_component,transversal_velocity_component","Механика","Кинематика","university:1",""
 
 "Среднее ускорение","\\vec{\\langle a \\rangle} = \\frac{\\vec{\\Delta v}}{\\Delta t}","mean_acceleration,velocity_difference,time_difference","Механика","Кинематика","school:9",""
 "Ускорение (мгновенное ускорение)","\\vec{a} = \\lim_{\\Delta t \\to 0}{\\vec{\\langle a \\rangle}} = \\frac{\\Delta v}{\\Delta t}","acceleration,mean_velocity,velocity,time","Механика","Кинематика","school:10",""
+"Связь вектора ускорения с его проекциями","\\vec{a} = a_x\\cdot \\vec{i} + a_y\\cdot \\vec{j} + a_z\\cdot \\vec{k}","accelertion,x_ort,y_ort,z_ort,acceleration_abscissa,acceleration_applicate,acceleration_ordinate","Механика","Кинематика","school:10",""
+"Связь модуля вектора ускорения с его проекциями (в декартовых координатах)","a = \\sqrt{a_x^2 + a_y^2 + a_z^2}","absolute_acceleration,acceleration_abscissa,acceleration_ordinate,acceleration_applicate","Механика","Кинематика","school:10",""
+"Среднее ускорение по годографу скорости","\\langle a \\rangle = \\frac{S_v}{\\Delta t}","mean_velocity_godograf_acceleration,velocity_godograf_spostamento,time_difference","Механика","Кинематика","university:1",""
+"Мгновенное ускорение по годографу скорости","a = \\lim_{\\Delta t \\to 0}{\\langle a \\rangle} = \\frac{dS_v}{dt}","velocity_godograf_acceleration,mean_velocity_godograf_acceleration,velocity_godograf_spostamento,time","Механика","Кинематика","university:1",""
 
 "Плотность вещества","\rho = \\frac{m}{V}","density,mass,volume","Механика","Кинематика","school:7",""
 "Второй закон Ньютона","\\vec{F} = m\\cdot \\vec{a}","resulting_force,mass,acceleration","Механика","Динамика","school:9",""
@@ -39,4 +46,4 @@
 "Связь скорости волны с частотой","c = \\lambda\\cdot \\nu","speed_of_light,wavelength,frequency","Электричество и магнетизм","Колебания и волны","school:9",""
 
 
-"Уравнения Максвелла (дивергенция E)","\\nabla \\cdot \\vec{E} = \\frac{\\rho}{\\varepsilon_0}","electric_field_divergence,density,electric_constant","Электродинамика","Электромагнетизм","university:2",""
+"Уравнения Максвелла (дивергенция E)","\\nabla \\cdot \\vec{E} = \\frac{\\rho}{\\varepsilon_0}","electric_field_divergence,density,electric_constant","Электричество и магнетизм","Электродинамика","university:2",""
