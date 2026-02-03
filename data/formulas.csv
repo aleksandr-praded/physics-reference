@@ -46,4 +46,4 @@
 "Связь скорости волны с частотой","c = \\lambda\\cdot \\nu","speed_of_light,wavelength,frequency","Электричество и магнетизм","Колебания и волны","school:9",""
 
 
-"Уравнения Максвелла (дивергенция E)","\\nabla \\cdot \\vec{E} = \\frac{\\rho}{\\varepsilon_0}","electric_field_divergence,density,electric_constant","Электричество и магнетизм","Электродинамика","university:2",""
+"Уравнения Максвелла ($\nabla \cdot \vec{E}$)","\\nabla \\cdot \\vec{E} = \\frac{\\rho}{\\varepsilon_0}","electric_field_divergence,density,electric_constant","Электричество и магнетизм","Электродинамика","university:2",""

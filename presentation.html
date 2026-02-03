@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Справочник по физике</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Reveal.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css" />
+
+  <!-- MathJax для формул -->
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    .formula { font-size: 1.8em; margin: 1em 0; text-align: center; }
+    .definition { font-size: 1.4em; margin: 1em 0; text-align: left; line-height: 1.4; }
+    .variables ul { text-align: left; margin-top: 1em; padding-left: 1em; }
+    .sources { margin-top: 1em; color: #666; font-size: 0.9em; }
+    h2 { font-size: 1.6em; margin-bottom: 0.5em; }
+    body { font-family: Arial, sans-serif; }
+  </style>
+</head>
+<body>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- Титульный слайд -->
+    <section data-autoslide="3000">
+      <h1>Справочник по физике</h1>
+      <p>Формулы и определения</p>
+    </section>
+
+    <!-- Формулы (1 сек = 1000 мс) -->
+    
+    <section data-autoslide="1000">
+      <h2>Второй закон Ньютона</h2>
+      <div class="formula">
+        $$ \vec{F} = m\cdot \vec{a} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\vec{F}</b> — равнодействующая всех сил
+            (Н)
+          </li>
+          
+          <li>
+            <b>$m</b> — масса
+            (кг)
+          </li>
+          
+          <li>
+            <b>$\vec{a}</b> — ускорение материальной точки
+            (м/с²)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Импульс тела</h2>
+      <div class="formula">
+        $$ \vec{p} = m\cdot \vec{v} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\vec{p}</b> — импульс тела
+            (кг·м/с)
+          </li>
+          
+          <li>
+            <b>$m</b> — масса
+            (кг)
+          </li>
+          
+          <li>
+            <b>$\vec{v}</b> — скорость
+            (м/с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Изменение скорости</h2>
+      <div class="formula">
+        $$ \vec{\Delta v} = \vec{v_2} - \vec{v_1} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\vec{\Delta v}</b> — изменение скорости
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$\vec{v_1}</b> — начальная скорость
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$\vec{v_2}</b> — конечная скорость
+            (м/с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Кинематические уравнения движения точки в векторной форме (общий вид)</h2>
+      <div class="formula">
+        $$ \vec{r} = \vec{r}(t) $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\vec{r}</b> — радиус-вектор
+            (м)
+          </li>
+          
+          <li>
+            <b>$t</b> — время
+            (с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Кинематические уравнения движения точки в скалярной форме (общий вид)</h2>
+      <div class="formula">
+        $$ \begin{cases}x = x(t) \\ y = y(t) \\ z = z(t) \end{cases} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$x</b> — абсцисса
+            (м)
+          </li>
+          
+          <li>
+            <b>$y</b> — ордината
+            (м)
+          </li>
+          
+          <li>
+            <b>$z</b> — аппликата
+            (м)
+          </li>
+          
+          <li>
+            <b>$t</b> — время
+            (с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Мгновенная путевая скорость</h2>
+      <div class="formula">
+        $$ v = \lim_{\Delta t \to 0}{\langle v \rangle} = \frac{dS}{dt} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$v</b> — путевая скорость
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$\langle v \rangle</b> — средняя путевая скорость
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$S</b> — путь
+            (м)
+          </li>
+          
+          <li>
+            <b>$t</b> — время
+            (с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Мгновенное ускорение по годографу скорости</h2>
+      <div class="formula">
+        $$ a = \lim_{\Delta t \to 0}{\langle a \rangle} = \frac{dS_v}{dt} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$a</b> — ускорение по годографу скорости
+            (м/с²)
+          </li>
+          
+          <li>
+            <b>$\langle a \rangle</b> — среднее ускорение по годографу скорости
+            (м/с²)
+          </li>
+          
+          <li>
+            <b>$S_v</b> — путь материальной точки по годографу скорости
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$t</b> — время
+            (с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Перемещение (изменение радиус-вектора)</h2>
+      <div class="formula">
+        $$ \vec{s} = \vec{\Delta r} = \vec{r_2} - \vec{r_1} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\vec{s}</b> — перемещение
+            (м)
+          </li>
+          
+          <li>
+            <b>$\vec{\Delta r}</b> — изменение радиус-вектора
+            (м)
+          </li>
+          
+          <li>
+            <b>$\vec{r_1}</b> — начальный радиус-вектор
+            (м)
+          </li>
+          
+          <li>
+            <b>$[final_radius-vector]</b> — неизвестная переменная
+            
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Плотность вещества</h2>
+      <div class="formula">
+        $$ \rho = \frac{m}{V} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\rho</b> — плотность вещества
+            (кг/м³)
+          </li>
+          
+          <li>
+            <b>$m</b> — масса
+            (кг)
+          </li>
+          
+          <li>
+            <b>$V</b> — объём
+            (м³)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Разложение скорости на лучевую и поперечную составляющие</h2>
+      <div class="formula">
+        $$ \vec{v} = \vec{v}_{\rho} + \vec{v}_{\varphi} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\vec{v}</b> — скорость
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$\vec{v}_{\rho}</b> — лучевая (радиальная) составляющая скорости
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$\vec{v}_{\varphi}</b> — поперечная (трансверсальная) составляющая скорости
+            (м/с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Связь вектора скорости с её проекциями</h2>
+      <div class="formula">
+        $$ \vec{v} = v_x\cdot \vec{i} + v_y\cdot \vec{j} + v_z\cdot \vec{k} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\vec{v}</b> — скорость
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$\vec{i}</b> — единичный вектор, направленный вдоль оси $OX$
+            (безразмерная)
+          </li>
+          
+          <li>
+            <b>$\vec{j}</b> — единичный вектор, направленный вдоль оси $OY$
+            (безразмерная)
+          </li>
+          
+          <li>
+            <b>$\vec{k}</b> — единичный вектор, направленный вдоль оси $OX$
+            (безразмерная)
+          </li>
+          
+          <li>
+            <b>$v_x</b> — проекция скорости на ось $OX$
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$v_z</b> — проекция скорости на ось $OZ$
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$v_y</b> — проекция скорости на ось $OY$
+            (м/с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Связь вектора ускорения с его проекциями</h2>
+      <div class="formula">
+        $$ \vec{a} = a_x\cdot \vec{i} + a_y\cdot \vec{j} + a_z\cdot \vec{k} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$[accelertion]</b> — неизвестная переменная
+            
+          </li>
+          
+          <li>
+            <b>$\vec{i}</b> — единичный вектор, направленный вдоль оси $OX$
+            (безразмерная)
+          </li>
+          
+          <li>
+            <b>$\vec{j}</b> — единичный вектор, направленный вдоль оси $OY$
+            (безразмерная)
+          </li>
+          
+          <li>
+            <b>$\vec{k}</b> — единичный вектор, направленный вдоль оси $OX$
+            (безразмерная)
+          </li>
+          
+          <li>
+            <b>$a_x</b> — проекция ускорения на ось $OX$
+            (м/с²)
+          </li>
+          
+          <li>
+            <b>$a_z</b> — проекция ускорения на ось $OZ$
+            (м/с²)
+          </li>
+          
+          <li>
+            <b>$a_y</b> — проекция ускорения на ось $OY$
+            (м/с²)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Связь модуля вектора скорости с его проекциями (в декартовых координатах)</h2>
+      <div class="formula">
+        $$ v = \sqrt{v_x^2 + v_y^2 + v_z^2} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$v</b> — модуль скорости
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$v_x</b> — проекция скорости на ось $OX$
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$v_y</b> — проекция скорости на ось $OY$
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$v_z</b> — проекция скорости на ось $OZ$
+            (м/с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Связь модуля вектора ускорения с его проекциями (в декартовых координатах)</h2>
+      <div class="formula">
+        $$ a = \sqrt{a_x^2 + a_y^2 + a_z^2} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$a</b> — модуль ускорения
+            (м/с²)
+          </li>
+          
+          <li>
+            <b>$a_x</b> — проекция ускорения на ось $OX$
+            (м/с²)
+          </li>
+          
+          <li>
+            <b>$a_y</b> — проекция ускорения на ось $OY$
+            (м/с²)
+          </li>
+          
+          <li>
+            <b>$a_z</b> — проекция ускорения на ось $OZ$
+            (м/с²)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Связь периода и частоты</h2>
+      <div class="formula">
+        $$ T = \frac{1}{\nu} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$T</b> — период колебаний
+            (с)
+          </li>
+          
+          <li>
+            <b>$\nu</b> — частота колебаний
+            (Гц)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Связь проекций скорости и координат материальной точки</h2>
+      <div class="formula">
+        $$ \begin{cases} v_x = \frac{dx}{dt} \\ v_y = \frac{dy}{dt} \\ v_z = \frac{dz}{dt} \end{cases} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$v_x</b> — проекция скорости на ось $OX$
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$v_y</b> — проекция скорости на ось $OY$
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$v_z</b> — проекция скорости на ось $OZ$
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$x</b> — абсцисса
+            (м)
+          </li>
+          
+          <li>
+            <b>$y</b> — ордината
+            (м)
+          </li>
+          
+          <li>
+            <b>$z</b> — аппликата
+            (м)
+          </li>
+          
+          <li>
+            <b>$t</b> — время
+            (с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Скорость (мгновенная скорость)</h2>
+      <div class="formula">
+        $$ \vec{v}=\lim_{\Delta t \to 0}{\vec{\langle v \rangle}} = \frac{\vec{dv}}{dt} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\vec{v}</b> — скорость
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$\vec{\langle v \rangle}</b> — средняя скорость
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$\vec{r}</b> — радиус-вектор
+            (м)
+          </li>
+          
+          <li>
+            <b>$t</b> — время
+            (с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Среднее ускорение</h2>
+      <div class="formula">
+        $$ \vec{\langle a \rangle} = \frac{\vec{\Delta v}}{\Delta t} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\vec{\langle a \rangle}</b> — среднее ускорение
+            (м/с²)
+          </li>
+          
+          <li>
+            <b>$\vec{\Delta v}</b> — изменение скорости
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$\Delta t</b> — промежуток времени
+            (с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Среднее ускорение по годографу скорости</h2>
+      <div class="formula">
+        $$ \langle a \rangle = \frac{S_v}{\Delta t} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\langle a \rangle</b> — среднее ускорение по годографу скорости
+            (м/с²)
+          </li>
+          
+          <li>
+            <b>$S_v</b> — путь материальной точки по годографу скорости
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$\Delta t</b> — промежуток времени
+            (с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Средняя путевая скорость</h2>
+      <div class="formula">
+        $$ \langle v \rangle = \frac{S}{\Delta t} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\langle v \rangle</b> — средняя путевая скорость
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$S</b> — путь
+            (м)
+          </li>
+          
+          <li>
+            <b>$\Delta t</b> — промежуток времени
+            (с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Средняя скорость</h2>
+      <div class="formula">
+        $$ \vec{\langle v \rangle} = \frac{\vec{\Delta r}}{\Delta t} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\vec{\langle v \rangle}</b> — средняя скорость
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$\vec{\Delta r}</b> — изменение радиус-вектора
+            (м)
+          </li>
+          
+          <li>
+            <b>$\Delta t</b> — промежуток времени
+            (с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Ускорение (мгновенное ускорение)</h2>
+      <div class="formula">
+        $$ \vec{a} = \lim_{\Delta t \to 0}{\vec{\langle a \rangle}} = \frac{\Delta v}{\Delta t} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\vec{a}</b> — ускорение материальной точки
+            (м/с²)
+          </li>
+          
+          <li>
+            <b>$\vec{\langle v \rangle}</b> — средняя скорость
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$\vec{v}</b> — скорость
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$t</b> — время
+            (с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Связь скорости волны с частотой</h2>
+      <div class="formula">
+        $$ v = \lambda\cdot \nu $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$v</b> — модуль скорости
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$\lambda</b> — длина волны
+            (м)
+          </li>
+          
+          <li>
+            <b>$\nu</b> — частота колебаний
+            (Гц)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Кинетическая энергия</h2>
+      <div class="formula">
+        $$ E_\text{к} = \frac{m\cdot v^2}{2} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$E_\text{к}</b> — кинетическая энергия
+            (Дж)
+          </li>
+          
+          <li>
+            <b>$m</b> — масса
+            (кг)
+          </li>
+          
+          <li>
+            <b>$v</b> — модуль скорости
+            (м/с)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Потенциальная энергия в поле тяжести</h2>
+      <div class="formula">
+        $$ E_\text{п} = m\cdot g\cdot h $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$E_\text{п}</b> — потенциальная энергия
+            (Дж)
+          </li>
+          
+          <li>
+            <b>$m</b> — масса
+            (кг)
+          </li>
+          
+          <li>
+            <b>$g</b> — ускорение свободного падения
+            (м/с²)
+          </li>
+          
+          <li>
+            <b>$h</b> — высота
+            (м)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Количество теплоты при нагревании</h2>
+      <div class="formula">
+        $$ Q = c\cdot m\cdot \Delta t $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$Q</b> — количество теплоты
+            (Дж)
+          </li>
+          
+          <li>
+            <b>$c</b> — удельная теплоёмкость
+            (Дж/(кг·К))
+          </li>
+          
+          <li>
+            <b>$m</b> — масса
+            (кг)
+          </li>
+          
+          <li>
+            <b>$\Delta T</b> — изменение температуры
+            (К)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Первый закон термодинамики</h2>
+      <div class="formula">
+        $$ \Delta U = Q + A_{\text{в}} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\Delta U</b> — внутренняя энергия
+            (Дж)
+          </li>
+          
+          <li>
+            <b>$Q</b> — количество теплоты
+            (Дж)
+          </li>
+          
+          <li>
+            <b>$A_{\text{в}}</b> — работа внешних сил
+            (Дж)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Первый закон термодинамики</h2>
+      <div class="formula">
+        $$  Q = \Delta U + A_{\text{г}} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\Delta U</b> — внутренняя энергия
+            (Дж)
+          </li>
+          
+          <li>
+            <b>$Q</b> — количество теплоты
+            (Дж)
+          </li>
+          
+          <li>
+            <b>$A_{\text{г}}</b> — работа газа
+            (Дж)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Уравнение Менделеева-Клапейрона</h2>
+      <div class="formula">
+        $$ p\cdot V = \nu\cdot R\cdot T $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$p</b> — давление
+            (Па)
+          </li>
+          
+          <li>
+            <b>$V</b> — объём
+            (м³)
+          </li>
+          
+          <li>
+            <b>$\nu</b> — количество вещества
+            (моль)
+          </li>
+          
+          <li>
+            <b>$R</b> — универсальная газовая постоянная
+            (Дж/(моль·К))
+          </li>
+          
+          <li>
+            <b>$T</b> — абсолютная температура
+            (К)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Связь скорости волны с частотой</h2>
+      <div class="formula">
+        $$ c = \lambda\cdot \nu $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$c</b> — скорость света в вакууме
+            (м/с)
+          </li>
+          
+          <li>
+            <b>$\lambda</b> — длина волны
+            (м)
+          </li>
+          
+          <li>
+            <b>$\nu</b> — частота колебаний
+            (Гц)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Закон Ома для полной цепи</h2>
+      <div class="formula">
+        $$ \mathcal{E} = I\cdot (R + r) $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\mathcal{E}</b> — электродвижущая сила (ЭДС)
+            (В)
+          </li>
+          
+          <li>
+            <b>$I</b> — сила тока
+            (А)
+          </li>
+          
+          <li>
+            <b>$R</b> — сопротивление
+            (Ом)
+          </li>
+          
+          <li>
+            <b>$r</b> — внутреннее сопротивление источника
+            (Ом)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Закон Ома для участка цепи</h2>
+      <div class="formula">
+        $$ U = I\cdot R $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$U</b> — напряжение
+            (В)
+          </li>
+          
+          <li>
+            <b>$I</b> — сила тока
+            (А)
+          </li>
+          
+          <li>
+            <b>$R</b> — сопротивление
+            (Ом)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Уравнения Максвелла ($\nabla \cdot \vec{E}$)</h2>
+      <div class="formula">
+        $$ \nabla \cdot \vec{E} = \frac{\rho}{\varepsilon_0} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$\nabla \cdot \vec{E}</b> — дивергенция напряжённости электрического поля
+            (В/м)
+          </li>
+          
+          <li>
+            <b>$\rho</b> — плотность вещества
+            (кг/м³)
+          </li>
+          
+          <li>
+            <b>$\varepsilon_0</b> — электрическая постоянная
+            (Ф/м)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Электроёмкость плоского конденсатора</h2>
+      <div class="formula">
+        $$ C = \frac{\varepsilon_0\cdot \varepsilon\cdot S}{d} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$C</b> — электроёмкость
+            (Ф)
+          </li>
+          
+          <li>
+            <b>$\varepsilon_0</b> — электрическая постоянная
+            (Ф/м)
+          </li>
+          
+          <li>
+            <b>$\varepsilon</b> — диэлектрическая проницаемость
+            (безразмерная)
+          </li>
+          
+          <li>
+            <b>$S</b> — площадь обкладок конденсатора
+            (м²)
+          </li>
+          
+          <li>
+            <b>$d</b> — расстояние между обкладками
+            (м)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section data-autoslide="1000">
+      <h2>Энергия заряженного конденсатора</h2>
+      <div class="formula">
+        $$ W_C = \frac{q^2}{2\cdot C} $$
+      </div>
+      <div class="variables">
+        <ul>
+          
+          <li>
+            <b>$W_C</b> — энергия конденсатора
+            (Дж)
+          </li>
+          
+          <li>
+            <b>$q</b> — заряд
+            (Кл)
+          </li>
+          
+          <li>
+            <b>$C</b> — электроёмкость
+            (Ф)
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    
+
+    <!-- Определения / Концепции (3 сек = 3000 мс) -->
+    
+    <section data-autoslide="3000">
+      <h2>Второй закон Ньютона</h2>
+      <div class="definition">
+        Равнодействующая всех внешних сил $\vec{F}$, действующих на материальную точку, равна произведению массы материальной точки $m$ на её ускорение $\vec{a}$.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Динамика</h2>
+      <div class="definition">
+        Раздел механики, в котором рассматривается влияние взаимодействия между телами на их механическое движение.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Первый закон Ньютона</h2>
+      <div class="definition">
+        Существуют системы отсчёта, называемые инерциальными, относительно которых тела сохраняют свою скорость постоянной, если действие на них всех внешних сил скомпенсировано.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Третий закон Ньютона</h2>
+      <div class="definition">
+        Силы $\vec{F_{12}}$ и $\vec{F_{21}}$, с которыми две материальные точки действуют друг на друга, равны по модулю и противоположны по направлению.
+      </div>
+      
+      <div class="sources">
+        Источники: [2]
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Абсолютно неупругое тело</h2>
+      <div class="definition">
+        Тело, которое полностью сохраняет деформированное состояние после прекращения действия сил.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Абсолютно твёрдое тело</h2>
+      <div class="definition">
+        Тело, расстояние между любыми двумя точками которого постоянно.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Абсолютно упругое тело</h2>
+      <div class="definition">
+        Тело, деформации которого пропорциональны вызывающим их силам и полностью исчезают после прекращения действия сил.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Годограф</h2>
+      <div class="definition">
+        Линия, которую описывает радиус вектор некоторой физической величины с течением времени.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Длина пути</h2>
+      <div class="definition">
+        Сумма длин всех участков траектории, пройденных телом за рассматриваемый промежуток времени.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Кинематика</h2>
+      <div class="definition">
+        Раздел механики, в котором приводится математическое описание механического движения безотносительно к тем причинам, которые вызывают механическое движение.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Классичекая ньютоновская механика</h2>
+      <div class="definition">
+        Механика, в которой рассматривают движения тел, происходящих со скоростями, много меньших скорости света в вакууме.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Лабораторная (земная, геоцентрическая) система отсчёта</h2>
+      <div class="definition">
+        Система отсчёта, связанная с Землёй.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Материальная точка</h2>
+      <div class="definition">
+        Тело, размеры которого несущественны в рассматриваемой задаче.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Мгновенная путевая скорость</h2>
+      <div class="definition">
+        Величина $v$, равная пределу средней путевой скорости $\langle v \rangle$ при стремлении промежутка времени $\Delta t$ к нулю.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Мгновенное ускорение по годографу скорости</h2>
+      <div class="definition">
+        Величина $a$, равная пределу среднего ускорения по годографу скорости $\langle a \rangle$ при стремлении промежутка времени $\Delta t$ к нулю.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Механика</h2>
+      <div class="definition">
+        Наука о механическом движении и взаимодействии тел.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Механическая система</h2>
+      <div class="definition">
+        Мысленно выделенная совокупность тел, которые в общем случае взаимодействуют как друг с другом, так и с внешними телами, не включёнными в состав системы.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Механическое движение</h2>
+      <div class="definition">
+        Простейшая форма движения в природе, состоящая в изменении взаимного расположения тел или их частей в пространстве с течением времени.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Несвободная механическая система</h2>
+      <div class="definition">
+        Механическая система, в которой имеются материальные точки или тела, которые не могут занимать произвольные положения в пространстве или иметь произвольные скорости.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Плоское движение</h2>
+      <div class="definition">
+        Механическое движение, при котором все участки траектории лежат в одной плоскости.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Равномерное движение</h2>
+      <div class="definition">
+        Движение, при котором скорость материальной точки не зависит от времени.
+      </div>
+      
+      <div class="sources">
+        Источники: [2]
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Релятивистская механика</h2>
+      <div class="definition">
+        Механика, в которой рассматриваются движения тел, скорости которых соизмеримы со скоростью света.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Свободная механическая система</h2>
+      <div class="definition">
+        Механическая система, в которой все входящие в неё материальные точки или тела могут занимать произвольные положения в пространстве и иметь произвольные скорости.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Свойства среднего и мгновенного ускорений</h2>
+      <div class="definition">
+        1. Среднее ускорение $\vec{\langle a \rangle}$ направлено вдоль вектора изменения скорости $\vec{\Delta v}$;\\ 2. Среднее ускорение $\vec{\langle a \rangle}$ зависит как от начального для него момента времени $t$, так и от промежутка времени $\Delta t$, в течении которого рассматривается, то есть $\vec{\langle a \rangle} = \vec{\langle a \rangle}(t, \Delta t)$;\\ 3. Мгновенное ускорение $\vec{a}$ направлено вдоль касательной к точке годографа скорости и произвольно в точке траектории;\\ 4. Мгновенное ускорение $\vec{a}$ зависит от момента времени $t$, то есть $\vec{a} = \vec{a}(t)$.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Свойства среднего и мгновенного ускорений по годографу скорости</h2>
+      <div class="definition">
+        1. Среднее ускорение по годографу скорости $\langle a \rangle$ зависит как от начального для него момента времени $t$, так и от промежутка времени $\Delta t$, в течении которого рассматривается, то есть $\langle a \rangle = \langle a \rangle (t, \Delta t)$;\\ 2. Мгновенное ускорение по годографу скорости $a$ зависит от момента времени $t$, то есть $a = a(t)$.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Свойства средней и мгновенной путевых скоростей</h2>
+      <div class="definition">
+        1. Средняя путевая скорость $\langle v \rangle$ зависит как от начального для неё момента времени $t$, так и от промежутка времени $\Delta t$, в течении которого рассматривается, то есть $\langle v \rangle = \langle v \rangle (t, \Delta t)$;\\ 2. Мгновенная путевая скорость $v$ зависит от момента времени $t$, то есть $v = v(t)$.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Свойства средней и мгновенной скоростей</h2>
+      <div class="definition">
+        1. Средняя скорость $\vec{\langle v \rangle}$ направлена вдоль вектора перемещения $\vec{s}$;\\ 2. Средняя скорость $\vec{\langle v \rangle}$ зависит как от начального для неё момента времени $t$, так и от промежутка времени $\Delta t$, в течении которого рассматривается, то есть $\vec{\langle v \rangle} = \vec{\langle v \rangle}(t, \Delta t)$;\\ 3. Мгновенная скорость $\vec{v}$ направлена вдоль касательной к точке траектории;\\ 4. Мгновенная скорость $\vec{v}$ зависит от момента времени $t$, то есть $\vec{v} = \vec{v}(t)$.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Связь (механическая связь)</h2>
+      <div class="definition">
+        Ограничение, наложенное на положение или движение рассматриваемой механической системы в пространстве.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Система отсчёта</h2>
+      <div class="definition">
+        Система, снабжённая часами, и жёстко связанная с абсолютно твёрдым телом, по отношению к которому определяют положения рассматриваемых тел в разные моменты времени.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Скорость (мгновенная скорость)</h2>
+      <div class="definition">
+        Величина $\vec{v}$, равная пределу средней скорости $\vec{\langle v \rangle}$ при стремлении промежутка времени $\Delta t$ к нулю.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Солнечная (гелиоцентрическая) система отсчёта</h2>
+      <div class="definition">
+        Система отсчёта, связанная с Солнцем.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Среднее ускорение</h2>
+      <div class="definition">
+        Величина $\vec{\langle a \rangle}$, равная отношению изменения скорости материальной точки $\vec{\Delta v}$ к промежутку времени $\Delta t$, за который изменение было совершено.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Среднее ускорение по годографу скорости</h2>
+      <div class="definition">
+        Величина $\langle a \rangle$, равная отношению пути материальной точки по годографу скорости $S_v$ к промежутку времени $\Delta t$, за который путь был пройден.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Средняя путевая скорость</h2>
+      <div class="definition">
+        Величина $\langle v \rangle$, равная отношению пути материальной точки $S$ к промежутку времени $\Delta t$, за который путь был пройден.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Средняя скорость</h2>
+      <div class="definition">
+        Величина $\vec{\langle v \rangle}$, равная отношению перемещения материальной точки $\vec{\Delta r}$ к промежутку времени $\Delta t$, за который перемещение было совершено.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Траектория</h2>
+      <div class="definition">
+        Линия, описываемая движущейся точкой в пространстве.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Ускорение (мгновенное ускорение)</h2>
+      <div class="definition">
+        Величина $\vec{a}$, равная пределу среднего ускорения $\vec{\langle a \rangle}$ при стремлении промежутка времени $\Delta t$ к нулю.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Физическое тело</h2>
+      <div class="definition">
+        Макроскопическая система, состоящая из большого числа молекул так, что размеры этих систем во много раз больше межмолекулярных расстояний.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Элементарное перемещение точки</h2>
+      <div class="definition">
+        Приращение радиуса-вектора $\vec{dr}$, совершённое за малый промежуток времени $dt$.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Закон сохранения энергии</h2>
+      <div class="definition">
+        Энергия не создаётся и не уничтожается, а только превращается из одной формы в другую.
+      </div>
+      
+    </section>
+    
+    <section data-autoslide="3000">
+      <h2>Правило буравчика</h2>
+      <div class="definition">
+        Если направление поступательного движения буравчика совпадает с направлением тока, то направление вращения ручки буравчика показывает направление магнитных линий.
+      </div>
+      
+      <div class="sources">
+        Источники: [1]
+      </div>
+      
+    </section>
+    
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script>
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+    transition: 'slide',
+    autoSlideStoppable: false, // пользователь не может остановить автопрокрутку
+    math: {
+      mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
+      config: 'TeX-AMS_HTML-full'
+    }
+  });
+</script>
+
+</body>
+</html>
