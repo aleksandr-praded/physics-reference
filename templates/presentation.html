@@ -2,13 +2,73 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Справочник по физике</title>
+  <title>Вариант {{ variant_number }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="static/reveal/reveal.css" />
   <link rel="stylesheet" href="static/reveal/theme/white.css" />
   <style>
-    h2 { font-size: 2.5em; margin: 0; }
-    .slide-content { display: flex; align-items: center; justify-content: center; height: 100%; }
+    /* Убираем стандартные отступы */
+    body, .reveal {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Основной контейнер слайда */
+    .slide-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding-bottom: 90px; /* место для очень крупных номеров */
+    }
+
+    /* Заголовок вопроса */
+    .slide-title {
+      font-size: 2.0em;
+      margin: 0;
+      text-align: center;
+      line-height: 1.3;
+      white-space: pre-wrap;
+    }
+
+    /* === ПРИНУДИТЕЛЬНОЕ ПЕРЕОПРЕДЕЛЕНИЕ Reveal.js === */
+
+    /* Номер страницы — правый нижний угол */
+    .reveal .slides section .slide-number,
+    .slide-number {
+      position: absolute !important;
+      bottom: 15px !important;
+      right: 20px !important;
+      font-size: 1.0em !important;
+      color: #d00 !important;
+      font-weight: bold !important;
+      line-height: 1 !important;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2) !important;
+      z-index: 100 !important;
+      background: none !important;
+      border: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      opacity: 1 !important;
+    }
+
+    /* Номер варианта — левый нижний угол */
+    .reveal .slides section .variant-label,
+    .variant-label {
+      position: absolute !important;
+      bottom: 25px !important;
+      left: 20px !important;
+      font-size: 1.0em !important;
+      color: #d00 !important;
+      font-weight: bold !important;
+      z-index: 100 !important;
+      background: none !important;
+      border: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      opacity: 1 !important;
+    }
   </style>
 </head>
 <body>
@@ -16,17 +76,13 @@
 <div class="reveal">
   <div class="slides">
 
-    <section data-autoslide="3000">
-      <div class="slide-content">
-        <h1>Справочник по физике</h1>
-      </div>
-    </section>
-
-    <!-- ЕДИНЫЙ ЦИКЛ -->
+    <!-- ВОПРОСЫ (без титульного слайда) -->
     {% for slide in slides %}
-    <section data-autoslide="{% if slide.type == 'formula' %}1000{% else %}3000{% endif %}">
+    <section data-autoslide="{{ slide.duration }}">
       <div class="slide-content">
-        <h2>{{ slide.name }}</h2>
+        <div class="slide-title">{{ slide.name }}</div>
+        <div class="variant-label">Вариант {{ variant_number }}</div>
+        <div class="slide-number">{{ slide.number }}</div>
       </div>
     </section>
     {% endfor %}

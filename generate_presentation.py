@@ -3,6 +3,7 @@ import sqlite3
 from jinja2 import Template
 import argparse
 import random
+import os
 
 def fix_latex_escapes(s):
     return "" if s is None else s.replace('\\\\', '\\')
@@ -12,11 +13,13 @@ def main():
     parser.add_argument("--section", nargs='+')
     parser.add_argument("--school", nargs='+')
     parser.add_argument("--university", nargs='+')
-    parser.add_argument("--limit", "-n", type=int, help="Максимальное количество слайдов")
-    parser.add_argument("--output-list", "-o", type=str, default="presentation_list.txt",
-                        help="Файл для сохранения списка вопросов и ответов")
+    parser.add_argument("--limit", "-n", type=int, default=10, help="Количество вопросов в варианте")
+    parser.add_argument("--variants", "-v", type=int, default=1, help="Количество вариантов")
+    parser.add_argument("--output-prefix", type=str, default="presentation",
+                        help="Префикс для имён файлов")
     args = parser.parse_args()
 
+    # Загружаем данные один раз
     conn = sqlite3.connect('physics.db')
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -27,7 +30,6 @@ def main():
         for r in cursor.fetchall()
     }
 
-    # Загружаем все записи в один список
     items = []
     cursor.execute("SELECT * FROM formulas ORDER BY section, subsection, name")
     for f in cursor.fetchall():
@@ -35,8 +37,7 @@ def main():
         items.append({
             'type': 'formula',
             'name': f['name'],
-            'content': fix_latex_escapes(f['formula_latex']),
-            'sources': []  # можно добавить, если нужно
+            'content': fix_latex_escapes(f['formula_latex'])
         })
 
     cursor.execute("SELECT * FROM concepts ORDER BY section, subsection, name")
@@ -45,34 +46,50 @@ def main():
         items.append({
             'type': 'concept',
             'name': c['name'],
-            'content': c['definition'],
-            'sources': []
+            'content': c['definition']
         })
+    conn.close()
 
-    # Случайный выбор
-    if args.limit is not None:
-        random.shuffle(items)
-        items = items[:args.limit]
+    if not items:
+        print("⚠️ Нет данных, удовлетворяющих фильтрам")
+        return
 
-    # === Сохраняем список с ответами ===
-    with open(args.output_list, 'w', encoding='utf-8') as f_list:
-        for i, item in enumerate(items, 1):
-            f_list.write(f"{i}. {item['name']}\n")
-            if item['type'] == 'formula':
-                f_list.write(f"   Ответ: ${item['content']}$\n\n")
-            else:
-                f_list.write(f"   Ответ: {item['content']}\n\n")
+    # Генерация вариантов
+    for var_num in range(1, args.variants + 1):
+        # Копируем и перемешиваем
+        pool = items.copy()
+        random.shuffle(pool)
+        selected = pool[:args.limit]
 
-    # === Генерация HTML ===
-    with open('templates/presentation.html', 'r', encoding='utf-8') as f_html:
-        template = Template(f_html.read())
-    html = template.render(slides=items)  # ← передаём ЕДИНЫЙ список
+        # === Сохраняем список ответов ===
+        quiz_file = f"{args.output_prefix}_variant_{var_num}.txt"
+        with open(quiz_file, 'w', encoding='utf-8') as f_list:
+            f_list.write(f"Вариант {var_num}\n\n")
+            for i, item in enumerate(selected, 1):
+                f_list.write(f"{i}. {item['name']}\n")
+                if item['type'] == 'formula':
+                    f_list.write(f"   Ответ: ${item['content']}$\n\n")
+                else:
+                    f_list.write(f"   Ответ: {item['content']}\n\n")
 
-    with open('presentation.html', 'w', encoding='utf-8') as f_html:
-        f_html.write(html)
+        # === Генерация HTML ===
+        slides = []
+        for i, item in enumerate(selected, 1):
+            slides.append({
+                'number': i,
+                'name': item['name'],
+                'duration': 1000 if item['type'] == 'formula' else 3000
+            })
 
-    print(f"✅ Презентация: presentation.html ({len(items)} слайдов)")
-    print(f"✅ Список с ответами: {args.output_list}")
+        with open('templates/presentation.html', 'r', encoding='utf-8') as f_html:
+            template = Template(f_html.read())
+        html = template.render(slides=slides, variant_number=var_num)
+
+        html_file = f"{args.output_prefix}_variant_{var_num}.html"
+        with open(html_file, 'w', encoding='utf-8') as f_html:
+            f_html.write(html)
+
+        print(f"✅ Вариант {var_num}: {html_file}, {quiz_file}")
 
 if __name__ == "__main__":
     main()
