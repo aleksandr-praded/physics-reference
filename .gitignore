@@ -8,6 +8,10 @@ output.log
 output.aux
 output.out
 
+#Результаты компиляции программы для презентации
+*.txt
+presentation.html
+
 #Вспомогательные папки
 /old_folders
 /output_versions

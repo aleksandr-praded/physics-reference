@@ -4,11 +4,8 @@
   <meta charset="UTF-8" />
   <title>Справочник по физике</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Локальный Reveal.js -->
   <link rel="stylesheet" href="static/reveal/reveal.css" />
   <link rel="stylesheet" href="static/reveal/theme/white.css" />
-
   <style>
     h2 { font-size: 2.5em; margin: 0; }
     .slide-content { display: flex; align-items: center; justify-content: center; height: 100%; }
@@ -25,18 +22,11 @@
       </div>
     </section>
 
-    {% for formula in formulas %}
-    <section data-autoslide="1000">
+    <!-- ЕДИНЫЙ ЦИКЛ -->
+    {% for slide in slides %}
+    <section data-autoslide="{% if slide.type == 'formula' %}1000{% else %}3000{% endif %}">
       <div class="slide-content">
-        <h2>{{ formula.name }}</h2>
-      </div>
-    </section>
-    {% endfor %}
-
-    {% for concept in concepts %}
-    <section data-autoslide="3000">
-      <div class="slide-content">
-        <h2>{{ concept.name }}</h2>
+        <h2>{{ slide.name }}</h2>
       </div>
     </section>
     {% endfor %}
@@ -44,7 +34,6 @@
   </div>
 </div>
 
-<!-- Локальный Reveal.js -->
 <script src="static/reveal/reveal.js"></script>
 <script>
   Reveal.initialize({
