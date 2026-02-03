@@ -5,26 +5,13 @@
   <title>Справочник по физике</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Reveal.js -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css" />
-
-  <!-- MathJax для формул -->
-  <script>
-    MathJax = {
-      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
-      svg: { fontCache: 'global' }
-    };
-  </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <!-- Локальный Reveal.js -->
+  <link rel="stylesheet" href="static/reveal/reveal.css" />
+  <link rel="stylesheet" href="static/reveal/theme/white.css" />
 
   <style>
-    .formula { font-size: 1.8em; margin: 1em 0; text-align: center; }
-    .definition { font-size: 1.4em; margin: 1em 0; text-align: left; line-height: 1.4; }
-    .variables ul { text-align: left; margin-top: 1em; padding-left: 1em; }
-    .sources { margin-top: 1em; color: #666; font-size: 0.9em; }
-    h2 { font-size: 1.6em; margin-bottom: 0.5em; }
-    body { font-family: Arial, sans-serif; }
+    h2 { font-size: 2.5em; margin: 0; }
+    .slide-content { display: flex; align-items: center; justify-content: center; height: 100%; }
   </style>
 </head>
 <body>
@@ -32,63 +19,41 @@
 <div class="reveal">
   <div class="slides">
 
-    <!-- Титульный слайд -->
     <section data-autoslide="3000">
-      <h1>Справочник по физике</h1>
-      <p>Формулы и определения</p>
+      <div class="slide-content">
+        <h1>Справочник по физике</h1>
+      </div>
     </section>
 
-    <!-- Формулы (1 сек = 1000 мс) -->
     {% for formula in formulas %}
     <section data-autoslide="1000">
-      <h2>{{ formula.name }}</h2>
-      <div class="formula">
-        $$ {{ formula.formula_latex }} $$
-      </div>
-      <div class="variables">
-        <ul>
-          {% for var in formula.variables %}
-          <li>
-            <b>${{ var.symbol }}</b> — {{ var.desc }}
-            {% if var.unit %}({{ var.unit }}){% endif %}
-          </li>
-          {% endfor %}
-        </ul>
+      <div class="slide-content">
+        <h2>{{ formula.name }}</h2>
       </div>
     </section>
     {% endfor %}
 
-    <!-- Определения / Концепции (3 сек = 3000 мс) -->
     {% for concept in concepts %}
     <section data-autoslide="3000">
-      <h2>{{ concept.name }}</h2>
-      <div class="definition">
-        {{ concept.definition }}
+      <div class="slide-content">
+        <h2>{{ concept.name }}</h2>
       </div>
-      {% if concept.sources %}
-      <div class="sources">
-        Источники: [{% for sid in concept.sources %}{{ sid }}{% if not loop.last %}, {% endif %}{% endfor %}]
-      </div>
-      {% endif %}
     </section>
     {% endfor %}
 
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<!-- Локальный Reveal.js -->
+<script src="static/reveal/reveal.js"></script>
 <script>
   Reveal.initialize({
-    controls: true,
-    progress: true,
+    controls: false,
+    progress: false,
     history: true,
     center: true,
-    transition: 'slide',
-    autoSlideStoppable: false, // пользователь не может остановить автопрокрутку
-    math: {
-      mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
-      config: 'TeX-AMS_HTML-full'
-    }
+    transition: 'none',
+    autoSlideStoppable: false
   });
 </script>
 

@@ -64,7 +64,6 @@ def main():
         })
 
     sources = {sid: all_sources[sid] for sid in used_source_ids if sid in all_sources}
-
     conn.close()
 
     with open('templates/presentation.html', 'r', encoding='utf-8') as f:
