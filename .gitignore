@@ -10,7 +10,7 @@ output.out
 
 #Результаты компиляции программы для презентации
 *.txt
-presentation.html
+*.html
 
 #Вспомогательные папки
 /old_folders
