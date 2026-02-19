@@ -7,23 +7,20 @@
   <link rel="stylesheet" href="static/reveal/reveal.css" />
   <link rel="stylesheet" href="static/reveal/theme/white.css" />
   <style>
-    /* Убираем стандартные отступы */
     body, .reveal {
       margin: 0;
       padding: 0;
     }
 
-    /* Основной контейнер слайда */
     .slide-content {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100%;
-      padding-bottom: 90px; /* место для очень крупных номеров */
+      padding-bottom: 80px; /* место для футера */
     }
 
-    /* Заголовок вопроса */
     .slide-title {
       font-size: 2.0em;
       margin: 0;
@@ -32,42 +29,20 @@
       white-space: pre-wrap;
     }
 
-    /* === ПРИНУДИТЕЛЬНОЕ ПЕРЕОПРЕДЕЛЕНИЕ Reveal.js === */
-
-    /* Номер страницы — правый нижний угол */
-    .reveal .slides section .slide-number,
-    .slide-number {
-      position: absolute !important;
-      bottom: 15px !important;
-      right: 20px !important;
-      font-size: 1.0em !important;
-      color: #d00 !important;
-      font-weight: bold !important;
-      line-height: 1 !important;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2) !important;
-      z-index: 100 !important;
-      background: none !important;
-      border: none !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      opacity: 1 !important;
-    }
-
-    /* Номер варианта — левый нижний угол */
-    .reveal .slides section .variant-label,
-    .variant-label {
-      position: absolute !important;
-      bottom: 25px !important;
-      left: 20px !important;
-      font-size: 1.0em !important;
-      color: #d00 !important;
-      font-weight: bold !important;
-      z-index: 100 !important;
-      background: none !important;
-      border: none !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      opacity: 1 !important;
+    /* === ЕДИНЫЙ ФУТЕР ДЛЯ ВСЕХ СЛАЙДОВ С ВОПРОСАМИ === */
+    .slide-footer {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end; /* выравнивание по нижнему краю текста */
+      font-size: 1.0em;
+      color: #d00;
+      font-weight: bold;
+      line-height: 1;
+      z-index: 100;
     }
   </style>
 </head>
@@ -76,13 +51,26 @@
 <div class="reveal">
   <div class="slides">
 
-    <!-- ВОПРОСЫ (без титульного слайда) -->
+    <!-- НАЧАЛЬНЫЙ СЛАЙД -->
+    <section data-autoslide="10000">
+      <div class="slide-content">
+        <div class="slide-title"><strong>Диктант начинается</strong></div>
+        <div class="slide-footer">
+          <span>Вариант {{ variant_number }}</span>
+          <span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ВОПРОСЫ -->
     {% for slide in slides %}
     <section data-autoslide="{{ slide.duration }}">
       <div class="slide-content">
         <div class="slide-title">{{ slide.name }}</div>
-        <div class="variant-label">Вариант {{ variant_number }}</div>
-        <div class="slide-number">{{ slide.number }}</div>
+        <div class="slide-footer">
+          <span>Вариант {{ variant_number }}</span>
+          <span>Вопрос {{ slide.number }}</span>
+        </div>
       </div>
     </section>
     {% endfor %}
@@ -90,9 +78,11 @@
     <!-- ФИНАЛЬНЫЙ СЛАЙД -->
     <section>
       <div class="slide-content">
-        <div class="slide-title">Презентация завершена</div>
-        <div class="variant-label">Вариант {{ variant_number }}</div>
-        <div class="slide-number">{{ slides|length + 1 }}</div>
+        <div class="slide-title" ><strong>Диктант завершился</strong></div>
+        <div class="slide-footer">
+          <span>Вариант {{ variant_number }}</span>
+          <span></span>
+        </div>
       </div>
     </section>
 
