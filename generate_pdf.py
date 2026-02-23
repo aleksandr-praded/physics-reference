@@ -89,8 +89,8 @@ def main():
     school_set = parse_intervals(args.school)
     univ_set = parse_intervals(args.university)
 
-    # === Фильтрация формул ===
-    cursor.execute("SELECT * FROM formulas/* ORDER BY section, subsection, name*/")
+    # === Фильтрация формул (БЕЗ ORDER BY) ===
+    cursor.execute("SELECT * FROM formulas")
     all_formulas = cursor.fetchall()
     filtered_formulas = []
     for f in all_formulas:
@@ -121,8 +121,8 @@ def main():
             source_ids = [r[0] for r in cursor.fetchall()]
             filtered_formulas.append((f, source_ids))
 
-    # === Фильтрация концепций ===
-    cursor.execute("SELECT * FROM concepts/* ORDER BY section, subsection, name*/")
+    # === Фильтрация концепций (БЕЗ ORDER BY) ===
+    cursor.execute("SELECT * FROM concepts")
     all_concepts = cursor.fetchall()
     filtered_concepts = []
     for c in all_concepts:
@@ -138,14 +138,22 @@ def main():
         source_ids = [r[0] for r in cursor.fetchall()]
         filtered_concepts.append((c, source_ids))
 
-    # === Сбор использованных источников и группировка ===
+    # === Сбор данных с сохранением порядка ===
     used_source_ids = set()
     sections_dict = defaultdict(lambda: defaultdict(lambda: {'formulas': [], 'concepts': []}))
+    section_order = []
+    subsection_order = defaultdict(list)
 
     for f, src_ids in filtered_formulas:
+        sec = f['section']
+        sub = f['subsection']
         if args.bibliography:
             used_source_ids.update(src_ids)
-        sections_dict[f['section']][f['subsection']]['formulas'].append({
+        if sec not in sections_dict:
+            section_order.append(sec)
+        if sub not in sections_dict[sec]:
+            subsection_order[sec].append(sub)
+        sections_dict[sec][sub]['formulas'].append({
             'name': f['name'],
             'formula_latex': fix_latex_escapes(f['formula_latex']),
             'variable_keys': f['variable_keys'],
@@ -155,24 +163,30 @@ def main():
         })
 
     for c, src_ids in filtered_concepts:
+        sec = c['section']
+        sub = c['subsection']
         if args.bibliography:
             used_source_ids.update(src_ids)
-        sections_dict[c['section']][c['subsection']]['concepts'].append({
+        if sec not in sections_dict:
+            section_order.append(sec)
+        if sub not in sections_dict[sec]:
+            subsection_order[sec].append(sub)
+        sections_dict[sec][sub]['concepts'].append({
             'name': c['name'],
             'definition': c['definition'],
             'image_path': c['image_path'],
             'sources': src_ids if args.bibliography else []
         })
 
-    # === Формирование items ===
+    # === Формирование items в исходном порядке ===
     items = []
-    for section, subsections in sorted(sections_dict.items()):
+    for section in section_order:
         subsections_list = []
-        for subsection, content in sorted(subsections.items()):
+        for subsection in subsection_order[section]:
             subsections_list.append({
                 'name': subsection,
-                'formulas': content['formulas'],
-                'concepts': content['concepts']
+                'formulas': sections_dict[section][subsection]['formulas'],
+                'concepts': sections_dict[section][subsection]['concepts']
             })
         items.append({
             'name': section,
