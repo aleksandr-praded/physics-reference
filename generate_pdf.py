@@ -90,7 +90,7 @@ def main():
     univ_set = parse_intervals(args.university)
 
     # === Фильтрация формул ===
-    cursor.execute("SELECT * FROM formulas ORDER BY section, subsection, name")
+    cursor.execute("SELECT * FROM formulas/* ORDER BY section, subsection, name*/")
     all_formulas = cursor.fetchall()
     filtered_formulas = []
     for f in all_formulas:
@@ -122,7 +122,7 @@ def main():
             filtered_formulas.append((f, source_ids))
 
     # === Фильтрация концепций ===
-    cursor.execute("SELECT * FROM concepts ORDER BY section, subsection, name")
+    cursor.execute("SELECT * FROM concepts/* ORDER BY section, subsection, name*/")
     all_concepts = cursor.fetchall()
     filtered_concepts = []
     for c in all_concepts:

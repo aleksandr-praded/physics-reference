@@ -18,7 +18,7 @@
       align-items: center;
       justify-content: center;
       height: 100%;
-      padding-bottom: 80px; /* место для футера */
+      padding-bottom: 80px;
     }
 
     .slide-title {
@@ -29,20 +29,31 @@
       white-space: pre-wrap;
     }
 
-    /* === ЕДИНЫЙ ФУТЕР ДЛЯ ВСЕХ СЛАЙДОВ С ВОПРОСАМИ === */
-    .slide-footer {
+    /* === ЕДИНЫЙ БАЗОВЫЙ СТИЛЬ === */
+    .slide-footer-label {
       position: absolute;
       bottom: 20px;
-      left: 20px;
-      right: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end; /* выравнивание по нижнему краю текста */
       font-size: 1.0em;
-      color: #d00;
       font-weight: bold;
       line-height: 1;
       z-index: 100;
+    }
+
+    /* Цвета */
+    .variant-label {
+      left: 20px;
+      color: #d00; /* красный */
+    }
+
+    .question-label {
+      right: 20px;
+      color: #006400; /* тёмно-зелёный */
+    }
+
+    .timer-label {
+      left: 50%;
+      transform: translateX(-50%);
+      color: #0066cc; /* синий */
     }
   </style>
 </head>
@@ -52,25 +63,22 @@
   <div class="slides">
 
     <!-- НАЧАЛЬНЫЙ СЛАЙД -->
-    <section data-autoslide="10000">
+    <section data-autoslide="30000" data-duration="30">
       <div class="slide-content">
         <div class="slide-title"><strong>Диктант начинается</strong></div>
-        <div class="slide-footer">
-          <span>Вариант {{ variant_number }}</span>
-          <span></span>
-        </div>
+        <div class="slide-footer-label variant-label">Вариант {{ variant_number }}</div>
+        <div class="slide-footer-label timer-label">Ожидание...</div>
       </div>
     </section>
 
     <!-- ВОПРОСЫ -->
     {% for slide in slides %}
-    <section data-autoslide="{{ slide.duration }}">
+    <section data-autoslide="{{ slide.duration }}" data-duration="{{ slide.duration // 1000 }}">
       <div class="slide-content">
         <div class="slide-title">{{ slide.name }}</div>
-        <div class="slide-footer">
-          <span>Вариант {{ variant_number }}</span>
-          <span>Вопрос {{ slide.number }}</span>
-        </div>
+        <div class="slide-footer-label variant-label">Вариант {{ variant_number }}</div>
+        <div class="slide-footer-label question-label">Вопрос {{ slide.number }}</div>
+        <div class="slide-footer-label timer-label">Готово...</div>
       </div>
     </section>
     {% endfor %}
@@ -78,11 +86,8 @@
     <!-- ФИНАЛЬНЫЙ СЛАЙД -->
     <section>
       <div class="slide-content">
-        <div class="slide-title" ><strong>Диктант завершился</strong></div>
-        <div class="slide-footer">
-          <span>Вариант {{ variant_number }}</span>
-          <span></span>
-        </div>
+        <div class="slide-title"><strong>Диктант завершился</strong></div>
+        <div class="slide-footer-label variant-label">Вариант {{ variant_number }}</div>
       </div>
     </section>
 
@@ -98,6 +103,41 @@
     center: true,
     transition: 'none',
     autoSlideStoppable: false
+  });
+
+  let currentTimer = null;
+
+  function startSlideTimer(durationSec) {
+    if (currentTimer) clearInterval(currentTimer);
+
+    let timeLeft = durationSec;
+    const timerEl = document.querySelector('.reveal .slides section.present .timer-label');
+
+    if (!timerEl || timeLeft <= 0) return;
+
+    timerEl.textContent = `Осталось: ${timeLeft} с`;
+
+    currentTimer = setInterval(() => {
+      timeLeft--;
+      if (timeLeft >= 0) {
+        timerEl.textContent = `Осталось: ${timeLeft} с`;
+      } else {
+        clearInterval(currentTimer);
+        timerEl.textContent = 'Время вышло!';
+      }
+    }, 1000);
+  }
+
+  Reveal.on('slidechanged', function(event) {
+    const slide = event.currentSlide;
+    const dur = slide.getAttribute('data-duration');
+    if (dur) startSlideTimer(parseInt(dur));
+  });
+
+  Reveal.on('ready', function() {
+    const first = document.querySelector('.reveal .slides section');
+    const dur = first.getAttribute('data-duration');
+    if (dur) startSlideTimer(parseInt(dur));
   });
 </script>
 
