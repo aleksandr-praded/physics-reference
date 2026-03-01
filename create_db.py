@@ -7,6 +7,19 @@ if os.path.exists('physics.db'):
     os.remove('physics.db')
     print("✅ Старая база удалена")
 
+def safe_load_csv(path, required_cols):
+    if not os.path.exists(path):
+        print(f"⚠️ {os.path.basename(path)} не найден")
+        return []
+    with open(path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        rows = []
+        for i, row in enumerate(reader, start=2):  # строка 1 — заголовок
+            if set(required_cols) - set(row.keys()):
+                raise ValueError(f"Ошибка в {path}, строка {i}: не хватает столбцов. Ожидались: {required_cols}, есть: {list(row.keys())}")
+            rows.append(row)
+        return rows
+
 os.makedirs('data', exist_ok=True)
 
 conn = sqlite3.connect('physics.db')
