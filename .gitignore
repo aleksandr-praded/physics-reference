@@ -15,8 +15,7 @@ output.out
 *.pdf
 
 #Вспомогательные папки
-/old_folders
-/output_versions
+/hidden
 
 #ОС
 .DS_Store
