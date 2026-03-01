@@ -2,7 +2,6 @@
 physics.db
 
 #Результаты компиляции LaTeX
-output.pdf
 output.tex
 output.log
 output.aux
@@ -11,6 +10,9 @@ output.out
 #Результаты компиляции программы для презентации
 *.txt
 *.html
+
+#Результаты компиляции промежуточных файлов
+*.pdf
 
 #Вспомогательные папки
 /old_folders

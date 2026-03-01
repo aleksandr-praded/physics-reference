@@ -54,7 +54,7 @@
 {% if concept.image_path %}
 \vspace{1em}
 \begin{center}
-\includegraphics[width=0.6\textwidth]{ {{ concept.image_path }} }
+\includegraphics[width=0.6\textwidth]{ images/{{ concept.image_path }} }
 \end{center}
 {% endif %}
 
@@ -87,7 +87,7 @@ ${{ var.symbol }}$ — {{ var.desc }}
 {% if formula.image_path %}
 \vspace{1em}
 \begin{center}
-\includegraphics[width=0.6\textwidth]{ {{ formula.image_path }} }
+\includegraphics[width=0.6\textwidth]{ images/{{ formula.image_path }} }
 \end{center}
 {% endif %}
 

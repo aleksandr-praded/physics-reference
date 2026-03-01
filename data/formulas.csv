@@ -1,4 +1,5 @@
-"name","formula_latex","variable_keys","section","subsection","level",image_path"
+"name","formula_latex","variable_keys","section","subsection","level","image_path"
+
 "Кинематические уравнения движения точки в скалярной форме (общий вид)","\\begin{cases}x = x(t) \\\\ y = y(t) \\\\ z = z(t) \\end{cases}","abscissa,ordinate,applicate,time","Механика","Кинематика","school:10",""
 "Кинематические уравнения движения точки в векторной форме (общий вид)","\\vec{r} = \\vec{r}(t)","radius_vector,time","Механика","Кинематика","school:10",""
 "Перемещение (изменение радиус-вектора)","\\vec{s} = \\vec{\\Delta r} = \\vec{r_2} - \\vec{r_1}","displacement,radius_vector_difference,inicial_radius_vector,final_radius-vector","Механика","Кинематика","school:9",""
@@ -6,7 +7,7 @@
 "Средняя скорость","\\vec{\\langle v \\rangle} = \\frac{\\vec{\\Delta r}}{\\Delta t}","mean_velocity,radius_vector_difference,time_difference","Механика","Кинематика","school:9",""
 "Скорость (мгновенная скорость)","\\vec{v}=\\lim_{\\Delta t \\to 0}{\\vec{\\langle v \\rangle}} = \\frac{\\vec{dv}}{dt}","velocity,mean_velocity,radius_vector,time","Механика","Кинематика","school:10",""
 "Связь вектора скорости с её проекциями","\\vec{v} = v_x\\cdot \\vec{i} + v_y\\cdot \\vec{j} + v_z\\cdot \\vec{k}","velocity,x_ort,y_ort,z_ort,velocity_abscissa,velocity_applicate,velocity_ordinate","Механика","Кинематика","school:10",""
-"Связь модуля вектора скорости с его проекциями (в декартовых координатах)","v = \\sqrt{v_x^2 + v_y^2 + v_z^2}","absolute_velocity,velocity_abscissa,velocity_ordinate,velocity_applicate","Механика","Кинематика","school:10",""
+"Связь модуля вектора скорости с его проекциями (в декартовых координатах)","v = \\sqrt{v_x^2 + v_y^2 + v_z^2}","velocity_modulus,velocity_abscissa,velocity_ordinate,velocity_applicate","Механика","Кинематика","school:10",""
 "Изменение скорости","\\vec{\\Delta v} = \\vec{v_2} - \\vec{v_1}","velocity_difference,inicial_velocity,final_velocity","Механика","Кинематика","school:9",""
 "Связь проекций скорости и координат материальной точки","\\begin{cases} v_x = \\frac{dx}{dt} \\\\ v_y = \\frac{dy}{dt} \\\\ v_z = \\frac{dz}{dt} \\end{cases}","velocity_abscissa,velocity_ordinate,velocity_applicate,abscissa,ordinate,applicate,time","Механика","Кинематика","school:10",""
 "Средняя путевая скорость","\\langle v \\rangle = \\frac{S}{\\Delta t}","mean_spostamento_velocity,spostamento,time_difference","Механика","Кинематика","school:9",""
@@ -16,43 +17,18 @@
 "Среднее ускорение","\\vec{\\langle a \\rangle} = \\frac{\\vec{\\Delta v}}{\\Delta t}","mean_acceleration,velocity_difference,time_difference","Механика","Кинематика","school:9",""
 "Ускорение (мгновенное ускорение)","\\vec{a} = \\lim_{\\Delta t \\to 0}{\\vec{\\langle a \\rangle}} = \\frac{\\Delta v}{\\Delta t}","acceleration,mean_velocity,velocity,time","Механика","Кинематика","school:10",""
 "Связь вектора ускорения с его проекциями","\\vec{a} = a_x\\cdot \\vec{i} + a_y\\cdot \\vec{j} + a_z\\cdot \\vec{k}","accelertion,x_ort,y_ort,z_ort,acceleration_abscissa,acceleration_applicate,acceleration_ordinate","Механика","Кинематика","school:10",""
-"Связь модуля вектора ускорения с его проекциями (в декартовых координатах)","a = \\sqrt{a_x^2 + a_y^2 + a_z^2}","absolute_acceleration,acceleration_abscissa,acceleration_ordinate,acceleration_applicate","Механика","Кинематика","school:10",""
+"Связь модуля вектора ускорения с его проекциями (в декартовых координатах)","a = \\sqrt{a_x^2 + a_y^2 + a_z^2}","acceleration_modulus,acceleration_abscissa,acceleration_ordinate,acceleration_applicate","Механика","Кинематика","school:10",""
 "Среднее ускорение по годографу скорости","\\langle a \\rangle = \\frac{S_v}{\\Delta t}","mean_velocity_godograf_acceleration,velocity_godograf_spostamento,time_difference","Механика","Кинематика","university:1",""
 "Мгновенное ускорение по годографу скорости","a = \\lim_{\\Delta t \\to 0}{\\langle a \\rangle} = \\frac{dS_v}{dt}","velocity_godograf_acceleration,mean_velocity_godograf_acceleration,velocity_godograf_spostamento,time","Механика","Кинематика","university:1",""
 
-"Плотность однородного тела","\rho = \\frac{m}{V}","density,mass,volume","Механика","Динамика","school:7",""
-"Второй закон Ньютона","\\vec{F} = m\\cdot \\vec{a}","resulting_force,mass,acceleration","Механика","Динамика","school:9",""
-"Сила тяжести","\\vec{F}_{\\text{тяж}} = m\\cdot \\vec{g}","gravitational_force,mass,free_fall_acceleration","Механика","Динамика","school:7",""
-"Закон Гука","F_{\\text{упр}} = k\\cdot \\Delta l","elastic_force_modulus,elasticity_coefficient,deformation","Механика","Динамика","school:7",""
-"Вес покоющегося тела","\\vec{P} = m\\cdot \\vec{g}","weight,mass,free_fall_acceleration","Механика","Динамика","school:7",""
-
-"Давление","p = \\frac{F_{\\text{д}}}{S}","pressure,pressure_force,area","Механика","Гидростатика","school:7",""
-"Вес покоющегося тела","\\vec{P} = m\\cdot \\vec{g}","weight,mass,free_fall_acceleration","Механика","Гидростатика","school:7",""
-"Гидростатическое давление","p = \\rho\\cdot g\\cdot h","pressure,density,free_fall_acceleration_modulus,depth","Механика","Гидростатика","school:7",""
-"Условие равновесия гидравлической машины","\\frac{F_1}{F_2} = \\frac{S_1}{S_2}","first_plunger_force,second_plunger_force,first_plunger_area,second_plunger_area","Механика","Гидростатика","school:7",""
-"Сила Архимеда","F_{\\text{арх}} = \\rho_{\\text{жид}}\\cdot g\\cdot V_{\\text{пог}}","buoyancy_force,liquid_density,free_fall_acceleration_modulus,dived_volume","Механика","Гидростатика","school:7",""
-
 "Импульс тела","\\vec{p} = m\\cdot \\vec{v}","impulse,mass,velocity","Механика","Динамика","school:9",""
 
-"Работа силы","A = F\\cdot S","work,force_modulus,spostamento","Механика","Работа и энергия","school:7",""
-"Коэффициент полезного действия","\\eta = \\frac{A_{\\text{пол}}}{A_{\\text{зат}}}","efficiency_factor,effective_work,total_work","Механика","Работа и энергия","school:7",""
-"Мощность","N = \\frac{A}{t}","power,work,time","Механика","Работа и энергия","school:7",""
-"Кинетическая энергия","E_\\text{к} = \\frac{m\\cdot v^2}{2}","kinetic_energy,mass,absolute_velocity","Механика","Работа и энергия","school:7",""
-"Потенциальная энергия силы тяжести","E_\\text{п} = m\\cdot g\\cdot h","potencial_energy,mass,free_fall_acceleration_modulus,height","Механика","Работа и энергия","school:7",""
-"Условие равновесия рычага","\\frac{F_1}{F_2} = \\frac{l_2}{l_1}","first_lever_force_modulus,second_lever_force_modulus,first_lever_arm,second_lever_arm","Механика","Работа и энергия","school:7",""
-"Момент силы","M = F\\cdot l","force_moment,force_modulus,lever_arm","Механика","Работа и энергия","school:7",""
-"Условие равновесия рычага через момент силы","M_1 = M_2","first_force_moment,second_force_moment","Механика","Работа и энергия","school:7",""
-
-
-"Связь периода и частоты","T = \\frac{1}{\\nu}","period,frequency","Механика","Кинематика","school:9",""
-"Связь скорости волны с частотой","v = \\lambda\\cdot \\nu","absolute_velocity,wavelength,frequency","Механика","Колебания и волны","school:9",""
-
+"Связь скорости волны с частотой","v = \\lambda\\cdot \\nu","velocity_modulus,wavelength,frequency","Механика","Колебания и волны","school:9",""
 
 "Уравнение Менделеева-Клапейрона","p\\cdot V = \\nu\\cdot R\\cdot T","pressure,volume,amount_of_substance,gas_constant,kelvin_temperature","Молекулярная физика и термодинамика","Термодинамика","school:10",""
 "Первый закон термодинамики","\\Delta U = Q + A_{\\text{в}}","internal_energy_difference,quantity_of_heat,external_force_work","Молекулярная физика и термодинамика","Термодинамика","school:10",""
 "Первый закон термодинамики"," Q = \\Delta U + A_{\\text{г}}","internal_energy_difference,quantity_of_heat,gas_work","Молекулярная физика и термодинамика","Термодинамика","school:10",""
 "Количество теплоты при нагревании","Q = c\\cdot m\\cdot \\Delta t","quantity_of_heat,specific_heat_capacity,mass,temperature_difference","Молекулярная физика и термодинамика","Термодинамика","school:8",""
-
 
 "Закон Ома для полной цепи","\\mathcal{E} = I\\cdot (R + r)","electromotive_force,amperage,resistance,internal_resistance","Электричество и магнетизм","Постоянный ток","school:10","images/ohm.jpg"
 "Закон Ома для участка цепи","U = I\\cdot R","voltage,amperage,resistance","Электричество и магнетизм","Постоянный ток","school:10",""
@@ -62,5 +38,62 @@
 
 "Связь скорости волны с частотой","c = \\lambda\\cdot \\nu","speed_of_light,wavelength,frequency","Электричество и магнетизм","Колебания и волны","school:9",""
 
-
 "Уравнения Максвелла (дивергенция напряжённости)","\\nabla \\cdot \\vec{E} = \\frac{\\rho}{\\varepsilon_0}","electric_field_divergence,density,electric_constant","Электричество и магнетизм","Электродинамика","university:2",""
+
+
+
+"Скорость тела при равномерном движении","v = \\frac{S}{t}","velocity_modulus,spostamento,time","Механика","Кинематика","school:7",""
+"Средняя скорость тела","\\langle v \\rangle = \\frac{S}{t}","mean_spostamento_velocity,total_spostamento,total_time","Механика","Кинематика","school:7",""
+"Плотность однородного тела","\rho = \\frac{m}{V}","density,mass,volume","Механика","Динамика","school:7",""
+"Сила тяжести","\\vec{F}_{\\text{тяж}} = m\\cdot \\vec{g}","gravitational_force,mass,free_fall_acceleration","Механика","Динамика","school:7",""
+"Сила упругости","F_{\\text{упр}} = k\\cdot \\Delta l","elastic_force_modulus,elasticity_coefficient,deformation","Механика","Динамика","school:7",""
+"Вес покоющегося тела","\\vec{P} = m\\cdot \\vec{g}","weight,mass,free_fall_acceleration","Механика","Гидростатика","school:7",""
+
+"Давление","p = \\frac{F_{\\text{д}}}{S}","pressure,pressure_force,area","Механика","Гидростатика","school:7",""
+"Гидростатическое давление","p = \\rho\\cdot g\\cdot h","pressure,density,free_fall_acceleration_modulus,depth","Механика","Гидростатика","school:7",""
+"Условие равновесия гидравлической машины","\\frac{F_1}{F_2} = \\frac{S_1}{S_2}","first_plunger_force_modulus,second_plunger_force_modulus,first_plunger_area,second_plunger_area","Механика","Гидростатика","school:7",""
+"Сила Архимеда","F_{\\text{арх}} = \\rho_{\\text{жид}}\\cdot g\\cdot V_{\\text{пог}}","buoyancy_force,liquid_density,free_fall_acceleration_modulus,dived_volume","Механика","Гидростатика","school:7",""
+
+"Работа силы","A = F\\cdot S","work,force_modulus,spostamento","Механика","Работа и энергия","school:7",""
+"Мощность","N = \\frac{A}{t}","power,work,time","Механика","Работа и энергия","school:7",""
+"Условие равновесия рычага","\\frac{F_1}{F_2} = \\frac{l_2}{l_1}","first_lever_force_modulus,second_lever_force_modulus,first_lever_arm,second_lever_arm","Механика","Работа и энергия","school:7",""
+"Момент силы","M = F\\cdot l","force_moment,force_modulus,lever_arm","Механика","Работа и энергия","school:7",""
+"Условие равновесия рычага через момент силы","M_1 = M_2","first_force_moment,second_force_moment","Механика","Работа и энергия","school:7",""
+"Условие равновесия неподвижного блока","F = P","push_force,weight","Механика","Статика","school:7",""
+"Условие равновесия подвижного блока","F = \\frac{P}{2}","push_force,weight","Механика","Статика","school:7",""
+"Коэффициент полезного действия","\\eta = \\frac{A_{\\text{пол}}}{A_{\\text{зат}}}","efficiency_factor,effective_work,total_work","Механика","Работа и энергия","school:7",""
+"Кинетическая энергия","E_\\text{к} = \\frac{m\\cdot v^2}{2}","kinetic_energy,mass,velocity_modulus","Механика","Работа и энергия","school:7",""
+"Потенциальная энергия силы тяжести","E_\\text{п} = m\\cdot g\\cdot h","potencial_energy,mass,free_fall_acceleration_modulus,height","Механика","Работа и энергия","school:7",""
+
+
+
+"Уравнение движения точки в координатной форме","\\begin{cases}x = x(t) \\\\ y = y(t) \\\\ z = z(t) \\end{cases}","abscissa,ordinate,applicate,time","Механика","Кинематика","school:10",""
+"Уравнение движения точки в векторной форме","\\vec{r} = \\vec{r}(t)","radius_vector,time","Механика","Кинематика","school:10",""
+"Скорость равномерного прямолинейного движения точки","\\vec{v} = \\frac{\\Delta r}{\\Delta t}","uniform_rectilinear_motion_velocity,displacement,time_difference","Механика","Кинематика","school:10",""
+"Уравнение равномерного прямолинейного движения в координатной форме","\\begin{cases}x = x_0 + v_x\\cdot t \\\\ y = y_0 + v_y\\cdot t \\\\ z = z_0 + v_z\\cdot t \\end{cases}","abscissa,ordinate,applicate,initial_abscissa_at_zero,initial_ordinate_at_zero,initial_applicate_at_zero,velocity_abscissa,velocity_ordinate,velocity_applicate,time","Механика","Кинематика","school:10",""
+"Уравнение равномерного прямолинейного движения в векторной форме","\\vec{r} = \\vec{r}_0 + \\vec{v}\\cdot t","radius_vector,inicial_radius_vector_at_zero,uniform_rectilinear_motion_velocity,time","Механика","Кинематика","school:10",""
+"Закон сложения скоростей","\\vec{v}_{\\text{абс}} = \\vec{v}_{\\text{пер}} + \\vec{v}_{\\text{отн}}","absolute_velocity,relative_velocity,transportation_velocity","Механика","Кинематика","school:10",""
+"Средняя путевая скорость","\\langle v \\rangle = \\frac{S}{\\Delta t}","mean_spostamento_velocity,spostamento,time_difference","Механика","Кинематика","school:10",""
+"Ускорение равнопеременного движения точки","\\vec{a} = \\frac{\\Delta \\vec{v}}{\\Delta t}","acceleration,velocity_difference,time_difference","Механика","Кинематика","school:10",""
+"Скорость равнопеременного движения точки в координатной форме","\\begin{cases}v_x = v_{0x} + a_x\\cdot t \\\\ v_y = v_{0y} + a_y\\cdot t \\\\ v_z = v_{0z} + a_z\\cdot t \\end{cases}","velocity_abscissa,velocity_ordinate,velocity_applicate,inicial_velocity_abscissa_at_zero,inicial_velocity_ordinate_at_zero,inicial_velocity_applicate_at_zero,acceleration_abscissa,acceleration_ordinate,acceleration_applicate,time","Механика","Кинематика","school:10",""
+"Скорость равнопеременного движения точки в векторной форме","\\vec{v} = \\vec{v}_0 + \\vec{a}\\cdot t","velocity,inicial_velocity_at_zero,acceleration,time","Механика","Кинематика","school:10",""
+"Уравнение равнопеременного движения точки в координатной форме","\\begin{cases}x = x_0 + v_{0x}\\cdot t + \\frac{a_x\\cdot t^2}{2} \\\\ y = y_0 + v_{0y}\\cdot t + \\frac{a_y\\cdot t^2}{2} \\\\ z = z_0 + v_{0z}\\cdot t + \\frac{a_z\\cdot t^2}{2} \\end{cases}","abscissa,ordinate,applicate,initial_abscissa_at_zero,initial_ordinate_at_zero,initial_applicate_at_zero,inicial_velocity_abscissa_at_zero,inicial_velocity_ordinate_at_zero,inicial_velocity_applicate_at_zero,acceleration_abscissa,acceleration_ordinate,acceleration_applicate,time","Механика","Кинематика","school:10",""
+"Уравнение равнопеременного движения точки в координатной форме (без времени)","\\begin{cases}x = x_0 + \\frac{v_x^2 - v_{0x}^2}{2\\cdot a_x} \\\\ y = y_0 + \\frac{v_y^2 - v_{0y}^2}{2\\cdot a_y} \\\\ z = z_0 + \\frac{v_z^2 - v_{0z}^2}{2\\cdot a_z} \\end{cases}","abscissa,ordinate,applicate,initial_abscissa_at_zero,initial_ordinate_at_zero,initial_applicate_at_zero,inicial_velocity_abscissa_at_zero,inicial_velocity_ordinate_at_zero,inicial_velocity_applicate_at_zero,acceleration_abscissa,acceleration_ordinate,acceleration_applicate,time","Механика","Кинематика","school:10",""
+"Уравнение равнопеременного движения точки в координатной форме (без ускорения)","\\begin{cases}x = x_0 + \\frac{v_x + v_{0x}}{2}\\cdot t \\\\ y = y_0 + \\frac{v_y + v_{0y}}{2}\\cdot t \\\\ z = z_0 + \\frac{v_z + v_{0z}}{2}\\cdot t \\end{cases}","abscissa,ordinate,applicate,initial_abscissa_at_zero,initial_ordinate_at_zero,initial_applicate_at_zero,inicial_velocity_abscissa_at_zero,inicial_velocity_ordinate_at_zero,inicial_velocity_applicate_at_zero,velocity_abscissa,velocity_ordinate,velocity_applicate,time","Механика","Кинематика","school:10",""
+"Уравнение равнопеременного движения точки в векторной форме","\vec{r} = \vec{r}_0 + \vec{v}_{0}\\cdot t + \frac{\\vec{a}\cdot t^2}{2}","radius_vector,inicial_radius_vector_at_zero,inicial_velocity_at_zero,acceleration,time","Механика","Кинематика","school:10",""
+"Скорость свободного падения точки в координатной форме","\begin{cases} v_x = v_0 \cdot \cos{(\alpha_0)} \\\\ v_y = v_0 \cdot \sin{(\alpha_0)} - g \cdot t \\\\ v_z = 0 \\end{cases}","velocity_abscissa,velocity_ordinate,velocity_applicate,initial_velocity_modulus_at_zero,free_fall_acceleration_modulus,initial_velocity_angle_at_zero,time","Механика","Кинематика","school:10",""
+"Скорость свободного падения точки в векторной форме","\vec{v} = \vec{v}_0 + \vec{g}\cdot t","velocity,inicial_velocity_at_zero,free_fall_acceleration,time","Механика","Кинематика","school:10",""
+"Уравнение свободного падения точки в координатной форме","\begin{cases} x = v_0 \cdot \cos{(\alpha_0)} \cdot t \\\\ y =  v_0 \cdot \sin{(\alpha_0)} \cdot t - \frac{g \cdot t^2}{2} \\\\ z = 0 \end{cases}","abscissa,ordinate,applicate,initial_velocity_modulus_at_zero,free_fall_acceleration_modulus,initial_velocity_angle_at_zero,time","Механика","Кинематика","school:10",""
+"Уравнение свободного падения точки в векторной форме","\vec{r} = \vec{v}_{0} \cdot t + \frac{\vec{g} \cdot t^2}{2}","radius_vector,inicial_velocity_at_zero,free_fall_acceleration,time","Механика","Кинематика","school:10",""
+"Максимальная высота подъёма при свободном падении","H = \frac{v_0^2}{2\cdot g}","free_fall_maximal_heigt,initial_velocity_modulus_at_zero,free_fall_acceleration_modulus,initial_velocity_angle_at_zero","Механика","Кинематика","school:10",""
+"Максимальная дальность полёта при свободном падении","L = \frac{v_0^2 \cdot \sin{(2 \cdot \alpha_0)}}{g}","free_fall_maximal_distance,initial_velocity_modulus_at_zero,free_fall_acceleration_modulus,initial_velocity_angle_at_zero","Механика","Кинематика","school:10",""
+"Полное время полёта при свободном падении","t_{\text{полн}} = \frac{2 \cdot v_0 \cdot \sin{(\alpha_0)}}{g}","free_fall_time,initial_velocity_modulus_at_zero,initial_velocity_angle_at_zero,free_fall_acceleration_modulus","Механика","Кинематика","school:10",""
+"Время подъёма при свободном падении","t_{\text{под}} = \frac{t_{\text{полн}}}{2}","free_fall_ascending_time,free_fall_time","Механика","Кинематика","school:10",""
+"Время спуска при свободном падении","t_{\text{сп}} = \frac{t_{\text{полн}}}{2}","free_fall_descending_time,free_fall_time","Механика","Кинематика","school:10",""
+"Модуль центростремительного ускорения","a_{\text{ц}} = \frac{v^2}{R}","normal_acceleration_modulus,velocity_modulus,radius","Механика","Кинематика","school:10",""
+"Угловая скорость при равномерном вращении","\omega = \frac{\Delta \varphi}{\Delta t}","uniform_angular_velocity,body_angular_displacement,time_difference","Механика","Кинематика","school:10",""
+"Связь периода и частоты","T = \frac{1}{\nu}","period,frequency","Механика","Кинематика","school:10",""
+"Связь угловой скорости и периода при равномерном вращении","\omega = \frac{2 \cdot \pi}{T}","uniform_angular_velocity,period","Механика","Кинематика","school:10",""
+"Связь линейной скорости и угловой при равномерном вращении","v = \omega \cdot R","velocity_modulus,uniform_angular_velocity,radius","Механика","Кинематика","school:10",""
+
+"Второй закон Ньютона","\vec{F} = m \cdot \vec{a}","resulting_force,mass,acceleration","Механика","Динамика","school:10",""
