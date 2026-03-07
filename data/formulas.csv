@@ -1,45 +1,5 @@
 "name","formula_latex","variable_keys","section","subsection","level","image_path"
 
-"Кинематические уравнения движения точки в скалярной форме (общий вид)","\\begin{cases}x = x(t) \\\\ y = y(t) \\\\ z = z(t) \\end{cases}","abscissa,ordinate,applicate,time","Механика","Кинематика","school:10",""
-"Кинематические уравнения движения точки в векторной форме (общий вид)","\\vec{r} = \\vec{r}(t)","radius_vector,time","Механика","Кинематика","school:10",""
-"Перемещение (изменение радиус-вектора)","\\vec{s} = \\vec{\\Delta r} = \\vec{r_2} - \\vec{r_1}","displacement,radius_vector_difference,inicial_radius_vector,final_radius-vector","Механика","Кинематика","school:9",""
-
-"Средняя скорость","\\vec{\\langle v \\rangle} = \\frac{\\vec{\\Delta r}}{\\Delta t}","mean_velocity,radius_vector_difference,time_difference","Механика","Кинематика","school:9",""
-"Скорость (мгновенная скорость)","\\vec{v}=\\lim_{\\Delta t \\to 0}{\\vec{\\langle v \\rangle}} = \\frac{\\vec{dv}}{dt}","velocity,mean_velocity,radius_vector,time","Механика","Кинематика","school:10",""
-"Связь вектора скорости с её проекциями","\\vec{v} = v_x\\cdot \\vec{i} + v_y\\cdot \\vec{j} + v_z\\cdot \\vec{k}","velocity,x_ort,y_ort,z_ort,velocity_abscissa,velocity_applicate,velocity_ordinate","Механика","Кинематика","school:10",""
-"Связь модуля вектора скорости с его проекциями (в декартовых координатах)","v = \\sqrt{v_x^2 + v_y^2 + v_z^2}","velocity_modulus,velocity_abscissa,velocity_ordinate,velocity_applicate","Механика","Кинематика","school:10",""
-"Изменение скорости","\\vec{\\Delta v} = \\vec{v_2} - \\vec{v_1}","velocity_difference,inicial_velocity,final_velocity","Механика","Кинематика","school:9",""
-"Связь проекций скорости и координат материальной точки","\\begin{cases} v_x = \\frac{dx}{dt} \\\\ v_y = \\frac{dy}{dt} \\\\ v_z = \\frac{dz}{dt} \\end{cases}","velocity_abscissa,velocity_ordinate,velocity_applicate,abscissa,ordinate,applicate,time","Механика","Кинематика","school:10",""
-"Средняя путевая скорость","\\langle v \\rangle = \\frac{S}{\\Delta t}","mean_spostamento_velocity,spostamento,time_difference","Механика","Кинематика","school:9",""
-"Мгновенная путевая скорость","v = \\lim_{\\Delta t \\to 0}{\\langle v \\rangle} = \\frac{dS}{dt}","spostamento_velocity,mean_spostamento_velocity,spostamento,time","Механика","Кинематика","school:10",""
-"Разложение скорости на лучевую и поперечную составляющие","\\vec{v} = \\vec{v}_{\\rho} + \\vec{v}_{\\varphi}","velocity,radial_velocity_component,transversal_velocity_component","Механика","Кинематика","university:1",""
-
-"Среднее ускорение","\\vec{\\langle a \\rangle} = \\frac{\\vec{\\Delta v}}{\\Delta t}","mean_acceleration,velocity_difference,time_difference","Механика","Кинематика","school:9",""
-"Ускорение (мгновенное ускорение)","\\vec{a} = \\lim_{\\Delta t \\to 0}{\\vec{\\langle a \\rangle}} = \\frac{\\Delta v}{\\Delta t}","acceleration,mean_velocity,velocity,time","Механика","Кинематика","school:10",""
-"Связь вектора ускорения с его проекциями","\\vec{a} = a_x\\cdot \\vec{i} + a_y\\cdot \\vec{j} + a_z\\cdot \\vec{k}","accelertion,x_ort,y_ort,z_ort,acceleration_abscissa,acceleration_applicate,acceleration_ordinate","Механика","Кинематика","school:10",""
-"Связь модуля вектора ускорения с его проекциями (в декартовых координатах)","a = \\sqrt{a_x^2 + a_y^2 + a_z^2}","acceleration_modulus,acceleration_abscissa,acceleration_ordinate,acceleration_applicate","Механика","Кинематика","school:10",""
-"Среднее ускорение по годографу скорости","\\langle a \\rangle = \\frac{S_v}{\\Delta t}","mean_velocity_godograf_acceleration,velocity_godograf_spostamento,time_difference","Механика","Кинематика","university:1",""
-"Мгновенное ускорение по годографу скорости","a = \\lim_{\\Delta t \\to 0}{\\langle a \\rangle} = \\frac{dS_v}{dt}","velocity_godograf_acceleration,mean_velocity_godograf_acceleration,velocity_godograf_spostamento,time","Механика","Кинематика","university:1",""
-
-"Импульс тела","\\vec{p} = m\\cdot \\vec{v}","impulse,mass,velocity","Механика","Динамика","school:9",""
-
-"Связь скорости волны с частотой","v = \\lambda\\cdot \\nu","velocity_modulus,wavelength,frequency","Механика","Колебания и волны","school:9",""
-
-"Уравнение Менделеева-Клапейрона","p\\cdot V = \\nu\\cdot R\\cdot T","pressure,volume,amount_of_substance,gas_constant,kelvin_temperature","Молекулярная физика и термодинамика","Термодинамика","school:10",""
-"Первый закон термодинамики","\\Delta U = Q + A_{\\text{в}}","internal_energy_difference,quantity_of_heat,external_force_work","Молекулярная физика и термодинамика","Термодинамика","school:10",""
-"Первый закон термодинамики"," Q = \\Delta U + A_{\\text{г}}","internal_energy_difference,quantity_of_heat,gas_work","Молекулярная физика и термодинамика","Термодинамика","school:10",""
-"Количество теплоты при нагревании","Q = c\\cdot m\\cdot \\Delta t","quantity_of_heat,specific_heat_capacity,mass,temperature_difference","Молекулярная физика и термодинамика","Термодинамика","school:8",""
-
-"Закон Ома для полной цепи","\\mathcal{E} = I\\cdot (R + r)","electromotive_force,amperage,resistance,internal_resistance","Электричество и магнетизм","Постоянный ток","school:10","images/ohm.jpg"
-"Закон Ома для участка цепи","U = I\\cdot R","voltage,amperage,resistance","Электричество и магнетизм","Постоянный ток","school:10",""
-
-"Электроёмкость плоского конденсатора","C = \\frac{\\varepsilon_0\\cdot \\varepsilon\\cdot S}{d}","electric_capacity,electric_constant,dielectric_constant,capacitor_area,capacitor_gap","Электричество и магнетизм","Электростатика","school:10",""
-"Энергия заряженного конденсатора","W_C = \\frac{q^2}{2\\cdot C}","capacitor_energy,electric_charge,electric_capacity","Электричество и магнетизм","Электростатика","school:10",""
-
-"Связь скорости волны с частотой","c = \\lambda\\cdot \\nu","speed_of_light,wavelength,frequency","Электричество и магнетизм","Колебания и волны","school:9",""
-
-"Уравнения Максвелла (дивергенция напряжённости)","\\nabla \\cdot \\vec{E} = \\frac{\\rho}{\\varepsilon_0}","electric_field_divergence,density,electric_constant","Электричество и магнетизм","Электродинамика","university:2",""
-
 
 
 "Скорость тела при равномерном движении","v = \\frac{S}{t}","velocity_modulus,spostamento,time","Механика","Кинематика","school:7",""
@@ -70,11 +30,11 @@
 "Уравнение движения точки в координатной форме","\\begin{cases}x = x(t) \\\\ y = y(t) \\\\ z = z(t) \\end{cases}","abscissa,ordinate,applicate,time","Механика","Кинематика","school:10",""
 "Уравнение движения точки в векторной форме","\\vec{r} = \\vec{r}(t)","radius_vector,time","Механика","Кинематика","school:10",""
 "Скорость равномерного прямолинейного движения точки","\\vec{v} = \\frac{\\Delta r}{\\Delta t}","uniform_rectilinear_motion_velocity,displacement,time_difference","Механика","Кинематика","school:10",""
-"Уравнение равномерного прямолинейного движения в координатной форме","\\begin{cases}x = x_0 + v_x\\cdot t \\\\ y = y_0 + v_y\\cdot t \\\\ z = z_0 + v_z\\cdot t \\end{cases}","abscissa,ordinate,applicate,initial_abscissa_at_zero,initial_ordinate_at_zero,initial_applicate_at_zero,velocity_abscissa,velocity_ordinate,velocity_applicate,time","Механика","Кинематика","school:10",""
-"Уравнение равномерного прямолинейного движения в векторной форме","\\vec{r} = \\vec{r}_0 + \\vec{v}\\cdot t","radius_vector,inicial_radius_vector_at_zero,uniform_rectilinear_motion_velocity,time","Механика","Кинематика","school:10",""
+"Уравнение равномерного прямолинейного движения в координатной форме","\\begin{cases}x = x_0 + v_x\\cdot t \\\\ y = y_0 + v_y\\cdot t \\\\ z = z_0 + v_z\\cdot t \\end{cases}","abscissa,ordinate,applicate,initial_abscissa_at_zero,initial_ordinate_at_zero,initial_applicate_at_zero,velocity_abscissa,velocity_ordinate,velocity_applicate,time","Механика","Кинематика","school:10","uniform_rectlinear_motion_scalar_form_4"
+"Уравнение равномерного прямолинейного движения в векторной форме","\\vec{r} = \\vec{r}_0 + \\vec{v}\\cdot t","radius_vector,inicial_radius_vector_at_zero,uniform_rectilinear_motion_velocity,time","Механика","Кинематика","school:10","uniform_rectlinear_motion_vector_form_4"
 "Закон сложения скоростей","\\vec{v}_{\\text{абс}} = \\vec{v}_{\\text{пер}} + \\vec{v}_{\\text{отн}}","absolute_velocity,relative_velocity,transportation_velocity","Механика","Кинематика","school:10",""
 "Средняя путевая скорость","\\langle v \\rangle = \\frac{S}{\\Delta t}","mean_spostamento_velocity,spostamento,time_difference","Механика","Кинематика","school:10",""
-"Ускорение равнопеременного движения точки","\\vec{a} = \\frac{\\Delta \\vec{v}}{\\Delta t}","acceleration,velocity_difference,time_difference","Механика","Кинематика","school:10",""
+"Ускорение равнопеременного движения точки","\\vec{a} = \\frac{\\Delta \\vec{v}}{\\Delta t}","acceleration,velocity_difference,time_difference","Механика","Кинематика","school:10","uniform_rectlinear_motion_vector_form_4"
 "Скорость равнопеременного движения точки в координатной форме","\\begin{cases}v_x = v_{0x} + a_x\\cdot t \\\\ v_y = v_{0y} + a_y\\cdot t \\\\ v_z = v_{0z} + a_z\\cdot t \\end{cases}","velocity_abscissa,velocity_ordinate,velocity_applicate,inicial_velocity_abscissa_at_zero,inicial_velocity_ordinate_at_zero,inicial_velocity_applicate_at_zero,acceleration_abscissa,acceleration_ordinate,acceleration_applicate,time","Механика","Кинематика","school:10",""
 "Скорость равнопеременного движения точки в векторной форме","\\vec{v} = \\vec{v}_0 + \\vec{a}\\cdot t","velocity,inicial_velocity_at_zero,acceleration,time","Механика","Кинематика","school:10",""
 "Уравнение равнопеременного движения точки в координатной форме","\\begin{cases}x = x_0 + v_{0x}\\cdot t + \\frac{a_x\\cdot t^2}{2} \\\\ y = y_0 + v_{0y}\\cdot t + \\frac{a_y\\cdot t^2}{2} \\\\ z = z_0 + v_{0z}\\cdot t + \\frac{a_z\\cdot t^2}{2} \\end{cases}","abscissa,ordinate,applicate,initial_abscissa_at_zero,initial_ordinate_at_zero,initial_applicate_at_zero,inicial_velocity_abscissa_at_zero,inicial_velocity_ordinate_at_zero,inicial_velocity_applicate_at_zero,acceleration_abscissa,acceleration_ordinate,acceleration_applicate,time","Механика","Кинематика","school:10",""
@@ -97,3 +57,13 @@
 "Связь линейной скорости и угловой при равномерном вращении","v = \omega \cdot R","velocity_modulus,uniform_angular_velocity,radius","Механика","Кинематика","school:10",""
 
 "Второй закон Ньютона","\vec{F} = m \cdot \vec{a}","resulting_force,mass,acceleration","Механика","Динамика","school:10",""
+
+
+
+"Система дифференциальных уравнений Гамильтона","\left \{ \begin{aligned} g_i &= \frac{\partial \dot{H}}{\partial p_i} \\ p_i = -\frac{\partial H}{\partial g} \end{aligned} \right","hamilton_function,generalized_coordinate,generalized_umpulse","Статистическая физика","Лекция 2","university:4",""
+"Связь вероятности с плотностью вероятности","\mathrm{d}w(g, p) = \omega(g, p) \cdot \mathrm{\Gamma}","impulse_and_coordinate_probability,impulse_and_coordinate_probability_distribution,phase_space,generalized_coordinate,generalized_impulse","Статистическая физика","Лекция 2","university:4",""
+"Среднее значение физической величины","Это нужно переделать","resulting_force,mass,acceleration","Статистическая физика","Лекция 2","university:4",""
+"Среднее значение физической величины в классической механике","Это нужно переделать","resulting_force,mass,acceleration","Статистическая физика","Лекция 2","university:4",""
+"Среднее значение физической величины в квантовой механике","Это нужно переделать","resulting_force,mass,acceleration","Статистическая физика","Лекция 2","university:4",""
+"Условие нормировки величины в классической механике","Это нужно переделать","resulting_force,mass,acceleration","Статистическая физика","Лекция 2","university:4",""
+"Условие нормировки величины в квантовой механике","Это нужно переделать","resulting_force,mass,acceleration","Статистическая физика","Лекция 2","university:4",""
