@@ -59,7 +59,7 @@ def filter_by_level(level_str, school_set, univ_set):
 
 def main():
     parser = argparse.ArgumentParser(description="Генерация справочника по физике")
-    parser.add_argument("--name", nargs='+', type=str, help="Название формулы или концепции")
+    parser.add_argument("--name", nargs='+', type=str, help="Название формулы или концепции (точное совпадение)")
     parser.add_argument("--section", nargs='+', type=str, help="Раздел: механика, термодинамика...")
     parser.add_argument("--subsection", nargs='+', type=str, help="Подраздел: кинематика, динамика...")
     parser.add_argument("--school", nargs='+', type=str, help="Класс(ы): 7, 8-9, 10...")
@@ -94,7 +94,8 @@ def main():
     all_formulas = cursor.fetchall()
     filtered_formulas = []
     for f in all_formulas:
-        if args.name and not any(n.lower() in f['name'].lower() for n in args.name):
+        # ТОЧНОЕ СОВПАДЕНИЕ для --name
+        if args.name and not any(f['name'].strip().lower() == n.strip().lower() for n in args.name):
             continue
         if args.section and not any(s.lower() in f['section'].lower() for s in args.section):
             continue
@@ -126,7 +127,8 @@ def main():
     all_concepts = cursor.fetchall()
     filtered_concepts = []
     for c in all_concepts:
-        if args.name and not any(n.lower() in c['name'].lower() for n in args.name):
+        # ТОЧНОЕ СОВПАДЕНИЕ для --name
+        if args.name and not any(c['name'].strip().lower() == n.strip().lower() for n in args.name):
             continue
         if args.section and not any(s.lower() in c['section'].lower() for s in args.section):
             continue

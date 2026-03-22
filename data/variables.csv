@@ -1,9 +1,12 @@
 "key","symbol_latex","description_ru","unit"
 
+
+
 "x_ort","\\vec{i}","единичный вектор, направленный вдоль оси $OX$","безразмерная"
 "y_ort","\\vec{j}","единичный вектор, направленный вдоль оси $OY$","безразмерная"
 "z_ort","\\vec{k}","единичный вектор, направленный вдоль оси $OZ$","безразмерная"
 "efficiency_factor","\\eta","коэффициент полезного действия","безразмерная"
+"friction_force_coefficient","\mu","коэффициент силы трения скольжения","безразмерная"
 
 "initial_velocity_angle_at_zero","\alpha_0","угол скорости в момент времени $t = 0$","радианы"
 "body_angular_displacement","\Delta \varphi","угол, на который повернулось тело","радианы"
@@ -27,9 +30,9 @@
 "initial_applicate_at_zero","z_0","аппликата в момент времени $t = 0$","м"
 "radius_vector_modulus","r","модуль радиус-вектора","м"
 "radius_vector_difference","\\vec{\\Delta r}","изменение радиус-вектора","м"
-"radius_vector_diference_abscissa","x","проекция изменения радиус-вектора на ось $OX$","м"
-"radius_vector_diference_ordinate","y","проекция изменения радиус-вектора на ось $OY$","м"
-"radius_vector_diference_applicate","z","проекция изменения радиус-вектора на ось $OZ$","м"
+"radius_vector_diference_abscissa","\Delta x","проекция изменения радиус-вектора на ось $OX$","м"
+"radius_vector_diference_ordinate","\Delta y","проекция изменения радиус-вектора на ось $OY$","м"
+"radius_vector_diference_applicate","\Delta z","проекция изменения радиус-вектора на ось $OZ$","м"
 "radius_vector_difference_modulus","\\Delta r"," модуль изменения радиус-вектора","м"
 "inicial_radius_vector","\\vec{r_1}","начальный радиус-вектор","м"
 "inicial_radius_vector_modulus","r_1","модуль начального радиус-вектора","м"
@@ -44,7 +47,10 @@
 "inicial_spostamento","S_1","начальный путь","м"
 "final_spostamento","S_2","конечный путь","м"
 "mean_spostamento","\\langle S \\rangle","средний путь","м"
-"displacement","\\vec{s}","перемещение","м"
+"displacement","\vec{s}","перемещение","м"
+"displacement_abscissa","s_x","проекция вектора перемещения на ось $OX$","м"
+"displacement_ordinate","s_y","проекция вектора перемещения на ось $OY$","м"
+"displacement_applicate","s_z","проекция вектора перемещения на ось $OZ$","м"
 "height","h","высота","м"
 "depth","h","глубина","м"
 "lever_arm","l","плечо силы","м"
@@ -55,6 +61,8 @@
 "radius","R","радиус окружности","м"
 "free_fall_maximal_heigt","H","максимальная высота подъёма при свободном падении","м"
 "free_fall_maximal_distance","L","максимальная дальность полёта при свободном падении","м"
+"distance","r","расстояние между материальными точками","м"
+"planet_radius","R","радиус планеты","м"
 
 "S","площадь поверхности","м²"
 "first_plunger_area","S_1","площадь поверхности первого поршня","м²"
@@ -97,6 +105,7 @@
 "relative_velocity","\\vec{v}_{\\text{отн}}","относительная скорость (скорость относительно подвижной системы отсчёта)","м/с"
 "transportation_velocity","\\vec{v}_{\\text{пер}}","переносная скорость (скорость подвижной системы отсчёта относительно неподвижной системы отсчёта)","м/с"
 "speed_of_light","c","скорость света в вакууме","м/с"
+"first_cosmic_velosity_modulus","v_I","модуль первой космической скорости","м/с"
 
 "acceleration","\\vec{a}","ускорение материальной точки","м/с²"
 "acceleration_abscissa","a_x","проекция ускорения на ось $OX$","м/с²"
@@ -126,17 +135,29 @@
 
 "force","\\vec{F}","сила","Н"
 "force_modulus","F","модуль силы","Н"
+"first_force","\vec{F}_1","первая сила","Н"
+"second_force","\vec{F}_2","вторая сила","Н"
+"last_force","\vec{F}_n","последняя сила","Н"
+"a_force","\vec{F}_A","сила, действующая на тело $A$","Н"
+"b_force","\vec{F}_B","сила, действующая на тело $B$","Н"
 "resulting_force","\\vec{F}","равнодействующая всех сил","Н"
 "gravitational_force","\\vec{F}_{\\text{тяж}}","сила тяжести","Н"
 "weight","\\vec{P}","вес тела","Н"
 "buoyancy_force","F_{\\text{арх}}","модуль силы Архимеда","Н"
-"first_plunger_force","F_1","сила, действующая на 1-й поршень","Н"
-"second_plunger_force","F_2","сила, действующая на 2-й поршень","Н"
+"first_plunger_force","F_1","модуль силы, действующей на 1-й поршень","Н"
+"second_plunger_force","F_2","модуль силы, действующей на 2-й поршень","Н"
 "first_lever_force_modulus","F_1","модуль силы, действующей на 1-е плечо","Н"
 "second_lever_force_modulus","F_1","модуль силы, действующей на 2-е плечо","Н"
-"elastic_force_modulus","F_{\\text{упр}}","модуль силы упругости","Н"
+"elastic_force","\vec{F}_{\text{упр}}","сила упругости","Н"
+"elastic_force_modulus","F_{\text{упр}}","модуль силы упругости","Н"
+"elastic_force_abscissa","F_{\text{упр } x}","проекция силы упругости на ось $OX$","Н"
+"elastic_force_ordinate","F_{\text{упр } y}","проекция силы упругости на ось $OY$","Н"
+"elastic_force_applicate","F_{\text{упр } z}","проекция силы упругости на ось $OZ$","Н"
+"sliding_friction_force_modulus","F_{\text{тр с}}","модуль силы трения скольжения","Н"
+"normal_force_modulus","N","модуль силы реакции опоры","Н"
 "pressure_force","F_{\\text{д}}","модуль силы давления","Н"
-"push_force","F","сила, с которой поднимают тело","Н"
+"push_force","F","модуль силы, с которой поднимают тело","Н"
+"gravity_force","F_{\text{тяг}}","модуль силы тяготения","Н"
 
 
 "elasticity_coefficient","k","коэффициент упругости (жёсткость)","Н/м"
@@ -146,6 +167,9 @@
 "second_force_moment","M_2","момент 2-й силы","Н·м"
 
 "mass","m","масса","кг"
+"first_mass","m_1","масса 1-й материальной точки","кг"
+"second_mass","m_2","масса 2-й материальной точки","кг"
+"planet_mass","M","масса планеты","кг"
 
 "density","\\rho","плотность вещества","кг/м³"
 "liquid_density","\\rho_{\\text{жид}}","плотность жидкости, в которую погружено тело","кг/м³"
@@ -179,6 +203,9 @@
 
 
 "electric_charge","q","заряд","Кл"
+"first_electric_charge","q_1","1-й заряд","Кл"
+"second_electric_charge","q_2","2-й заряд","Кл"
+"last_electric_charge","q_n","последний заряд","Кл"
 
 "electromotive_force","\\mathcal{E}","электродвижущая сила (ЭДС)","В"
 "amperage","I","сила тока","А"
@@ -198,4 +225,6 @@
 "electric_field_divergence","\nabla \cdot \vec{E}","дивергенция напряжённости электрического поля","В/м"
 
 
+
 "planck_constant","h","постоянная Планка","Дж·с"
+"gravity_constant","G","гравитационная постоянная","Н·м²/кг²"

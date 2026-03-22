@@ -27,15 +27,14 @@ def matches_level(db_level, allowed_school, allowed_univ):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--name", nargs='+', type=str, help="Фильтр по названию (частичное совпадение)")
+    parser.add_argument("--name", nargs='+', type=str, help="Фильтр по названию (точное совпадение)")
     parser.add_argument("--section", nargs='+')
     parser.add_argument("--subsection", nargs='+')
     parser.add_argument("--school", nargs='+', type=int, help="Номера школьных классов (например: 7 8 9)")
     parser.add_argument("--university", nargs='+', type=int, help="Номера курсов (например: 1 2)")
     parser.add_argument("--limit", "-n", type=int, default=10, help="Количество вопросов в варианте")
     parser.add_argument("--variants", "-v", type=int, default=1, help="Количество вариантов")
-    parser.add_argument("--output-prefix", type=str, default="presentation",
-                        help="Префикс для имён файлов")
+    parser.add_argument("--output-prefix", type=str, default="presentation", help="Префикс для имён файлов")
     args = parser.parse_args()
 
     conn = sqlite3.connect('physics.db')
@@ -51,8 +50,7 @@ def main():
     items = []
     cursor.execute("SELECT * FROM formulas")
     for f in cursor.fetchall():
-        # Фильтр по name
-        if args.name and not any(n.lower() in f['name'].lower() for n in args.name):
+        if args.name and not any(f['name'].strip().lower() == n.strip().lower() for n in args.name):
             continue
         if args.section and not any(s.lower() in f['section'].lower() for s in args.section):
             continue
@@ -60,16 +58,17 @@ def main():
             continue
         if not matches_level(f['level'], args.school, args.university):
             continue
+        # Добавляем "(формула)" к названию
+        name_with_formula = f"{f['name']} (формула)"
         items.append({
             'type': 'formula',
-            'name': f['name'],
+            'name': name_with_formula,
             'content': fix_latex_escapes(f['formula_latex'])
         })
 
     cursor.execute("SELECT * FROM concepts")
     for c in cursor.fetchall():
-        # Фильтр по name
-        if args.name and not any(n.lower() in c['name'].lower() for n in args.name):
+        if args.name and not any(c['name'].strip().lower() == n.strip().lower() for n in args.name):
             continue
         if args.section and not any(s.lower() in c['section'].lower() for s in args.section):
             continue
@@ -108,12 +107,16 @@ def main():
             slides.append({
                 'number': i,
                 'name': item['name'],
-                'duration': 45_000 if item['type'] == 'formula' else 60_000
+                'duration': 90_000 if item['type'] == 'formula' else 120_000
             })
 
         with open('templates/presentation.html', 'r', encoding='utf-8') as f_html:
             template = Template(f_html.read())
-        html = template.render(slides=slides, variant_number=var_num)
+            html = template.render(
+            slides=slides,
+            variant_number=var_num,
+            instructions="Перед выполнением теста запишите:\n-дату\n -ФИО\n -факультет\n -курс и группу\n -номер варианта.\n\n"
+        )
 
         html_file = f"{args.output_prefix}_variant_{var_num}.html"
         with open(html_file, 'w', encoding='utf-8') as f_html:

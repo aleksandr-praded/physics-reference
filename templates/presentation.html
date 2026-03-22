@@ -66,6 +66,9 @@
     <section data-autoslide="30000" data-duration="30">
       <div class="slide-content">
         <div class="slide-title"><strong>Диктант начинается</strong></div>
+        <div style="margin-top: 2em; font-size: 0.8em; text-align: left; max-width: 80%;">
+          {{ instructions|replace('\n', '<br>')|safe }}
+        </div>
         <div class="slide-footer-label variant-label">Вариант {{ variant_number }}</div>
         <div class="slide-footer-label timer-label">Ожидание...</div>
       </div>
