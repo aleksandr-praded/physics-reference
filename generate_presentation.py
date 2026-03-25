@@ -115,7 +115,7 @@ def main():
             html = template.render(
             slides=slides,
             variant_number=var_num,
-            instructions="Перед выполнением теста запишите:\n-дату\n -ФИО\n -факультет\n -курс и группу\n -номер варианта.\n\n"
+            instructions="Перед диктантом запишите:\n-дату\n -ФИО\n -факультет\n -курс и группу\n -номер варианта\n\n"
         )
 
         html_file = f"{args.output_prefix}_variant_{var_num}.html"
