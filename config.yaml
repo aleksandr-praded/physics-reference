@@ -1,0 +1,18 @@
+# config.yaml
+defaults:
+  # Параметры по умолчанию для всех команд
+  school: [10]
+  section: ["Механика"]
+  
+
+presentation:
+  # Настройки для презентаций
+  fixed_time:
+    formula_ms: 70000    # 90 секунд
+    concept_ms: 100000   # 120 секунд
+  adaptive_coefficient: 1.5  # коэффициент для адаптивного времени
+
+pdf:
+  # Настройки для PDF
+  include_images: false
+  include_animations: false

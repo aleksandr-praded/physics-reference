@@ -5,6 +5,7 @@ import subprocess
 import os
 import argparse
 from collections import defaultdict
+import yaml  # ← ДОБАВЛЕНО
 
 def fix_latex_escapes(s):
     if s is None:
@@ -71,6 +72,20 @@ def main():
 
     args = parser.parse_args()
 
+    # === ЗАГРУЗКА КОНФИГУРАЦИИ ===
+    config = {}
+    config_path = 'config.yaml'
+    if os.path.exists(config_path):
+        with open(config_path, 'r', encoding='utf-8') as f:
+            config = yaml.safe_load(f) or {}
+
+    # Применяем настройки по умолчанию, если аргументы не заданы
+    defaults = config.get('defaults', {})
+    if not args.school:
+        args.school = defaults.get('school', [])
+    if not args.section:
+        args.section = defaults.get('section', [])
+
     conn = sqlite3.connect('physics.db')
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -86,8 +101,12 @@ def main():
         for row in cursor.fetchall()
     }
 
-    school_set = parse_intervals(args.school)
-    univ_set = parse_intervals(args.university)
+    # Преобразуем аргументы в строки (независимо от того, откуда они — CLI или config)
+    school_str = [str(x) for x in (args.school or [])]
+    univ_str = [str(x) for x in (args.university or [])]
+    
+    school_set = parse_intervals(school_str)
+    univ_set = parse_intervals(univ_str)
 
     # === Фильтрация формул (БЕЗ ORDER BY) ===
     cursor.execute("SELECT * FROM formulas")
@@ -161,7 +180,7 @@ def main():
             'variable_keys': f['variable_keys'],
             'variables': variables_dict,
             'image_path': f['image_path'],
-            'animation_url': f['animation_url'] if f['animation_url'] else "",  # ← ДОБАВЛЕНО
+            'animation_url': f['animation_url'] if f['animation_url'] else "",
             'sources': src_ids if args.bibliography else []
         })
 
@@ -178,7 +197,7 @@ def main():
             'name': c['name'],
             'definition': c['definition'],
             'image_path': c['image_path'],
-            'animation_url': c['animation_url'] if c['animation_url'] else "",  # ← ДОБАВЛЕНО
+            'animation_url': c['animation_url'] if c['animation_url'] else "",
             'sources': src_ids if args.bibliography else []
         })
 
@@ -230,9 +249,8 @@ def main():
                 stderr=subprocess.DEVNULL
             )
         print("✅ PDF создан: output.pdf")
-        for ext in ['log', 'aux', 'out', 'toc']:
+        for ext in ['tex', 'log', 'aux', 'out', 'toc']:
             try:
-                pass
                 os.remove(f'output.{ext}')
             except FileNotFoundError:
                 pass

@@ -3,6 +3,8 @@ import sqlite3
 from jinja2 import Template
 import argparse
 import random
+import os  # ← ДОБАВЛЕНО
+import yaml  # ← ДОБАВЛЕНО
 
 def fix_latex_escapes(s):
     return "" if s is None else s.replace('\\\\', '\\')
@@ -38,6 +40,25 @@ def main():
     parser.add_argument("--adaptive-time", type=float, 
                         help="Коэффициент для адаптивного времени (сек/символ). Если не задан — фиксированное время.")
     args = parser.parse_args()
+
+    # === ЗАГРУЗКА КОНФИГУРАЦИИ ===
+    config = {}
+    config_path = 'config.yaml'
+    if os.path.exists(config_path):
+        with open(config_path, 'r', encoding='utf-8') as f:
+            config = yaml.safe_load(f) or {}
+
+    # Применяем настройки по умолчанию, если аргументы не заданы
+    defaults = config.get('defaults', {})
+    if not args.school:
+        args.school = defaults.get('school', [])
+    if not args.section:
+        args.section = defaults.get('section', [])
+
+    # Настройки времени из конфига
+    pres_config = config.get('presentation', {}).get('fixed_time', {})
+    FORMULA_TIME = pres_config.get('formula_ms', 90_000)
+    CONCEPT_TIME = pres_config.get('concept_ms', 120_000)
 
     conn = sqlite3.connect('physics.db')
     conn.row_factory = sqlite3.Row
@@ -87,7 +108,7 @@ def main():
         if args.adaptive_time is not None:
             duration_ms = int(total_length * args.adaptive_time * 1000)
         else:
-            duration_ms = 90_000  # 90 сек по умолчанию
+            duration_ms = FORMULA_TIME  # ← ИСПОЛЬЗУЕМ ЗНАЧЕНИЕ ИЗ КОНФИГА
         
         items.append({
             'type': 'formula',
@@ -112,7 +133,7 @@ def main():
         if args.adaptive_time is not None:
             duration_ms = int(len(content) * args.adaptive_time * 1000)
         else:
-            duration_ms = 120_000  # 120 сек по умолчанию
+            duration_ms = CONCEPT_TIME  # ← ИСПОЛЬЗУЕМ ЗНАЧЕНИЕ ИЗ КОНФИГА
         
         items.append({
             'type': 'concept',
@@ -155,7 +176,7 @@ def main():
         instructions = "Перед диктантом запишите:\n-дату\n -ФИО\n -факультет\n -курс и группу\n -номер варианта\n\n"
         with open('templates/presentation.html', 'r', encoding='utf-8') as f_html:
             template = Template(f_html.read())
-            html = template.render(
+        html = template.render(
             slides=slides,
             variant_number=var_num,
             instructions=instructions
