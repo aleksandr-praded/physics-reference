@@ -161,6 +161,7 @@ def main():
             'variable_keys': f['variable_keys'],
             'variables': variables_dict,
             'image_path': f['image_path'],
+            'animation_url': f['animation_url'] if f['animation_url'] else "",  # ← ДОБАВЛЕНО
             'sources': src_ids if args.bibliography else []
         })
 
@@ -177,6 +178,7 @@ def main():
             'name': c['name'],
             'definition': c['definition'],
             'image_path': c['image_path'],
+            'animation_url': c['animation_url'] if c['animation_url'] else "",  # ← ДОБАВЛЕНО
             'sources': src_ids if args.bibliography else []
         })
 
@@ -228,8 +230,9 @@ def main():
                 stderr=subprocess.DEVNULL
             )
         print("✅ PDF создан: output.pdf")
-        for ext in ['tex', 'log', 'aux', 'out', 'toc']:
+        for ext in ['log', 'aux', 'out', 'toc']:
             try:
+                pass
                 os.remove(f'output.{ext}')
             except FileNotFoundError:
                 pass

@@ -155,7 +155,7 @@ def main():
         instructions = "Перед диктантом запишите:\n-дату\n -ФИО\n -факультет\n -курс и группу\n -номер варианта\n\n"
         with open('templates/presentation.html', 'r', encoding='utf-8') as f_html:
             template = Template(f_html.read())
-        html = template.render(
+            html = template.render(
             slides=slides,
             variant_number=var_num,
             instructions=instructions

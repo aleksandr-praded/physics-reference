@@ -7,19 +7,28 @@
 \usepackage{titlesec}
 \usepackage{setspace}
 \usepackage{tocloft}
-\usepackage{etoolbox}  % ← ДОБАВЛЕНО
+\usepackage{etoolbox}
+\usepackage{hyperref}
 
 \geometry{a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm}
 \setstretch{1.0}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
+% Настройки гиперссылок
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
 % Заголовки
 \titleformat{\section}{\centering\Large\bfseries}{}{0em}{}
 \titleformat{\subsection}{\centering\large\bfseries}{}{0em}{}
-\titleformat{\subsubsection}{\normalsize\bfseries}{}{0em}{}  % ← ДОБАВЛЕНО
+\titleformat{\subsubsection}{\normalsize\bfseries}{}{0em}{}
 
 % Устанавливаем единый размер по умолчанию
-\AtBeginDocument{\normalsize\setstretch{1.0}}  % ← ДОБАВЛЕНО
+\AtBeginDocument{\normalsize\setstretch{1.0}}
 
 \begin{document}
 
@@ -42,7 +51,7 @@
 {% for concept in subsection.concepts %}
 \subsubsection*{ {{ concept.name }} }
 \begin{flushleft}
-\normalsize  % ← ЯВНО задаем размер
+\normalsize
 {{ concept.definition }}
 \end{flushleft}
 
@@ -58,6 +67,14 @@
 \end{center}
 {% endif %}
 
+% === ССЫЛКА НА АНИМАЦИЮ ДЛЯ КОНЦЕПЦИЙ ===
+{% if concept.animation_url %}
+\vspace{1em}
+\begin{flushleft}
+\href{ {{- concept.animation_url -}} }{Анимация: {{ concept.name }}}
+\end{flushleft}
+{% endif %}
+
 \vspace{1em}
 {% endfor %}
 
@@ -68,7 +85,7 @@
 \end{equation*}
 
 \begin{flushleft}
-\normalsize  % ← ЯВНО задаем размер
+\normalsize
 {% for var_key in formula.variable_keys.split(',') %}
 {% set var = formula.variables.get(var_key.strip()) %}
 {% if var %}
@@ -89,6 +106,14 @@ ${{ var.symbol }}$ — {{ var.desc }}
 \begin{center}
 \includegraphics[width=0.6\textwidth]{ images/{{ formula.image_path }} }
 \end{center}
+{% endif %}
+
+% === ССЫЛКА НА АНИМАЦИЮ ДЛЯ ФОРМУЛ ===
+{% if formula.animation_url %}
+\vspace{1em}
+\begin{flushleft}
+\href{ {{- formula.animation_url -}} }{ Анимация: {{ formula.name }} }
+\end{flushleft}
 {% endif %}
 
 \vspace{1em}
