@@ -35,7 +35,8 @@ CREATE TABLE IF NOT EXISTS formulas (
     section TEXT NOT NULL,
     subsection TEXT NOT NULL,
     level TEXT,
-    image_path TEXT
+    image_path TEXT,
+    animation_url TEXT  -- ← ДОБАВЛЕНО
 )
 ''')
 
@@ -48,7 +49,8 @@ CREATE TABLE IF NOT EXISTS concepts (
     section TEXT NOT NULL,
     subsection TEXT NOT NULL,
     level TEXT,
-    image_path TEXT
+    image_path TEXT,
+    animation_url TEXT  -- ← ДОБАВЛЕНО
 )
 ''')
 
@@ -135,10 +137,11 @@ if os.path.exists('data/formulas.csv'):
         reader = csv.DictReader(f)
         for row in reader:
             image_path = row['image_path'].strip() if row.get('image_path') else None
+            animation_url = row['animation_url'].strip() if row.get('animation_url') else None  # ← ДОБАВЛЕНО
             cursor.execute('''
                 INSERT OR REPLACE INTO formulas 
-                (name, formula_latex, variable_keys, section, subsection, level, image_path)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                (name, formula_latex, variable_keys, section, subsection, level, image_path, animation_url)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
                 row['name'],
                 row['formula_latex'],
@@ -146,7 +149,8 @@ if os.path.exists('data/formulas.csv'):
                 row['section'],
                 row['subsection'],
                 row.get('level', ''),
-                image_path
+                image_path,
+                animation_url  # ← ДОБАВЛЕНО
             ))
     print("✅ Формулы загружены")
 else:
@@ -175,17 +179,19 @@ if os.path.exists('data/concepts.csv'):
         reader = csv.DictReader(f)
         for row in reader:
             image_path = row['image_path'].strip() if row.get('image_path') else None
+            animation_url = row['animation_url'].strip() if row.get('animation_url') else None  # ← ДОБАВЛЕНО
             cursor.execute('''
                 INSERT OR REPLACE INTO concepts 
-                (name, definition, section, subsection, level, image_path)
-                VALUES (?, ?, ?, ?, ?, ?)
+                (name, definition, section, subsection, level, image_path, animation_url)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
             ''', (
                 row['name'],
                 row['definition'],
                 row['section'],
                 row['subsection'],
                 row.get('level', ''),
-                image_path
+                image_path,
+                animation_url  # ← ДОБАВЛЕНО
             ))
     print("✅ Концепции загружены")
 else:

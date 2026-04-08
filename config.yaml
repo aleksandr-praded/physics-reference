@@ -8,9 +8,8 @@ defaults:
 presentation:
   # Настройки для презентаций
   fixed_time:
-    formula_ms: 70000    # 90 секунд
-    concept_ms: 100000   # 120 секунд
-  adaptive_coefficient: 1.5  # коэффициент для адаптивного времени
+    formula_ms: 70000
+    concept_ms: 100000
 
 pdf:
   # Настройки для PDF

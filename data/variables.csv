@@ -228,3 +228,21 @@
 
 "planck_constant","h","постоянная Планка","Дж·с"
 "gravity_constant","G","гравитационная постоянная","Н·м²/кг²"
+
+
+
+"particle_concentration","n","концентрация частиц","м\(^{-3}\)"
+"number_of_particles","N","число частиц","безразмерная"
+"molar_mass","M","молярная масса вещества","кг/моль"
+"avogadro_constant","N_A","постоянная Авогадро","моль\(^{-1}\)"
+"gas_pressure","p","давление газа","Па"
+"gas_degree_of_freedom","i","число степеней свободы (\(i = 3\) для одноатомной молекулы, \(i = 5\) для двухатомной и \(i = 6\) для трёх- и более атомной молекулы)","безразмерная"
+"gas_rotational_degree_of_freedom","i_\text{вращ}","число вращательных степеней свободы (\(i_{\text{вращ}} = 2\) для двухатомной молекулы, \(i_{\text{вращ}} = 3\) для трёх- и более атомной молекулы)","безразмерная"
+"translational_movement_average_kinetic_energy","\langle E_\text{пост} \rangle","средняя кинетическая энергия поступательного движения молекул","Дж"
+"rotational_movement_average_kinetic_energy","\langle E_\text{вращ} \rangle","средняя кинетическая энергия вращательного движения молекул","Дж"
+"average_kinetic_energy","\langle E \rangle","средняя кинетическая энергия молекул","Дж"
+"oscillational_movement_average_kinetic_energy","\langle E_{\text{кол}} \rangle","средняя кинетическая энергия колебательного движения молекул","Дж"
+"molecule_mass","m_0","маса молекулы","кг"
+"quadratic_average_velocity","\langle v_{\text{квад}} \rangle","средняя квадратичная скорость","м/с"
+"arithmetic_average_velocity","\langle v_{\text{ариф}} \rangle","средняя арифметическая скорость","м/с"
+"most_probable_velocity","v_{\text{вер}}","наиболее вероятная скорость","м/с"
