@@ -66,6 +66,13 @@
 "Проекции силы упругости","\begin{cases} F_{\text{упр } x} = -k \cdot s_x \\\\ F_{\text{упр } y} = -k \cdot s_y \\\\ F_{\text{упр } z} = -k \cdot s_z \\end{cases}","elastic_force_abscissa,elastic_force_ordinate,elastic_force_applicate,elasticity_coefficient,displacement_abscissa,displacement_ordinate,displacement_applicate","Механика","Динамика","school:10","",""
 "Модуль силы трения скольжения","F_{\text{тр с}} = \mu \cdot N","sliding_friction_force_modulus,friction_force_coefficient,normal_force_modulus","Механика","Динамика","school:10","",""
 
+"Импульс материальной точки","\vec{p} = m \cdot \vec{v}","impulse,mass,velocity","Механика","Закон сохранения импульса","school:10","",""
+"Импульс силы материальной точки","\vec{I} =  \vec{F} \cdot \Delta t","momentum,force,time_difference","Механика","Закон сохранения импульса","school:10","",""
+"Второй закон Ньютона в импульсной форме","\Delta \vec{p} =  \vec{F} \cdot \Delta t","impulse_difference,resulting_force,time_difference","Механика","Закон сохранения импульса","school:10","",""
+"Импульс системы материальных точек","\vec{p}_{\text{сист}} =  \vec{p}_1 + \vec{p}_2 + ... + \vec{p}_n","system_impulse,first_impulse,second_impulse,last_impulse","Механика","Закон сохранения импульса","school:10","",""
+"Изменение импульса системы","\Delta \vec{p}_{\text{сист}} =  \vec{F}_{\text{внеш равн}} \cdot \Delta t","system_impulse_difference,resulting_outer_force,time_difference","Механика","Закон сохранения импульса","school:10","",""
+"Закон сохранения импульса","\vec{p}_1 + \vec{p}_2 + ... + \vec{p}_n = \vec{p}_1\mkern1mu' + \vec{p}_2\mkern1mu' + ... + \vec{p}_n\mkern1mu'","initial_first_impulse,initial_second_impulse,initial_last_impulse,final_first_impulse,final_second_impulse,final_last_impulse","Механика","Закон сохранения импульса","school:10","",""
+
 "Закон сохранения электрического заряда","q_1 + q_2 + ... + q_n = const","first_electric_charge,second_electric_charge,last_electric_charge","Электричество и магнетизм","Электростатика","school:10","",""
 
 

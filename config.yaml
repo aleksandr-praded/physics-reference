@@ -8,8 +8,8 @@ defaults:
 presentation:
   # Настройки для презентаций
   fixed_time:
-    formula_ms: 70000
-    concept_ms: 100000
+    formula_ms: 90000
+    concept_ms: 120000
 
 pdf:
   # Настройки для PDF
