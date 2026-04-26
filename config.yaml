@@ -2,6 +2,7 @@
 defaults:
   # Параметры по умолчанию для всех команд
   school: [10]
+  university: []
   section: ["Механика"]
   
 

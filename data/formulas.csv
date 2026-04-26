@@ -21,9 +21,9 @@
 "Условие равновесия рычага через момент силы","M_1 = M_2","first_force_moment,second_force_moment","Механика","Работа и энергия","school:7","",""
 "Условие равновесия неподвижного блока","F = P","push_force,weight","Механика","Статика","school:7","",""
 "Условие равновесия подвижного блока","F = \\frac{P}{2}","push_force,weight","Механика","Статика","school:7","",""
-"Коэффициент полезного действия","\\eta = \\frac{A_{\\text{пол}}}{A_{\\text{зат}}}","efficiency_factor,effective_work,total_work","Механика","Работа и энергия","school:7","",""
-"Кинетическая энергия","E_\\text{к} = \\frac{m\\cdot v^2}{2}","kinetic_energy,mass,velocity_modulus","Механика","Работа и энергия","school:7","",""
-"Потенциальная энергия силы тяжести","E_\\text{п} = m\\cdot g\\cdot h","potencial_energy,mass,free_fall_acceleration_modulus,height","Механика","Работа и энергия","school:7","",""
+"Коэффициент полезного действия","\eta = \frac{A_{\text{пол}}}{A_{\text{зат}}}","efficiency_factor,effective_work,total_work","Механика","Работа и энергия","school:7","",""
+"Кинетическая энергия","E_\text{к} = \frac{m \cdot v^2}{2}","kinetic_energy,mass,velocity_modulus","Механика","Работа и энергия","school:7","",""
+"Потенциальная энергия силы тяжести","E_\text{п} = m \cdot g \cdot h","potencial_energy,mass,free_fall_acceleration_modulus,height","Механика","Работа и энергия","school:7","",""
 
 
 
@@ -72,6 +72,22 @@
 "Импульс системы материальных точек","\vec{p}_{\text{сист}} =  \vec{p}_1 + \vec{p}_2 + ... + \vec{p}_n","system_impulse,first_impulse,second_impulse,last_impulse","Механика","Закон сохранения импульса","school:10","",""
 "Изменение импульса системы","\Delta \vec{p}_{\text{сист}} =  \vec{F}_{\text{внеш равн}} \cdot \Delta t","system_impulse_difference,resulting_outer_force,time_difference","Механика","Закон сохранения импульса","school:10","",""
 "Закон сохранения импульса","\vec{p}_1 + \vec{p}_2 + ... + \vec{p}_n = \vec{p}_1\mkern1mu' + \vec{p}_2\mkern1mu' + ... + \vec{p}_n\mkern1mu'","initial_first_impulse,initial_second_impulse,initial_last_impulse,final_first_impulse,final_second_impulse,final_last_impulse","Механика","Закон сохранения импульса","school:10","",""
+
+"Работа постоянной силы","A = F \cdot s \cdot \cos{(\widehat{\vec{F}, \vec{s}})}","work,force_modulus,displacement_modulus,force_displacement_angle","Механика","Закон сохранения энергии","school:10","",""
+"Работа нескольких сил","A = A_1 + A_2 + ... + A_n","work,first_work,second_work,last_work","Механика","Закон сохранения энергии","school:10","",""
+"Мощность","N = \frac{A}{\Delta t}","power,work,time_difference","Механика","Закон сохранения энергии","school:10","",""
+"Кинетическая энергия","E_{\text{к}} = \frac{m \cdot v^2}{2}","kinetic_energy,mass,velocity_modulus","Механика","Закон сохранения энергии","school:10","",""
+"Теорема об изменении кинетической энергии","A = \Delta E_{\text{к}}","kinetic_energy_difference,work","Механика","Закон сохранения энергии","school:10","",""
+"Потенциальная энергия силы тяжести","E_{\text{п}} = m \cdot g \cdot h","potencial_energy,mass,free_fall_acceleration_modulus,height","Механика","Закон сохранения энергии","school:10","",""
+"Потенциальная энергия силы упругости","E_{\text{п}} = \frac{k \cdot x^2}{2}","potencial_energy,elasticity_coefficient,deformation","Механика","Закон сохранения энергии","school:10","",""
+"Работа консервативной силы","A_{\text{кон}} = - \Delta E_{\text{п}}","conservative_force_work,potencial_energy_difference","Механика","Закон сохранения энергии","school:10","",""
+"Механическая энергия","E = E_{\text{к}} + E_{\text{п}}","mechanical_energy,kinetic_energy,potencial_energy","Механика","Закон сохранения энергии","school:10","",""
+"Закон сохранения механической энергии","E_{\text{к}} + E_{\text{п}} = E_{\text{к}}' + E_{\text{п}}'","initial_kinetic_energy,initial_potencial_energy,final_kinetic_energy,final_potencial_energy","Механика","Закон сохранения энергии","school:10","",""
+"Вторая космическая скорость","v_I = \sqrt{2 \cdot G \cdot \frac{M}{R + h}}","second_cosmic_velosity_modulus,gravity_constant,planet_mass,planet_radius,height","Механика","Закон сохранения энергии","school:10","second_cosmic_velocity.png",""
+"Потенциальная энергия силы тяготения","E_{\text{п}} = G \cdot \frac{m \cdot M}{R + h}","potencial_energy,gravity_constant,body_mass,planet_mass,planet_radius,height","Механика","Закон сохранения энергии","school:10","",""
+
+"Момент силы","M = F \cdot l","force_moment,force_modulus,lever_arm","Механика","Статика","school:10","",""
+"Условия равновесия твёрдого тела","\begin{cases} \vec{F}_1 + \vec{F}_2 + ... + \vec{F}_n = \vec{0} \\\\ M_1 + M_2 + ... + M_n = 0 \end{cases}","first_force,second_force,last_force,first_force_moment,second_force_moment,last_force_moment","Механика","Статика","school:10","",""
 
 "Закон сохранения электрического заряда","q_1 + q_2 + ... + q_n = const","first_electric_charge,second_electric_charge,last_electric_charge","Электричество и магнетизм","Электростатика","school:10","",""
 
@@ -155,6 +171,18 @@
 "Поле диполя в экваториальной плоскости","pass","electric_charge","Электричество и магнетизм","Проводники в электрическом поле. Энергия электрического поля","university:2","",""
 "Теорема Гаусса (интегральная форма)","pass","electric_charge","Электричество и магнетизм","Проводники в электрическом поле. Энергия электрического поля","university:2","",""
 
+"Сопротивление однородного проводника","R = \rho \frac{l}{S}","electric_charge","Электричество и магнетизм","Электрический ток","university:2","",""
+"Закон Ома для участка цепи","pass","electric_charge","Электричество и магнетизм","Электрический ток","university:2","",""
+"Закон Ома в дифференциальной форме","pass","electric_charge","Электричество и магнетизм","Электрический ток","university:2","",""
+"Мощность тока","pass","electric_charge","Электричество и магнетизм","Электрический ток","university:2","",""
+"Теплота, выделяемая током (закон Джоуля-Ленца)","pass","electric_charge","Электричество и магнетизм","Электрический ток","university:2","",""
+"Закон Ома для полной цепи","pass","electric_charge","Электричество и магнетизм","Электрический ток","university:2","",""
+"Эквивалентное сопротивление при последовательном соединении","pass","electric_charge","Электричество и магнетизм","Электрический ток","university:2","",""
+"Эквивалентное сопротивление при параллельном соединении","pass","electric_charge","Электричество и магнетизм","Электрический ток","university:2","",""
+"Заряд конденсатора при подключении к источнику","pass","electric_charge","Электричество и магнетизм","Электрический ток","university:2","",""
+"Заряд конденсатора при отключении от источника","pass","electric_charge","Электричество и магнетизм","Электрический ток","university:2","",""
+"Первое правило Кирхгофа","pass","electric_charge","Электричество и магнетизм","Электрический ток","university:2","",""
+"Второе правило Кирхгофа","pass","electric_charge","Электричество и магнетизм","Электрический ток","university:2","",""
 
 
 "Система дифференциальных уравнений Гамильтона","\left \{ \begin{aligned} g_i &= \frac{\partial \dot{H}}{\partial p_i} \\ p_i = -\frac{\partial H}{\partial g} \end{aligned} \right","hamilton_function,generalized_coordinate,generalized_umpulse","Статистическая физика","Лекция 2","university:4","",""
