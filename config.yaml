@@ -1,9 +1,9 @@
 # config.yaml
 defaults:
   # Параметры по умолчанию для всех команд
-  school: [10]
-  university: []
-  section: ["Механика"]
+  #school: [10]
+  university: [4]
+  section: ["Молекулярная физика и термодинамика"]
   
 
 presentation:
