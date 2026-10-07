@@ -2,17 +2,20 @@
 
 
 
-"Скорость тела при равномерном движении","v = \\frac{S}{t}","velocity_modulus,spostamento,time","Механика","Кинематика","school:7","",""
-"Средняя скорость тела","\\langle v \\rangle = \\frac{S}{t}","mean_spostamento_velocity,total_spostamento,total_time","Механика","Кинематика","school:7","",""
-"Плотность однородного тела","\rho = \\frac{m}{V}","density,mass,volume","Механика","Динамика","school:7","",""
-"Сила тяжести","\\vec{F}_{\\text{тяж}} = m\\cdot \\vec{g}","gravitational_force,mass,free_fall_acceleration","Механика","Динамика","school:7","",""
-"Сила упругости","F_{\\text{упр}} = k\\cdot \\Delta l","elastic_force_modulus,elasticity_coefficient,deformation","Механика","Динамика","school:7","",""
-"Вес покоющегося тела","\\vec{P} = m\\cdot \\vec{g}","weight,mass,free_fall_acceleration","Механика","Гидростатика","school:7","",""
+"Модуль скорости тела при равномерном прямолинейном движении","v = \frac{S}{t}","velocity_modulus,spostamento,time","Взаимодействие тел","Кинематика","school:7","",""
+"Средняя скорость тела","\langle v \rangle = \frac{S}{t}","mean_spostamento_velocity,total_spostamento,total_time","Взаимодействие тел","Кинематика","school:7","",""
+"Модуль ускорения тела при прямолинейном равноускоренном движении","a = \frac{v - v_0}{t}","acceleration_modulus,initial_velocity_modulus_at_zero,velocity_modulus,time","Взаимодействие тел","Кинематика","school:7","",""
+"Плотность однородного тела","\rho = \\frac{m}{V}","density,body_mass,body_volume","Взаимодействие тел","Динамика","school:7","",""
+"Модуль силы тяжести","F_{\text{тяж}} = m \cdot g","gravitational_force_modulus,body_mass,free_fall_acceleration_modulus","Взаимодействие тел","Динамика","school:7","",""
+"Сила упругости","F_{\text{упр}} = k \cdot \\Delta l","elastic_force_modulus,elasticity_coefficient,deformation","Взаимодействие тел","Динамика","school:7","",""
+"Вес покоющегося тела","P = m \cdot g","weight_modulus,body_mass,free_fall_acceleration_modulus","Взаимодействие тел","Динамика","school:7","",""
+"Модуль равнодействующей двух сил, направленных в одну сторону","F = F_1 + F_2","resulting_force_modulus,first_force_modulus,second_force_modulus","Взаимодействие тел","Динамика","school:7","",""
+"Модуль равнодействующей двух сил, направленных в разные стороны","F = |F_1 - F_2|","resulting_force_modulus,first_force_modulus,second_force_modulus","Взаимодействие тел","Динамика","school:7","",""
 
 "Давление","p = \\frac{F_{\\text{д}}}{S}","pressure,pressure_force,area","Механика","Гидростатика","school:7","",""
 "Гидростатическое давление","p = \\rho\\cdot g\\cdot h","pressure,density,free_fall_acceleration_modulus,depth","Механика","Гидростатика","school:7","",""
 "Условие равновесия гидравлической машины","\\frac{F_1}{F_2} = \\frac{S_1}{S_2}","first_plunger_force_modulus,second_plunger_force_modulus,first_plunger_area,second_plunger_area","Механика","Гидростатика","school:7","",""
-"Сила Архимеда","F_{\\text{арх}} = \\rho_{\\text{жид}}\\cdot g\\cdot V_{\\text{пог}}","buoyancy_force,liquid_density,free_fall_acceleration_modulus,dived_volume","Механика","Гидростатика","school:7","",""
+"Сила Архимеда","F_{\\text{арх}} = \\rho_{\\text{жид}}\\cdot g\\cdot V_{\\text{пог}}","buoyancy_force_modulus,liquid_density,free_fall_acceleration_modulus,dived_volume","Механика","Гидростатика","school:7","",""
 
 "Работа силы","A = F\\cdot S","work,force_modulus,spostamento","Механика","Работа и энергия","school:7","",""
 "Мощность","N = \\frac{A}{t}","power,work,time","Механика","Работа и энергия","school:7","",""
@@ -60,7 +63,7 @@
 "Второй закон Ньютона","\vec{F} = m \cdot \vec{a}","resulting_force,mass,acceleration","Механика","Динамика","school:10","",""
 "Третий закон Ньютона","\vec{F}_A = -\vec{F}_B","a_force,b_force","Механика","Динамика","school:10","third_newtons_law_4.png",""
 "Сила тяжести","\vec{F}_{\text{тяж}} = m\cdot \vec{g}","gravitational_force,mass,free_fall_acceleration","Механика","Динамика","school:10","",""
-"Закон всемирного тяготения","F_{\text{тяг}} = G\cdot \frac{m_1 \cdot m_2}{r^2}","gravity_force,gravity_constant,first_mass,second_mass,distance","Механика","Динамика","school:10","gravity_force_4.png",""
+"Закон всемирного тяготения","F_{\text{тяг}} = G\cdot \frac{m_1 \cdot m_2}{r^2}","gravity_force_modulus,gravity_constant,first_mass,second_mass,distance","Механика","Динамика","school:10","gravity_force_4.png",""
 "Первая космическая скорость","v_I = \sqrt{G \cdot \frac{M}{R + h}}","first_cosmic_velosity_modulus,gravity_constant,planet_mass,planet_radius,height","Механика","Динамика","school:10","first_cosmic_velocity_4.png",""
 "Сила упругости","\vec{F}_{\text{упр}} = -k \cdot \vec{s}","elastic_force,elasticity_coefficient,displacement","Механика","Динамика","school:10","elastic_force_4.png",""
 "Проекции силы упругости","\begin{cases} F_{\text{упр } x} = -k \cdot s_x \\\\ F_{\text{упр } y} = -k \cdot s_y \\\\ F_{\text{упр } z} = -k \cdot s_z \\end{cases}","elastic_force_abscissa,elastic_force_ordinate,elastic_force_applicate,elasticity_coefficient,displacement_abscissa,displacement_ordinate,displacement_applicate","Механика","Динамика","school:10","",""
@@ -249,7 +252,6 @@
 "Изменение энтропии изолированной системы","dS \\geqslant 0","entropy_change","Молекулярная физика и термодинамика","Изменение энтропии при обратимых и необратимых процессах","university:4","",""
 "Определение изменения энтропии (равновесный процесс)","dS = \\frac{\\delta Q}{T}","entropy_change,heat_quantity,absolute_temperature","Молекулярная физика и термодинамика","Изменение энтропии при обратимых и необратимых процессах","university:4","",""
 "Изменение энтропии при переходе между состояниями","\\Delta S_{12} = S_2 - S_1","entropy_change,state_2_entropy,state_1_entropy","Молекулярная физика и термодинамика","Изменение энтропии при обратимых и необратимых процессах","university:4","",""
-"Стремление теплоёмкостей к нулю","\\lim_{T \\to 0} C_V = 0, \\quad \\lim_{T \\to 0} C_P = 0","heat_capacity_V,heat_capacity_P,absolute_temperature","Молекулярная физика и термодинамика","Изменение энтропии при обратимых и необратимых процессах","university:4","",""
 
 "Уравнение Ван-дер-Ваальса","\left(P + \frac{a}{V^2}\right)(V - b) = RT","pressure,volume,van_der_waals_a,van_der_waals_b,universal_gas_constant,absolute_temperature","Молекулярная физика и термодинамика","Термодинамика газа Ван-дер-Ваальса","university:4","",""
 "Поправка на внутренний давление","\frac{a}{V^2}","internal_pressure_correction,van_der_waals_a,volume","Молекулярная физика и термодинамика","Термодинамика газа Ван-дер-Ваальса","university:4","",""

@@ -1,16 +1,15 @@
 # config.yaml
 defaults:
   # Параметры по умолчанию для всех команд
-  #school: [10]
-  university: [4]
-  section: ["Молекулярная физика и термодинамика"]
-  
+  school: [7]
+#  university: [4]
+#  section: ["Молекулярная физика и термодинамика"]
 
 presentation:
   # Настройки для презентаций
   fixed_time:
-    formula_ms: 90000
-    concept_ms: 120000
+    formula_ms: 90_000
+    concept_ms: 90_000
 
 pdf:
   # Настройки для PDF

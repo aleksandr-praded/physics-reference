@@ -1,4 +1,5 @@
-# 📖 Справочник полезных команд
+    
+     .# 📖 Справочник полезных команд
 
 > 💡 **Как использовать:** Скопируйте нужный блок и вставьте в терминал, консоль Python или сохраните как отдельный скрипт. Все пути относительны корню проекта.
 
@@ -75,12 +76,24 @@ with open(output_file, "a", encoding="utf-8") as f_out:
 for %i in (*.html) do start msedge "%cd%%i" --new-window
 ```
 
+### 2. Компиляция листингов, содержащих русские символы
+Необходимо использовать Пайтон-пакет Pygments для успешного создания файла
+```cmd
+pdflatex --shell-escape ваш_файл.tex
+```
+
 ## Power Shell
 
 ### 1. Открытие всех файлов в отдельных окнах
 Открыть файл с указанным расширением в указанном браузере
 ```powershell
 Get-ChildItem *.html | ForEach-Object { Start-Process chrome "--new-window `"$($_.FullName)`"" }
+```
+
+### 2. Открытие файлов, содержащих определённую строку
+Ищет файлы, содержащие определённую строку, и открывает их в выбранном приложении в разных окнах
+```powershell
+Get-ChildItem -Recurse -File | Where-Object {$_.FullName -like "*ЕГФ*5-6*.txt"} | Select-String "кинетическая энергия" | Select-Object -Property Path -Unique | ForEach-Object {Start-Process notepad $_.Path}
 ```
 
 ## Bash
