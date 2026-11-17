@@ -23,4 +23,4 @@ output.out
 Thumbs.db
 
 # Настройки программы
-config.yaml
+*.yaml

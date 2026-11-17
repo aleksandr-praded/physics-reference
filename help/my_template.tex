@@ -1,0 +1,49 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{russian}
+
+\setmainfont{Times New Roman}[
+  BoldFont = Times New Roman Bold,
+  ItalicFont = Times New Roman Italic,
+  BoldItalicFont = Times New Roman Bold Italic
+]
+\setmonofont{Consolas}
+
+\usepackage[top=2cm,bottom=2cm,left=3cm,right=1.5cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{enumitem}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\usepackage{xcolor}
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+\usepackage{framed}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue]{hyperref}
+
+% Фикс для Pandoc 3.8+: таблицы без подписи используют \LTcaptype{none},
+% и longtable требует существования счётчика 'none'.
+\newcounter{none}
+
+% Pandoc сам сгенерирует цвета и \*Tok-макросы по --highlight-style=tango
+$highlighting-macros$
+
+% Перенос длинных строк в блоках кода
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{%
+  commandchars=\\\{\},
+  breaklines=true,
+  breaksymbolleft={},
+  breaksymbolright={}
+}
+
+\begin{document}
+
+$body$
+
+\end{document}

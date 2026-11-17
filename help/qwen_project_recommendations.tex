@@ -1,0 +1,361 @@
+\documentclass[12pt,a4paper]{article}
+
+% ==================== ПРЕАМБУЛА (LuaLaTeX) ====================
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{russian}
+\setotherlanguage{english}
+
+% Шрифты с кириллицей (есть в Windows; при необходимости замените)
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Consolas}[Scale=0.9]
+% Резервный вариант, если шрифтов выше нет:
+% \setmainfont{DejaVu Serif}
+% \setsansfont{DejaVu Sans}
+% \setmonofont{DejaVu Sans Mono}
+
+\usepackage{amsmath,amssymb}
+\usepackage{unicode-math}
+\setmathfont{Latin Modern Math}
+
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2cm,top=2cm,bottom=2cm}
+
+\usepackage{xcolor}
+\definecolor{darkgreen}{RGB}{0,100,0}
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{accent}{RGB}{30,80,140}
+
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{codebg},
+  breaklines=true,
+  frame=single,
+  framesep=4pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=*}
+
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{accent}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{darkgreen}}{\thesubsection}{0.6em}{}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  urlcolor=darkgreen,
+  pdftitle={Итоги проектирования генератора физических справочников},
+  pdfauthor={Alexandr Praded}
+}
+
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+
+\newcommand{\idea}[1]{\textcolor{darkgreen}{\textbf{#1}}}
+
+\title{\textbf{Генератор физических справочников и задачников:\\
+итоги проектирования, микросервисная архитектура\\
+и стратегия выхода в веб}}
+\author{Alexandr Praded}
+\date{16 ноября 2026 г.}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+\noindent Документ фиксирует идеи, выработанные в ходе обсуждения проекта автоматической генерации учебных материалов по физике (справочник формул и определений, задачник, презентации). Ключевые решения: отказ от нейросетей на этапе генерации в пользу детерминированного шаблонно-морфологического движка; композиционная модель описания величин; ООП-онтология учебных элементов; хранение данных в SQLite с CSV-мостом; декомпозиция на микросервисы и поэтапный выход в веб-пространство. Все архитектурные решения приняты с учётом дальнейшего масштабирования.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% =====================================================================
+\section{Контекст и цели проекта}
+% =====================================================================
+
+Проект решает задачу автоматизированного создания структурированных учебных документов по физике и математике:
+\begin{itemize}
+  \item справочник формул с пояснениями величин и единицами измерения;
+  \item справочник определений (концепций) со ссылками на формулы и иллюстрации;
+  \item генератор вариантов задач с гарантированно корректными ответами;
+  \item презентации (reveal.js + MathJax/KaTeX) и печатные PDF (LaTeX).
+\end{itemize}
+
+\idea{Главный принцип:} нейросеть --- инструмент \emph{наполнения} базы знаний (черновики описаний, сюжеты задач), но \emph{не} движок генерации. Генерация детерминирована: шаблоны + морфология + символьная математика. Это гарантирует точность терминологии, отсутствие галлюцинаций в формулах и работу офлайн.
+
+% =====================================================================
+\section{Модель описания физических величин}
+% =====================================================================
+
+\subsection{Проблема}
+Одна и та же величина требует разной степени подробности и разного смысла в разных контекстах: $Q$ --- «заряд» (кратко), «точечный заряд» (средне), «величина точечного заряда, помещённого в данную точку поля» (полно); в термодинамике $Q$ --- уже «количество теплоты». Хранение одной статичной строки на величину теряет контекст; дублирование полных строк на каждую формулу не масштабируется.
+
+\subsection{Решение: двухслойная композиционная модель}
+\begin{enumerate}
+  \item \idea{Инвариант величины} (\texttt{Quantity}): символ, базовая лемма, род, единица измерения, падеж управления. Не меняется никогда. Один на величину.
+  \item \idea{Контекстное описание} (\texttt{NounPhrase}): головное слово + список типизированных модификаторов. Много на величину (по одному на контекст/формулу).
+\end{enumerate}
+
+Отвергнутые альтернативы: плоская схема слотов частей речи (разреженная, жёсткий порядок слов, не различает типы грамматической связи) и глубокое наследование классов величин (комбинаторный взрыв).
+
+\subsection{Три типа связи модификаторов}
+\begin{center}
+\begin{tabular}{@{}llp{6.2cm}@{}}
+\toprule
+\textbf{Тип} & \textbf{Пример} & \textbf{Морфологическая обработка} \\
+\midrule
+\texttt{agreed}   & «объёмный» $\to$ «объёмная плотность» & согласование в роде/числе/падеже головного слова \\
+\texttt{governed} & «заряд» $\to$ «плотность заряда»    & склонение в падеж, которым управляет голова \\
+\texttt{fixed}    & «в данной точке поля»               & готовый блок, без обработки \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Три типа покрывают $\approx 95\,\%$ описаний величин в физике. Сложные причастные обороты и предложные группы хранятся как \texttt{fixed}-блоки: шаблон надёжнее алгоритма.
+
+\subsection{Уровни детализации}
+Единая база, три режима вывода, переключаемые параметром \texttt{detail\_level}:
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Уровень} & \textbf{Вывод для $\Pi$} & \textbf{Назначение} \\
+\midrule
+\texttt{short}  & потенциальная энергия, Дж & шпаргалка \\
+\texttt{medium} & потенциальная энергия точечного заряда, Дж & задачник \\
+\texttt{full}   & потенциальная энергия точечного заряда в данной точке поля, Дж & учебник \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Пример итоговой сборки:
+\begin{equation*}
+\varphi = \frac{\Pi}{Q},
+\end{equation*}
+где $\varphi$ --- потенциал электростатического поля, В; $\Pi$ --- потенциальная энергия точечного заряда в данной точке поля, Дж; $Q$ --- величина точечного заряда, помещённого в данную точку поля, Кл.
+
+% =====================================================================
+\section{Морфологический движок без нейросетей}
+% =====================================================================
+
+\idea{Инструмент:} \texttt{pymorphy3} (+ \texttt{pymorphy3-dicts-ru}). Библиотека склоняет отдельные слова; согласование словосочетаний --- задача собственного кода, который передаёт грамматемы головного слова зависимым.
+
+Две базовые операции движка:
+\begin{itemize}
+  \item \texttt{agree\_adjective(adj, head)} --- согласование прилагательного с существительным («объёмный» + «плотность» $\to$ «объёмная»);
+  \item \texttt{decline\_to\_case(phrase, case)} --- склонение управляемого дополнения («заряд» $\to$ «заряда»).
+\end{itemize}
+
+Хранятся \emph{леммы} и грамматические признаки, а не готовые словоформы. Падежное управление --- метаданные головного слова (\texttt{governs\_case}). Единицы измерения целесообразно типизировать через \texttt{Pint} (автоконвертация, русские названия), структуру записей валидировать через \texttt{Pydantic}.
+
+\begin{lstlisting}[language=Python,caption={Согласование прилагательного с головным словом}]
+import pymorphy3
+morph = pymorphy3.MorphAnalyzer()
+
+def agree_adjective(adj_lemma, head_lemma):
+    head = morph.parse(head_lemma)[0]
+    grammemes = {head.tag.gender, head.tag.number, head.tag.case}
+    adj = morph.parse(adj_lemma)[0]
+    inflected = adj.inflect(grammemes)
+    return inflected.word if inflected else adj_lemma
+\end{lstlisting}
+
+% =====================================================================
+\section{ООП-онтология учебных элементов}
+% =====================================================================
+
+\subsection{Базовый класс и специализации}
+Общие атрибуты всех элементов справочника: \texttt{key}, \texttt{level} (уровень обучения первого введения), \texttt{example} (пример экземпляра), \texttt{tags}, \texttt{title}. Абстрактные методы: \texttt{render(detail\_level)} и \texttt{validate()}.
+
+\begin{center}
+\begin{tabular}{@{}lp{8.6cm}@{}}
+\toprule
+\textbf{Тип} & \textbf{Специфика поведения} \\
+\midrule
+\texttt{Formula} & рендер \texttt{equation*} + \texttt{itemize}; проверка выражения через SymPy; ссылки на величины по ключам \\
+\texttt{Concept} & текстовое определение; связи с формулами и иллюстрациями \\
+\texttt{Figure}  & \texttt{includegraphics} + подпись; статичный файл или программная генерация (Matplotlib) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\idea{Правило наследования:} дочерний класс создаётся при различии \emph{поведения}, а не данных. Схема и график --- один класс \texttt{Figure} с атрибутом \texttt{figure\_type}, пока их рендеринг одинаков; разделение на \texttt{Plot}/\texttt{Scheme} --- только при принципиально разной логике генерации.
+
+\idea{Правило связей:} типы ссылаются друг на друга \emph{ключами}, а не вложенными объектами (защита от циклических ссылок при загрузке из БД). Граф связей резолвится репозиторием лениво.
+
+\subsection{Формульный слой}
+Каждая формула хранит LaTeX-тело, список ключей величин, опциональное SymPy-выражение для машинной проверки и \texttt{context\_id}, определяющий набор контекстных описаний. Ответы задачника вычисляются SymPy --- арифметическая корректность гарантирована, а не «предсказана» моделью.
+
+% =====================================================================
+\section{Хранилище данных: SQLite + CSV-мост}
+% =====================================================================
+
+\subsection{Разделение ролей}
+\begin{itemize}
+  \item \idea{SQLite} --- рабочее хранилище: связи, внешние ключи, JOIN, constraints, индексы.
+  \item \idea{CSV} --- источник истины для человека: редактирование в Excel, читаемый \texttt{git diff}, версионирование. Файл \texttt{.db} --- в \texttt{.gitignore}.
+\end{itemize}
+Поток: CSV $\to$ импортёр с валидацией $\to$ SQLite $\to$ репозиторий $\to$ объекты $\to$ Jinja2 $\to$ LaTeX/PDF.
+
+\subsection{Схема базы}
+\begin{lstlisting}[language=SQL,caption={Основные таблицы (сокращённо)}]
+CREATE TABLE quantities (
+  key TEXT PRIMARY KEY, symbol TEXT NOT NULL,
+  lemma TEXT NOT NULL, gender TEXT NOT NULL,
+  unit TEXT NOT NULL, governs_case TEXT DEFAULT 'gent'
+);
+CREATE TABLE contexts (
+  context_id TEXT PRIMARY KEY,
+  quantity_key TEXT NOT NULL REFERENCES quantities(key),
+  name_override TEXT
+);
+CREATE TABLE modifiers (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  context_id TEXT NOT NULL REFERENCES contexts(context_id),
+  lemma TEXT NOT NULL, mod_type TEXT NOT NULL,
+  position INTEGER NOT NULL, case_form TEXT
+);
+CREATE TABLE items (
+  key TEXT PRIMARY KEY, item_type TEXT NOT NULL,
+  level INTEGER NOT NULL, example TEXT, title TEXT
+);
+CREATE TABLE formulas (
+  key TEXT PRIMARY KEY REFERENCES items(key),
+  latex TEXT, sympy_expr TEXT, context_id TEXT
+);
+CREATE TABLE concepts (
+  key TEXT PRIMARY KEY REFERENCES items(key), definition TEXT
+);
+CREATE TABLE figures (
+  key TEXT PRIMARY KEY REFERENCES items(key),
+  image_path TEXT, caption TEXT, figure_type TEXT
+);
+CREATE TABLE relations (
+  source_key TEXT REFERENCES items(key),
+  target_key TEXT REFERENCES items(key),
+  relation_type TEXT,
+  PRIMARY KEY (source_key, target_key, relation_type)
+);
+CREATE INDEX idx_mod_context ON modifiers(context_id);
+\end{lstlisting}
+
+Таблица \texttt{relations} --- сердце графа знаний: новый тип элемента (например, \texttt{Animation}) добавляется без изменения существующих таблиц.
+
+\subsection{Практические требования}
+\begin{itemize}
+  \item \texttt{PRAGMA foreign\_keys = ON} при каждом соединении (SQLite по умолчанию не проверяет внешние ключи);
+  \item чтение CSV в кодировке \texttt{utf-8-sig} (BOM-метка Excel иначе ломает имя первой колонки);
+  \item валидация заголовков и обязательных полей CSV до импорта (соответствие структуры заявленной схеме);
+  \item кэширование репозитория: одно соединение на сеанс генерации;
+  \item миграции --- нумерованные \texttt{.sql}-файлы + таблица \texttt{schema\_version}; тяжёлые ORM-миграции избыточны;
+  \item обратный экспорт SQLite $\to$ CSV для коммитов.
+\end{itemize}
+
+% =====================================================================
+\section{Микросервисная декомпозиция}
+% =====================================================================
+
+\idea{Стратегия:} модульный монолит сейчас, микросервисы по мере роста. Границы сервисов проводятся по границам предметных областей, интерфейсы между модулями --- контрактные (Pydantic-схемы), чтобы будущий вынос модуля в отдельный сервис не требовал переписывания.
+
+\subsection{Карта сервисов}
+\begin{center}
+\begin{longtable}{@{}lp{5.4cm}p{5.6cm}@{}}
+\toprule
+\textbf{Сервис} & \textbf{Ответственность} & \textbf{Технологии} \\
+\midrule
+\endhead
+Knowledge API & CRUD величин, формул, концепций, рисунков; граф связей; версии схемы & FastAPI + SQLite $\to$ PostgreSQL \\
+Morphology Service & сборка именных групп, согласование, склонение, уровни детализации & pymorphy3, чистые функции, stateless \\
+Math Engine & символьная проверка формул, вычисление ответов вариантов & SymPy (+ Pint для единиц) \\
+Render Service & Jinja2 $\to$ LaTeX $\to$ PDF; HTML/reveal.js-рендер & LuaLaTeX/TeX Live, очереди задач \\
+Asset Service & хранение и выдача изображений, анимаций (Manim), графиков & S3-совместимое хранилище / файловый том \\
+Task Generator & подбор шаблонов, случайные параметры, валидация ответов & Math Engine + Knowledge API \\
+LLM Gateway & единственная точка обращения к моделям (локальная Ollama / облако); наполнение базы, сюжеты задач & Ollama (Qwen 2.5 14B), опционально облачные API \\
+Web Frontend & интерфейс преподавателя: просмотр, генерация, скачивание & HTMX + Jinja2 (минимум JS) либо SPA позже \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\subsection{Принципы взаимодействия}
+\begin{itemize}
+  \item каждый сервис владеет своими данными; общий доступ --- только через API, не через чужие таблицы;
+  \item Morphology и Math Engine --- stateless-сервисы: горизонтальное масштабирование тривиально;
+  \item Render Service --- ресурсоёмкий и медленный: асинхронная очередь (Celery/RQ/arq), результат --- ссылка на артефакт в Asset Service;
+  \item LLM Gateway изолирует нестабильность нейросетей: таймауты, ретраи, JSON-валидация ответов; при отказе LLM генерация документов \emph{не останавливается} (детерминированное ядро самодостаточно);
+  \item контракты событий и DTO версионируются (\texttt{/api/v1/...}).
+\end{itemize}
+
+\subsection{Эволюция хранилища}
+SQLite достаточен для одного пользователя и десятков тысяч записей. При переходе в веб (многопользовательская запись, конкурентный доступ) --- миграция на PostgreSQL: схема переносится почти без изменений, репозиторий скрывает смену драйвера. CSV-мост сохраняется как формат обмена и резервного копирования.
+
+% =====================================================================
+\section{Выход в веб-пространство}
+% =====================================================================
+
+\subsection{Этап 1: локальный веб (один пользователь)}
+FastAPI + HTMX: сервер отдаёт HTML-фрагменты, интерактивность без написания JavaScript. Тот же Jinja2-слой обслуживает и LaTeX-, и HTML-шаблоны --- единый источник контента, два представления. Формулы в браузере --- MathJax/KaTeX (локальные файлы, офлайн-совместимость с reveal.js-презентациями).
+
+\subsection{Этап 2: многопользовательский режим}
+\begin{itemize}
+  \item аутентификация и роли (преподаватель / студент / редактор базы);
+  \item PostgreSQL вместо SQLite; Alembic-миграции при росте команды;
+  \item очередь рендеринга: PDF собирается в фоне, пользователь получает уведомление и ссылку;
+  \item персональные подборки: варианты задач, избранные формулы, история генераций;
+  \item раздача статики и артефактов через reverse proxy (nginx) + кэширование.
+\end{itemize}
+
+\subsection{Этап 3: масштабирование и интеграции}
+\begin{itemize}
+  \item контейнеризация каждого сервиса (Docker Compose $\to$ Kubernetes при необходимости);
+  \item публичный read-only API справочника (REST/JSON) для сторонних образовательных инструментов;
+  \item LMS-интеграция (LTI) --- выдача вариантов задач в Moodle и аналоги;
+  \item наблюдаемость: структурные логи, метрики латентности рендеринга, алерты на падение LLM Gateway;
+  \item CI/CD: тесты морфологического движка (золотые эталоны фраз), тесты SymPy-ответов, валидация CSV-схем на каждый коммит.
+\end{itemize}
+
+\subsection{Безопасность и приватность}
+Учебные материалы и данные студентов не покидают контролируемую инфраструктуру: LLM --- локальная (Ollama), облачные вызовы --- только через явное разрешение в LLM Gateway. Агентские инструменты (создание файлов, правка базы) --- принцип «человек в контуре»: подтверждение каждой мутирующей операции, песочница рабочей директории, read-only на критичных файлах, Git-чекпоинты перед агентскими сессиями.
+
+% =====================================================================
+\section{Свод архитектурных правил}
+% =====================================================================
+
+\begin{enumerate}
+  \item \idea{Наследование --- для поведения, композиция --- для данных, ключи --- для связей.}
+  \item Нейросеть наполняет базу; детерминированный движок генерирует документы. Отказ LLM не блокирует выпуск материалов.
+  \item Инвариант величины отделён от контекстного описания: один инвариант --- много контекстов.
+  \item Три типа грамматической связи (\texttt{agreed}, \texttt{governed}, \texttt{fixed}) --- минимально достаточная модель русской физической фразы.
+  \item Математическая корректность обеспечивается SymPy, лингвистическая --- pymorphy3 + эталонные тесты, структурная --- Pydantic + валидация CSV/БД.
+  \item CSV --- источник истины и версия в Git; SQLite/PostgreSQL --- рабочее представление.
+  \item Границы микросервисов = границы предметных областей; сначала модульный монолит, вынос --- по факту нагрузки.
+  \item Единый контент --- много представлений: LaTeX/PDF, HTML/MathJax, reveal.js-презентации.
+  \item Приватность по умолчанию: локальные модели, песочницы, подтверждения мутаций.
+\end{enumerate}
+
+% =====================================================================
+\section{Ближайшие шаги}
+% =====================================================================
+
+\begin{enumerate}
+  \item Перенести проект в путь без кириллицы (\texttt{C:\textbackslash Projects\textbackslash physics-reference}); закрепить \texttt{requirements.txt} с гибкими версиями.
+  \item Реализовать схему БД (раздел 5) и репозитории; написать CSV-импортёр с валидацией.
+  \item Собрать морфологический движок (две операции) и покрыть эталонными тестами на трёх пилотных формулах: потенциал, плотность заряда, скорость.
+  \item Оформить базовый класс \texttt{LearningItem} и три специализации; связи --- через таблицу \texttt{relations}.
+  \item Поднять FastAPI + HTMX локально; подключить HTML-представление справочника.
+  \item Наполнить контекстные описания с помощью локальной LLM (однократно, с ручной проверкой), далее --- только детерминированная генерация.
+\end{enumerate}
+
+\vfill
+\begin{center}
+\small\color{gray}
+Документ подготовлен для компиляции LuaLaTeX $\to$ PDF.\\
+Шрифты: Times New Roman / Arial / Consolas (замените на DejaVu при отсутствии).
+\end{center}
+
+\end{document}

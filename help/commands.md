@@ -44,28 +44,49 @@ with open('output_list.txt', 'w', encoding='utf-8') as f_out:
 Ищет записи в concepts.csv, formulas.csv, где подраздел содержит заданную фразу
 ```python
 import csv
+import os
+from pathlib import Path
 
-SEARCH_TERM = "Фазовые переходы. Насыщенный пар"
-output_file = "output_list.txt"
+SEARCH_TERM = 'Электрические явления'
+KEY_TO_COLUMN = {'concepts': 2, 'variables': 3}
 
-# Очистка/создание файла
-with open(output_file, "w", encoding="utf-8") as f_out:
-    f_out.write("")
-
-def extract_from_csv(filepath, subsection_col_idx):
+def extract_from_csv(filepath: Path, column: int):
     found = []
-    with open(filepath, "r", encoding="utf-8") as f:
+    with open(filepath, 'r', encoding='utf-8-sig', newline='') as f:
         reader = csv.reader(f)
         for row in reader:
-            if len(row) > subsection_col_idx and SEARCH_TERM in row[subsection_col_idx]:
-                found.append(f'"{row[0]}"')
+            if len(row) > column and SEARCH_TERM.lower() in row[column].lower():
+                name = row[0].strip()
+                if name:
+                    found.append(f'"{name}"')
     return found
 
-# Индексы: concepts -> subsection в колонке 3, formulas -> в колонке 4
-all_names = extract_from_csv("data/concepts.csv", 3) + extract_from_csv("data/formulas.csv", 4)
+all_names = []
+for dirpath, dirnames, filenames in os.walk(os.getcwd()):
+    # Проверяем, что путь содержит physics_docs/data как компоненты, а не подстроку
+    parts = Path(dirpath).parts
+    if 'physics_docs' not in parts or 'data' not in parts:
+        continue
+    # Убеждаемся, что data идёт сразу после physics_docs (или где-то после)
+    try:
+        idx = parts.index('physics_docs')
+        if parts[idx + 1] != 'data':
+            continue
+    except (ValueError, IndexError):
+        continue
 
-with open(output_file, "a", encoding="utf-8") as f_out:
-    f_out.write("\n".join(all_names))
+    for filename in filenames:
+        path = Path(filename)
+        if path.suffix != '.csv':
+            continue
+        column = KEY_TO_COLUMN.get(path.stem)
+        if column is None:
+            continue
+        all_names.extend(extract_from_csv(Path(dirpath) / filename, column))
+
+unique_names = list(dict.fromkeys(all_names))
+with open('output.txt', 'w', encoding='utf-8', newline='') as f:
+    f.write(' '.join(unique_names))
 ```
 
 ## Command Line

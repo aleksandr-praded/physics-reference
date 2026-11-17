@@ -1,0 +1,805 @@
+\documentclass[12pt,a4paper]{article}
+
+% ═══════════════════════════════════════════════════════
+% Настройки для LuaLaTeX
+% ═══════════════════════════════════════════════════════
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{russian}
+\setotherlanguage{english}
+
+% Шрифты с поддержкой кириллицы (должны быть установлены в системе)
+\setmainfont{Times New Roman}
+\setsansfont{Times New Roman}
+\setmonofont{Times New Roman}
+
+\usepackage{geometry}
+\geometry{a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!50!black,
+    urlcolor=blue!70!black,
+    citecolor=green!50!black
+}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{setspace}
+\setstretch{1.15}
+
+% Оформление заголовков
+\titleformat{\section}{\Large\bfseries\color{blue!40!black}}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{blue!30!black}}{\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection.}{0.4em}{}
+
+% Листинги кода через minted (требует -shell-escape)
+\usepackage{minted}
+\setminted{
+    style=vs,
+    fontsize=\small,
+    frame=single,
+    framesep=2mm,
+    breaklines=true,
+    tabsize=4,
+    bgcolor=gray!5
+}
+\usemintedstyle{friendly}
+
+% Пользовательские команды
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\term}[1]{\textit{#1}}
+
+\title{\textbf{Архитектура научно-образовательной платформы}\\[0.5em]
+\large Итоговый документ по проектированию}
+\author{Проект <<analysis>>}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent
+Документ обобщает архитектурные решения, принятые в ходе проектирования
+научно-образовательной платформы для преподавателя физики. Платформа
+предназначена для автоматизации создания справочных материалов, задач,
+презентаций и последующей публикации в веб-пространстве. Изложение
+учитывает переход от локального монолита к микросервисной архитектуре
+и сохранение воспроизводимости результатов без обязательного
+использования нейросетей.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════
+\section{Общая концепция}
+% ═══════════════════════════════════════════════════════
+
+Платформа решает три взаимосвязанные задачи:
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{Генерация справочных материалов} (PDF) из базы
+          определений и формул.
+    \item \textbf{Генерация задач} с автоматическим вычислением ответов
+          на основе символьных вычислений.
+    \item \textbf{Генерация презентаций} (reveal.js) для диктантов
+          и лекций, включая интерактивные элементы.
+\end{enumerate}
+
+\noindent
+В перспективе --- публикация тех же материалов через веб-интерфейс
+с сохранением воспроизводимости и единого источника истины.
+
+% ═══════════════════════════════════════════════════════
+\section{Принципы проектирования}
+% ═══════════════════════════════════════════════════════
+
+\subsection{Разделение слоёв}
+
+Проект строится по классической схеме <<данные --- домен --- представление>>:
+
+\begin{center}
+\begin{tabular}{@{}p{3.2cm}p{5.5cm}p{5.5cm}@{}}
+\toprule
+\textbf{Слой} & \textbf{Ответственность} & \textbf{Технологии} \\
+\midrule
+Хранилище & Данные о концепциях, формулах, задачах, величинах & SQLite (локально), PostgreSQL (веб) \\
+Домен & Типизированные модели, бизнес-логика, генерация & dataclass/Pydantic, SymPy, Pint \\
+Представление & Рендеринг PDF, reveal.js, JSON/HTML & Jinja2, LuaLaTeX, reveal.js, FastAPI \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+Такое разделение позволяет позже заменить SQLite на PostgreSQL,
+а LuaLaTeX-рендеринг --- на веб-API, не переписывая бизнес-логику.
+
+\subsection{Единый источник истины}
+
+Все сгенерированные материалы (PDF, презентации, задачи) должны
+строиться из одной базы данных. Это гарантирует, что:
+\begin{itemize}
+    \item изменения в определении автоматически попадают во все
+          производные документы;
+    \item нет дублирования текста в разных шаблонах;
+    \item можно воспроизвести любой материал через \code{git checkout}
+          и повторный запуск генератора.
+\end{itemize}
+
+\subsection{Воспроизводимость без обязательных нейросетей}
+
+Нейросети допустимы как \textbf{вспомогательный инструмент на этапе
+разметки данных} (первичное заполнение контекстов, формулировки),
+но \textbf{не участвуют в рантайме}. Все вычисления, ответы и
+описания генерируются детерминированно.
+
+% ═══════════════════════════════════════════════════════
+\section{Структура проекта}
+% ═══════════════════════════════════════════════════════
+
+\begin{verbatim}
+analysis/
+├── .venv/                     # виртуальное окружение (не коммитится)
+├── data/
+│   ├── physics.db             # SQLite (локально)
+│   ├── raw/                   # исходные данные
+│   └── processed/             # обработанные данные
+├── docs/                      # документация (Sphinx / MyST)
+├── help/                      # личные заметки и шпаргалки
+├── media/
+│   ├── figures/               # выходные графики
+│   ├── tables/                # выходные таблицы
+│   └── schemes/               # схемы
+├── notebooks/                 # Jupyter для исследований
+├── scripts/
+│   ├── create_db.py
+│   ├── import_csv.py
+│   ├── generate_pdf.py
+│   ├── generate_quiz.py
+│   └── generate_lecture.py
+├── src/my_project/
+│   ├── __init__.py
+│   ├── database.py            # подключение и миграции
+│   ├── repositories.py        # доступ к данным
+│   ├── domain/                # dataclass-модели
+│   │   ├── content.py         # Formula, Concept, Figure
+│   │   ├── quantities.py      # PhysicalQuantity, QuantityUsage
+│   │   └── tasks.py           # Task, GeneratedVariant
+│   ├── generation/            # NLG-генерация описаний
+│   │   ├── grammar.py         # pymorphy3-обёртка
+│   │   └── templates.py
+│   ├── render/
+│   │   ├── latex.py
+│   │   ├── reveal.py
+│   │   └── web.py             # будущий API
+│   └── templates/
+│       ├── physics.tex
+│       └── lecture_reveal.j2
+├── tests/
+├── .gitignore
+├── pyproject.toml
+└── README.md
+\end{verbatim}
+
+% ═══════════════════════════════════════════════════════
+\section{Модель данных}
+% ═══════════════════════════════════════════════════════
+
+\subsection{Основные таблицы}
+
+\begin{center}
+\begin{tabular}{@{}p{3.5cm}p{9.5cm}@{}}
+\toprule
+\textbf{Таблица} & \textbf{Назначение} \\
+\midrule
+\code{concepts} & Определения (текст, раздел, уровень, пример) \\
+\code{formulas} & Формулы (LaTeX, раздел, уровень, пример) \\
+\code{variables} & Физические величины (символ, имя, единица, род) \\
+\code{formula\_variable\_context} & Квалификаторы переменных в конкретных формулах \\
+\code{tasks} & Задачи (шаблон условия, SymPy-формула, спецификация параметров) \\
+\code{task\_concepts}, \code{task\_formulas} & Связи задач с концепциями и формулами \\
+\code{figures} & Рисунки и схемы (путь к изображению, тип) \\
+\code{sources} & Библиография \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Таблица контекста переменных}
+
+Ключевая идея: квалификатор (<<точечного заряда в данной точке поля>>)
+хранится не в самой величине, а в паре <<формула---величина>>:
+
+\begin{minted}{sql}
+CREATE TABLE formula_variable_context (
+    formula_id   INTEGER NOT NULL,
+    variable_id  INTEGER NOT NULL,
+    qualifier    TEXT,          -- родительный падеж
+    location     TEXT,          -- обстоятельство
+    detail_level INTEGER DEFAULT 1,
+    PRIMARY KEY (formula_id, variable_id),
+    FOREIGN KEY (formula_id)  REFERENCES formulas(id),
+    FOREIGN KEY (variable_id) REFERENCES variables(id)
+);
+\end{minted}
+
+\noindent
+Это позволяет описывать \(\Pi\) в разных формулах по-разному,
+не дублируя данные.
+
+\subsection{Таблица задач}
+
+\begin{minted}{sql}
+CREATE TABLE tasks (
+    task_id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    source             TEXT,   -- задачник, номер
+    section            TEXT,
+    subsection         TEXT,
+    level              TEXT,   -- "school:10-11", "university:1-2"
+    condition_template TEXT,   -- шаблон с {m}, {v}, ...
+    answer_formula     TEXT,   -- SymPy-выражение
+    parameter_spec     TEXT,   -- JSON: диапазоны и единицы
+    units              TEXT,   -- единицы ответа
+    notes              TEXT
+);
+
+CREATE TABLE generated_variants (
+    variant_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    task_id    INTEGER NOT NULL,
+    seed       INTEGER NOT NULL,
+    parameters TEXT,           -- JSON
+    answer     TEXT,           -- точное значение
+    FOREIGN KEY (task_id) REFERENCES tasks(task_id)
+);
+\end{minted}
+
+\noindent
+Варианты генерируются <<на лету>>, а в БД сохраняются только
+зафиксированные варианты (например, для контрольных), с seed
+для воспроизводимости.
+
+% ═══════════════════════════════════════════════════════
+\section{Доменная модель}
+% ═══════════════════════════════════════════════════════
+
+\subsection{Типы контента: ООП с наследованием}
+
+Общие атрибуты (уровень, раздел, пример) вынесены в базовый класс,
+наследники добавляют специфику.
+
+\begin{minted}{python}
+from dataclasses import dataclass, field
+from typing import Optional, List
+
+@dataclass
+class ContentItem:
+    item_id: int
+    section: str
+    subsection: str
+    level: str
+    example: Optional[str] = None
+    notes: Optional[str] = None
+
+@dataclass
+class Formula(ContentItem):
+    latex: str = ""
+    variable_keys: List[str] = field(default_factory=list)
+
+@dataclass
+class Concept(ContentItem):
+    definition: str = ""
+    related_formula_ids: List[int] = field(default_factory=list)
+
+@dataclass
+class Figure(ContentItem):
+    image_path: str = ""
+    figure_type: str = "scheme"  # "scheme" | "plot"
+    caption: str = ""
+\end{minted}
+
+\noindent
+Обратите внимание: \code{Figure} хранит тип как поле, а не как
+наследника --- это позволяет избежать <<ромбовидного наследования>>.
+
+\subsection{Величины: композиция вместо наследования}
+
+Наследование <<скорость \(\to\) скорость тела / скорость процесса>>
+приводит к жёсткой иерархии: одна и та же величина может играть
+разные роли. Поэтому используется композиция.
+
+\begin{minted}{python}
+@dataclass
+class PhysicalQuantity:
+    key: str
+    symbol: str
+    base_name: str
+    unit: str
+    gender: str                # "f", "m", "n"
+    government: Optional[str]  # требуемый падеж дополнения
+
+@dataclass
+class QuantityUsage:
+    quantity: PhysicalQuantity
+    formula_id: int
+    qualifier: Optional[str] = None
+    location: Optional[str] = None
+    detail_level: int = 1
+\end{minted}
+
+\noindent
+Уровни детализации:
+\begin{itemize}
+    \item \textbf{1} --- только \code{base_name};
+    \item \textbf{2} --- добавляется \code{qualifier};
+    \item \textbf{3} --- добавляется \code{location}.
+\end{itemize}
+
+% ═══════════════════════════════════════════════════════
+\section{Генерация текста (NLG)}
+% ═══════════════════════════════════════════════════════
+
+\subsection{Шаблоны с грамматическими метаданными}
+
+Каждый слот несёт не только текст, но и грамматическую информацию:
+
+\begin{minted}{python}
+@dataclass
+class Slot:
+    text: str
+    gender: str      # "f", "m", "n"
+    number: str      # "sg", "pl"
+    case: str        # "nom", "gen", "dat", ...
+\end{minted}
+
+\noindent
+Согласование прилагательного с существительным, управление
+падежом дополнения и склонение --- через \code{pymorphy3}.
+
+\subsection{Пример генерации}
+
+\begin{minted}{python}
+import pymorphy3
+morph = pymorphy3.MorphAnalyzer()
+
+def inflect(phrase: str, case: str) -> str:
+    words = phrase.split()
+    result = []
+    for w in words:
+        p = morph.parse(w)[0]
+        inflected = p.inflect({case})
+        result.append(inflected.word if inflected else w)
+    return " ".join(result)
+
+def describe(usage: QuantityUsage) -> str:
+    q = usage.quantity
+    if usage.detail_level == 1 or not usage.qualifier:
+        return f"{q.symbol} — {q.base_name}, {q.unit}"
+    qualifier = inflect(usage.qualifier, "gen")
+    parts = [q.base_name, qualifier]
+    if usage.detail_level >= 3 and usage.location:
+        parts.append(usage.location)
+    return f"{q.symbol} — {' '.join(parts)}, {q.unit}"
+\end{minted}
+
+\noindent
+Результат для \(\Pi\) в формуле потенциала:
+\begin{quote}
+\code{\textbackslash Pi — потенциальная энергия точечного заряда, Дж}
+\end{quote}
+
+\subsection{Ограничения подхода}
+
+\begin{itemize}
+    \item \code{pymorphy3} хорошо склоняет отдельные слова и простые
+          словосочетания, но не строит сложные причастные обороты.
+    \item Для фраз вида <<заряда, помещённого в данную точку поля>>
+          рекомендуется хранить готовую формулировку в нужном падеже
+          (в поле \code{qualifier}).
+\end{itemize}
+
+% ═══════════════════════════════════════════════════════
+\section{Вычисления и единицы измерения}
+% ═══════════════════════════════════════════════════════
+
+\subsection{SymPy: символьные вычисления и ОДЗ}
+
+Формулы ответов хранятся в виде SymPy-выражений. Это даёт
+точные ответы и возможность автоматической проверки.
+
+\begin{minted}{python}
+import sympy as sp
+from sympy.calculus.util import continuous_domain, singularities
+
+x = sp.symbols('x', real=True)
+expr = 1 / (x**2 - 1)
+
+domain = continuous_domain(expr, x, sp.S.Reals)
+sing = singularities(expr, x, sp.S.Reals)
+\end{minted}
+
+\noindent
+Ограничения на параметры (например, \(m > 0\)) хранятся в
+\code{parameter\_spec} и проверяются при генерации вариантов.
+
+\subsection{Pint: единицы измерения}
+
+Числовые расчёты с единицами выполняются через \code{Pint}:
+
+\begin{minted}{python}
+import pint
+ureg = pint.UnitRegistry()
+
+v = (50 * ureg.centimeter).to(ureg.meter) / (2 * ureg.second)
+print(v.to(ureg.km / ureg.hour))
+\end{minted}
+
+\noindent
+\textbf{SymPy} используется для символьного вывода (формулы, LaTeX),
+\textbf{Pint} --- для проверки согласованности единиц и числовых
+пересчётов.
+
+% ═══════════════════════════════════════════════════════
+\section{Генерация PDF (LuaLaTeX)}
+% ═══════════════════════════════════════════════════════
+
+\subsection{Почему LuaLaTeX}
+
+Классический \code{pdflatex} требует дополнительных пакетов
+(\code{inputenc}, \code{T2A}) и хуже работает с UTF-8 кириллицей
+и системными шрифтами. \textbf{LuaLaTeX} нативно поддерживает UTF-8,
+\code{fontspec} и \code{polyglossia}, что критично для русскоязычных
+научных документов.
+
+\subsection{Шаблон}
+
+Шаблон \code{templates/physics.tex} использует:
+
+\begin{minted}{latex}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{russian}
+\setmainfont{Liberation Serif}
+\end{minted}
+
+\noindent
+Jinja2 подставляет данные из БД:
+
+\begin{minted}{latex}
+\begin{equation*}
+{{ formula.formula_latex }}
+\end{equation*}
+
+\begin{itemize}
+{% for usage in formula.usages %}
+    \item[$\bullet$] {{ usage.description }}
+{% endfor %}
+\end{itemize}
+\end{minted}
+
+\subsection{Проверка компиляции}
+
+Генератор \textbf{обязан проверять код возврата} \code{lualatex}
+и не удалять временные файлы при ошибке:
+
+\begin{minted}{python}
+import shutil, subprocess
+engine = shutil.which('lualatex') or shutil.which('xelatex')
+
+for i in range(2):
+    result = subprocess.run(
+        [engine, '-interaction=nonstopmode', 'output.tex'],
+        capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        print(result.stdout[-3000:])
+        raise RuntimeError("LaTeX compilation failed")
+\end{minted}
+
+% ═══════════════════════════════════════════════════════
+\section{Презентации (reveal.js)}
+% ═══════════════════════════════════════════════════════
+
+Презентации генерируются из того же источника данных через
+Jinja2-шаблон. Для диктантов порядок случайный, для лекций ---
+упорядоченный.
+
+\subsection{Структура лекции}
+
+\begin{minted}{sql}
+CREATE TABLE lectures (
+    lecture_id INTEGER PRIMARY KEY,
+    title      TEXT NOT NULL,
+    section    TEXT,
+    level      TEXT
+);
+
+CREATE TABLE lecture_items (
+    lecture_id   INTEGER NOT NULL,
+    item_type    TEXT NOT NULL,  -- 'concept' | 'formula' | 'task'
+    item_id      INTEGER NOT NULL,
+    order_index  INTEGER NOT NULL,
+    PRIMARY KEY (lecture_id, item_type, item_id),
+    FOREIGN KEY (lecture_id) REFERENCES lectures(lecture_id)
+);
+\end{minted}
+
+\subsection{Генерация слайдов}
+
+\begin{minted}{python}
+def build_lecture(lecture_id):
+    items = get_lecture_items(lecture_id)
+    slides = []
+    for item in items:
+        if item.type == 'concept':
+            slides.append(render_concept_slide(item))
+        elif item.type == 'formula':
+            slides.append(render_formula_slide(item))
+        elif item.type == 'task':
+            slides.append(render_task_slide(item))
+    return render_reveal_template(slides)
+\end{minted}
+
+% ═══════════════════════════════════════════════════════
+\section{Микросервисная архитектура}
+% ═══════════════════════════════════════════════════════
+
+\subsection{Принципы}
+
+Переход к микросервисам оправдан, когда появляется веб-интерфейс
+и несколько сценариев использования. Разделение на сервисы
+основано на \textbf{доменных границах}, а не на типах файлов.
+
+\subsection{Сервисы}
+
+\begin{center}
+\begin{tabular}{@{}p{3.5cm}p{6cm}p{4cm}@{}}
+\toprule
+\textbf{Сервис} & \textbf{Ответственность} & \textbf{Стек} \\
+\midrule
+\code{content-service} & CRUD для концепций, формул, величин & FastAPI + PostgreSQL \\
+\code{task-service} & Генерация задач, проверка ответов & FastAPI + SymPy + Pint \\
+\code{render-service} & Генерация PDF и reveal.js & FastAPI + LuaLaTeX + Jinja2 \\
+\code{web-frontend} & Веб-интерфейс для преподавателя и студента & React / Vue / Svelte \\
+\code{auth-service} & Аутентификация и роли & FastAPI + OAuth2 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Взаимодействие}
+
+\begin{itemize}
+    \item \textbf{Синхронно} (REST) --- когда нужен немедленный ответ
+          (например, <<сгенерируй PDF>>).
+    \item \textbf{Асинхронно} (очередь, например, RabbitMQ или Kafka) ---
+          для длительных операций (пакетная генерация, компиляция
+          LaTeX, отчёты).
+\end{itemize}
+
+\subsection{Почему не монолит}
+
+Монолит на FastAPI тоже возможен и проще на старте. Микросервисы
+оправданы, когда:
+\begin{itemize}
+    \item есть разные требования к масштабированию (рендеринг
+          PDF требует LuaLaTeX-окружения, задачи --- только SymPy);
+    \item разные команды или пользователи работают с разными частями;
+    \item нужно независимое развёртывание (например, обновить
+          рендер, не трогая генерацию задач).
+\end{itemize}
+
+\noindent
+\textbf{Рекомендация:} начать с \textbf{модульного монолита} на
+FastAPI с чётким разделением слоёв. Выделять сервисы по мере
+роста нагрузки. Это снижает риск преждевременной оптимизации.
+
+% ═══════════════════════════════════════════════════════
+\section{Веб-расширение}
+% ═══════════════════════════════════════════════════════
+
+\subsection{API}
+
+Все операции, доступные локальным скриптам, должны быть
+доступны через REST API. Это ключевой принцип: локальный
+и веб-режим используют \textbf{один и тот же доменный слой}.
+
+\begin{minted}{python}
+# Пример будущего API
+@app.get("/api/formulas")
+def list_formulas(section: str = None, level: str = None):
+    return repositories.get_formulas(section, level)
+
+@app.post("/api/tasks/generate")
+def generate_task(task_id: int, seed: int = None):
+    return task_service.generate(task_id, seed)
+\end{minted}
+
+\subsection{Безопасность}
+
+\begin{itemize}
+    \item OAuth2 / JWT для аутентификации.
+    \item Ролевая модель: \code{teacher}, \code{student}, \code{admin}.
+    \item Ограничение доступа к генерации и редактированию
+          контента.
+\end{itemize}
+
+\subsection{Хранение}
+
+\begin{itemize}
+    \item Локально --- \textbf{SQLite}.
+    \item В вебе --- \textbf{PostgreSQL} (через SQLAlchemy + Alembic).
+    \item Файлы (PDF, изображения) --- объектное хранилище (S3-совместимое,
+          например, MinIO).
+\end{itemize}
+
+\subsection{Рендеринг в вебе}
+
+LuaLaTeX-рендеринг в вебе --- тяжёлая операция. Варианты:
+\begin{itemize}
+    \item отдельный \textbf{render-service} с LuaLaTeX в контейнере;
+    \item очередь задач (Celery + Redis) для пакетной генерации;
+    \item кэширование готовых PDF по хэшу входных данных.
+\end{itemize}
+
+% ═══════════════════════════════════════════════════════
+\section{Инструменты и зависимости}
+% ═══════════════════════════════════════════════════════
+
+\begin{center}
+\begin{tabular}{@{}p{4cm}p{9.5cm}@{}}
+\toprule
+\textbf{Область} & \textbf{Инструменты} \\
+\midrule
+Хранение & SQLite (локально), PostgreSQL + SQLAlchemy + Alembic (веб) \\
+Символьные вычисления & SymPy \\
+Единицы измерения & Pint, sympy.physics.units \\
+Морфология & pymorphy3 \\
+Шаблонизация & Jinja2 \\
+PDF & LuaLaTeX (fontspec, polyglossia), либо XeLaTeX \\
+Презентации & reveal.js \\
+Веб-фреймворк & FastAPI + Uvicorn \\
+Очереди & Celery + Redis (при необходимости) \\
+Тестирование & pytest, pytest-cov, mypy \\
+Версионный контроль & Git (GitHub/GitLab) \\
+Среда & venv, pyproject.toml, ruff, black \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Почему именно LuaLaTeX}
+
+Для русскоязычных научных документов \textbf{LuaLaTeX} предпочтительнее
+\code{pdflatex}:
+\begin{itemize}
+    \item нативная поддержка UTF-8;
+    \item \code{fontspec} и \code{polyglossia} для системных шрифтов;
+    \item корректная работа с формулами и кириллицей без
+          <<костылей>> с \code{T2A}.
+\end{itemize}
+
+\noindent
+Установка: официальный установщик TUG с последующим использованием
+\code{tlmgr install <package>} для добавления пакетов. Это
+гибче, чем \code{apt install texlive-full}.
+
+% ═══════════════════════════════════════════════════════
+\section{Тестирование и качество}
+% ═══════════════════════════════════════════════════════
+
+\subsection{Уровни тестов}
+
+\begin{enumerate}
+    \item \textbf{Юнит-тесты} для чистых функций:
+          \code{parse_intervals}, \code{inflect}, \code{describe},
+          \code{calculate\_answer}.
+    \item \textbf{Интеграционные тесты} для репозиториев на
+          временной БД SQLite.
+    \item \textbf{Снэпшот-тесты} для сгенерированного LaTeX
+          (сравнение с эталоном).
+    \item \textbf{Моки} для \code{subprocess.run} (LuaLaTeX)
+          и \code{argparse}.
+\end{enumerate}
+
+\subsection{Статический анализ}
+
+\begin{itemize}
+    \item \code{mypy} --- проверка типов (PEP 484).
+    \item \code{ruff} --- линтер и форматтер.
+    \item \code{black} --- единый стиль (если не используете ruff format).
+\end{itemize}
+
+\subsection{CI/CD}
+
+\begin{itemize}
+    \item \code{pytest} + \code{mypy} + \code{ruff} на каждый push.
+    \item Сборка Docker-образов для сервисов.
+    \item Деплой через GitOps (например, ArgoCD) при переходе
+          на Kubernetes.
+\end{itemize}
+
+% ═══════════════════════════════════════════════════════
+\section{Дорожная карта}
+% ═══════════════════════════════════════════════════════
+
+\subsection{Этап 1: монолит (локально)}
+
+\begin{itemize}
+    \item Разделение слоёв (\code{repositories}, \code{domain},
+          \code{render}).
+    \item Добавление таблиц задач и контекстов переменных.
+    \item Генерация PDF через LuaLaTeX с проверкой кода возврата.
+    \item Генерация reveal.js для диктантов.
+    \item Написание юнит-тестов для чистых функций.
+\end{itemize}
+
+\subsection{Этап 2: задачи с SymPy}
+
+\begin{itemize}
+    \item Генератор вариантов на SymPy с seed.
+    \item Проверка ОДЗ и ограничений на параметры.
+    \item Сохранение зафиксированных вариантов.
+\end{itemize}
+
+\subsection{Этап 3: модульный монолит на FastAPI}
+
+\begin{itemize}
+    \item REST API для контента и задач.
+    \item Аутентификация и роли.
+    \item Миграция на PostgreSQL.
+    \item Веб-интерфейс (фронтенд).
+\end{itemize}
+
+\subsection{Этап 4: микросервисы}
+
+\begin{itemize}
+    \item Выделение \code{render-service} (тяжёлый LuaLaTeX).
+    \item Выделение \code{task-service} (SymPy + Pint).
+    \item Очередь задач для пакетной генерации.
+\end{itemize}
+
+\subsection{Этап 5: масштабирование}
+
+\begin{itemize}
+    \item Kubernetes, GitOps, мониторинг (Prometheus + Grafana).
+    \item Кэширование PDF по хэшу.
+    \item CDN для статики и изображений.
+\end{itemize}
+
+% ═══════════════════════════════════════════════════════
+\section{Заключение}
+% ═══════════════════════════════════════════════════════
+
+Проект <<analysis>> сочетает сильные стороны локальной
+воспроизводимости и современной веб-архитектуры. Ключевые решения:
+
+\begin{enumerate}
+    \item \textbf{Единый источник истины} --- база данных, из которой
+          порождаются PDF, презентации и задачи.
+    \item \textbf{Разделение слоёв} --- данные, домен, представление;
+          позволяет заменить SQLite на PostgreSQL, а LuaLaTeX на API
+          без переписывания логики.
+    \item \textbf{Композиция вместо наследования} для величин;
+          \textbf{наследование с оговорками} для типов контента.
+    \item \textbf{Воспроизводимость без обязательных нейросетей}:
+          SymPy, Pint, pymorphy3 и шаблоны с грамматическими
+          метаданными.
+    \item \textbf{Микросервисы по доменным границам}, а не по типам
+          файлов; начать с модульного монолита на FastAPI.
+    \item \textbf{LuaLaTeX} для русскоязычных PDF: нативная поддержка
+          UTF-8, \code{fontspec}, \code{polyglossia}.
+\end{enumerate}
+
+\noindent
+Такая архитектура позволяет сохранить локальную воспроизводимость
+для научной работы, обеспечить готовность к веб-публикации и
+избежать зависимости от нейросетей в критичных по корректности
+участках.
+
+\end{document}
