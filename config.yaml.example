@@ -1,0 +1,18 @@
+# config.yaml
+defaults:
+  # Параметры по умолчанию для всех команд
+  school: [7]
+  university: [4]
+  section: ["Молекулярная физика и термодинамика"]
+  subsection: ["Основные понятия"]
+
+presentation:
+  # Настройки для презентаций
+  fixed_time:
+    formula_ms: 90_000
+    concept_ms: 90_000
+
+pdf:
+  # Настройки для PDF
+  include_images: false
+  include_animations: false

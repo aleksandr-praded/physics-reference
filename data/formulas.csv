@@ -90,6 +90,7 @@
 "Связь периода и частоты","T = \frac{1}{\nu}","period,frequency","Механика","Кинематика","school:10","",""
 "Связь угловой скорости и периода при равномерном вращении","\omega = \frac{2 \cdot \pi}{T}","uniform_angular_velocity,period","Механика","Кинематика","school:10","",""
 "Связь линейной скорости и угловой при равномерном вращении","v = \omega \cdot R","velocity_modulus,uniform_angular_velocity,radius","Механика","Кинематика","school:10","",""
+
 "Равнодействующая сил","\vec{F} = \vec{F}_1 + \vec{F}_2 + ... + \vec{F}_n","resulting_force,first_force,second_force,last_force","Механика","Динамика","school:10","",""
 "Второй закон Ньютона","\vec{F} = m \cdot \vec{a}","resulting_force,mass,acceleration","Механика","Динамика","school:10","",""
 "Третий закон Ньютона","\vec{F}_A = -\vec{F}_B","a_force,b_force","Механика","Динамика","school:10","third_newtons_law_4.png",""
@@ -99,12 +100,14 @@
 "Сила упругости","\vec{F}_{\text{упр}} = -k \cdot \vec{s}","elastic_force,elasticity_coefficient,displacement","Механика","Динамика","school:10","elastic_force_4.png",""
 "Проекции силы упругости","\begin{cases} F_{\text{упр } x} = -k \cdot s_x \\ F_{\text{упр } y} = -k \cdot s_y \\ F_{\text{упр } z} = -k \cdot s_z \end{cases}","elastic_force_abscissa,elastic_force_ordinate,elastic_force_applicate,elasticity_coefficient,displacement_abscissa,displacement_ordinate,displacement_applicate","Механика","Динамика","school:10","",""
 "Модуль силы трения скольжения","F_{\text{тр с}} = \mu \cdot N","sliding_friction_force_modulus,friction_force_coefficient,normal_force_modulus","Механика","Динамика","school:10","",""
+
 "Импульс материальной точки","\vec{p} = m \cdot \vec{v}","impulse,mass,velocity","Механика","Закон сохранения импульса","school:10","",""
 "Импульс силы материальной точки","\vec{I} = \vec{F} \cdot \Delta t","momentum,force,time_difference","Механика","Закон сохранения импульса","school:10","",""
 "Второй закон Ньютона в импульсной форме","\Delta \vec{p} = \vec{F} \cdot \Delta t","impulse_difference,resulting_force,time_difference","Механика","Закон сохранения импульса","school:10","",""
 "Импульс системы материальных точек","\vec{p}_{\text{сист}} = \vec{p}_1 + \vec{p}_2 + ... + \vec{p}_n","system_impulse,first_impulse,second_impulse,last_impulse","Механика","Закон сохранения импульса","school:10","",""
 "Изменение импульса системы","\Delta \vec{p}_{\text{сист}} = \vec{F}_{\text{внеш равн}} \cdot \Delta t","system_impulse_difference,resulting_outer_force,time_difference","Механика","Закон сохранения импульса","school:10","",""
 "Закон сохранения импульса","\vec{p}_1 + \vec{p}_2 + ... + \vec{p}_n = \vec{p}_1' + \vec{p}_2' + ... + \vec{p}_n'","initial_first_impulse,initial_second_impulse,initial_last_impulse,final_first_impulse,final_second_impulse,final_last_impulse","Механика","Закон сохранения импульса","school:10","",""
+
 "Работа постоянной силы","A = F \cdot s \cdot \cos(\widehat{\vec{F}, \vec{s}})","work,force_modulus,displacement_modulus,force_displacement_angle","Механика","Закон сохранения энергии","school:10","",""
 "Работа нескольких сил","A = A_1 + A_2 + ... + A_n","work,first_work,second_work,last_work","Механика","Закон сохранения энергии","school:10","",""
 "Мощность","N = \frac{A}{\Delta t}","power,work,time_difference","Механика","Закон сохранения энергии","school:10","",""
@@ -117,6 +120,7 @@
 "Закон сохранения механической энергии","E_{\text{к}} + E_{\text{п}} = E_{\text{к}}' + E_{\text{п}}'","initial_kinetic_energy,initial_potencial_energy,final_kinetic_energy,final_potencial_energy","Механика","Закон сохранения энергии","school:10","",""
 "Вторая космическая скорость","v_{II} = \sqrt{2 \cdot G \cdot \frac{M}{R + h}}","second_cosmic_velosity_modulus,gravity_constant,planet_mass,planet_radius,height","Механика","Закон сохранения энергии","school:10","second_cosmic_velocity.png",""
 "Потенциальная энергия силы тяготения","E_{\text{п}} = G \cdot \frac{m \cdot M}{R + h}","potencial_energy,gravity_constant,body_mass,planet_mass,planet_radius,height","Механика","Закон сохранения энергии","school:10","",""
+
 "Среднее угловое ускорение","\langle \varepsilon \rangle = \frac{\Delta \omega}{\Delta t}","average_angular_acceleration,angular_velocity_difference,time_difference","Механика","Динамика вращательного движения","school:10","",""
 "Момент инерции материальной точки","I = m \cdot r^2","moment_of_inertia,mass,distance_to_rotational_axis","Механика","Динамика вращательного движения","school:10","",""
 "Основное уравнение динамики вращательного движения","M = I \cdot \varepsilon","force_moment,moment_of_inertia,angular_acceleration","Механика","Динамика вращательного движения","school:10","",""
@@ -125,9 +129,14 @@
 "Изменение момента импульса","\Delta L = M \cdot \Delta t","angular_momentum_difference,force_moment,time_difference","Механика","Динамика вращательного движения","school:10","",""
 "Закон сохранения момента импульса","L_1 = L_1'","initial_angular_momentum,final_angular_momentum","Механика","Динамика вращательного движения","school:10","",""
 "Кинетическая энергия вращательного движения","E_{\text{к}} = \frac{I \cdot \omega^2}{2}","kinetic_energy,moment_of_inertia,angular_velocity","Механика","Динамика вращательного движения","school:10","",""
+
 "Момент силы","M = F \cdot l","force_moment,force_modulus,lever_arm","Механика","Статика","school:10","",""
 "Условия равновесия твёрдого тела","\begin{cases} \vec{F}_1 + \vec{F}_2 + ... + \vec{F}_n = \vec{0} \\ M_1 + M_2 + ... + M_n = 0 \end{cases}","first_force,second_force,last_force,first_force_moment,second_force_moment,last_force_moment","Механика","Статика","school:10","",""
+
 "Закон сохранения электрического заряда","q_1 + q_2 + ... + q_n = const","first_electric_charge,second_electric_charge,last_electric_charge","Электричество и магнетизм","Электростатика","school:10","",""
+
+
+
 "Количество вещества","\nu = \frac{N}{N_A}","amount_of_substance,number_of_particles,avogadro_constant","Молекулярная физика и термодинамика","Молекулярное строение вещества. Законы идеальных газов","university:1","",""
 "Молярная масса вещества","M = \frac{m}{\nu}","molar_mass,mass,amount_of_substance","Молекулярная физика и термодинамика","Молекулярное строение вещества. Законы идеальных газов","university:1","",""
 "Относительная молекулярная масса вещества","M_r = \sum_{i = 1} ^N n_i \cdot A_{r,i}","molecule_relative_mass,i_atom_number,i_atom_relative_mass","Молекулярная физика и термодинамика","Молекулярное строение вещества. Законы идеальных газов","university:1","",""
@@ -138,6 +147,7 @@
 "Уравнение состояния идеального газа (уравнение Менделеева-Клапейрона)","p \cdot V = \frac{m}{M} \cdot R \cdot T","gas_pressure,volume,mass,molar_mass,gas_constant,kelvin_temperature","Молекулярная физика и термодинамика","Молекулярное строение вещества. Законы идеальных газов","university:1","",""
 "Плотность идеального газа","\rho = \frac{M \cdot p}{R \cdot T}","molar_mass,gas_pressure,gas_constant,kelvin_temperature","Молекулярная физика и термодинамика","Молекулярное строение вещества. Законы идеальных газов","university:1","",""
 "Закон Дальтона","p = \sum_{i=1}^{N} p_i","first_component_pressure,second_component_pressure,last_component_pressure","Молекулярная физика и термодинамика","Молекулярное строение вещества. Законы идеальных газов","university:1","",""
+
 "Концентрация частиц","n = \frac{N}{V} \quad \text{и} \quad n = \frac{\rho}{M} N_A","particle_concentration,number_of_particles,volume,density,molar_mass,avogadro_constant","Молекулярная физика и термодинамика","Молекулярно-кинетическая теория газов","university:1","",""
 "Основное уравнение молекулярно-кинетической теории газов","p = \frac{2}{3} n \langle E \rangle","gas_pressure,particle_concentration,translational_movement_average_kinetic_energy","Молекулярная физика и термодинамика","Молекулярно-кинетическая теория газов","university:1","",""
 "Зависимость давления газа от концентрации и температуры","p = nkT","gas_pressure,particle_concentration,boltzmann_constant,kelvin_temperature","Молекулярная физика и термодинамика","Молекулярно-кинетическая теория газов","university:1","",""
@@ -148,6 +158,7 @@
 "Средняя квадратичная скорость","\langle v_{\text{кв}} \rangle = \sqrt{\frac{3kT}{m_0}}, \quad \text{или} \quad \langle v_{\text{кв}} \rangle = \sqrt{\frac{3RT}{M}}","quadratic_average_velocity,molecule_mass,boltzmann_constant,molar_mass,gas_constant,kelvin_temperature","Молекулярная физика и термодинамика","Молекулярно-кинетическая теория газов","university:1","",""
 "Средняя арифметическая скорость","\langle v \rangle = \sqrt{\frac{8kT}{\pi m_0}}, \quad \text{или} \quad \langle v \rangle = \sqrt{\frac{8RT}{\pi M}}","arithmetic_average_velocity,molecule_mass,boltzmann_constant,molar_mass,gas_constant,kelvin_temperature","Молекулярная физика и термодинамика","Молекулярно-кинетическая теория газов","university:1","",""
 "Наиболее вероятная скорость","v_{\text{в}} = \sqrt{\frac{2kT}{m_0}}, \quad \text{или} \quad v_{\text{в}} = \sqrt{\frac{2RT}{M}}","most_probable_velocity,molecule_mass,boltzmann_constant,molar_mass,gas_constant,kelvin_temperature","Молекулярная физика и термодинамика","Молекулярно-кинетическая теория газов","university:1","",""
+
 "Распределение Больцмана","n = n_0 \cdot \exp\left(-\frac{U}{k \cdot T}\right)","particle_concentration_r,particle_potencial_energy,particle_concentration_at_zero,boltzmann_constant,kelvin_temperature","Молекулярная физика и термодинамика","Элементы статистической физики","university:1","",""
 "Барометрическая формула","p = p_0 \cdot \exp\left(-\frac{m_0 \cdot g \cdot z}{k \cdot T}\right)","pressure_h,particle_mass,particle_applicate,reference_pressure,gravity_constant,boltzmann_constant,kelvin_temperature","Молекулярная физика и термодинамика","Элементы статистической физики","university:1","",""
 "Распределение Максвелла по скоростям","\mathrm{d}N(v) = N \cdot \frac{4}{\sqrt{\pi}} \cdot \left(\frac{m_0}{2 \cdot k \cdot T}\right)^{3/2} \cdot \exp\left(-\frac{m_0 \cdot v^2}{2 \cdot k \cdot T}\right) \cdot v^2 \cdot \mathrm{d}v","velocity_particle_number_differencial,number_of_particles,particle_mass,boltzmann_constant,kelvin_temperature,velocity_modulus_v","Молекулярная физика и термодинамика","Элементы статистической физики","university:1","",""
@@ -170,6 +181,7 @@
 "Закон Фика","\Delta m_i = -D \cdot \frac{\mathrm{d}\rho_i}{\mathrm{d}x} \cdot S \cdot \Delta t","i_component_mass,diffusion_coefficient,i_component_density_gradient,S,time","Молекулярная физика и термодинамика","Элементы статистической физики","university:1","",""
 "Коэффициент диффузии","D = \frac{\langle v \rangle \cdot \langle l \rangle}{3}","diffusion_coefficient,mean_velocity_modulus,mean_free_path","Молекулярная физика и термодинамика","Элементы статистической физики","university:1","",""
 "Характерное время диффузии","\tau = \frac{L^2}{D}","characteristic_time,diffusion_propagation_distance,diffusion_coefficient","Молекулярная физика и термодинамика","Элементы статистической физики","university:1","",""
+
 "Теплоёмкость","C = \frac{\delta Q}{d T}","heat_capacity,heat_quantity,kelvin_temperature","Молекулярная физика и термодинамика","Физические основы термодинамики","university:1","",""
 "Удельная теплоёмкость","c = \frac{C}{m}","specific_heat_capacity,heat_capacity,mass","Молекулярная физика и термодинамика","Физические основы термодинамики","university:1","",""
 "Молярная теплоёмкость","C_M = \frac{C}{\nu}","molar_heat_capacity,heat_capacity,amount_of_substance","Молекулярная физика и термодинамика","Физические основы термодинамики","university:1","",""
@@ -197,6 +209,7 @@
 "Термический коэффициент полезного действия","\eta = \frac{Q_1 - Q_2}{Q_1}","efficiency_factor,heater_heat,cooler_heat","Молекулярная физика и термодинамика","Физические основы термодинамики","university:1","",""
 "Термический коэффициент полезного действия цикла Карно","\eta = \frac{T_1 - T_2}{T_1}","kelvin_temperature,heater_temperature,cooler_temperature","Молекулярная физика и термодинамика","Физические основы термодинамики","university:1","",""
 "Формула Больцмана для энтропии","S = k \ln(W)","entropy,boltzmann_constant,thermodynamic_probability","Молекулярная физика и термодинамика","Физические основы термодинамики","university:1","",""
+
 "Уравнение Ван-дер-Ваальса","\left(P + \frac{a}{V^2}\right)(V - b) = RT","pressure_P,volume_V,van_der_waals_a,van_der_waals_b,gas_constant,kelvin_temperature","Молекулярная физика и термодинамика","Реальные газы. Жидкости","university:1","",""
 "Связь критических параметров для реального газа","p_{\text{кр}} V_{\text{кр}} = \frac{3}{8} R T_{\text{кр}}","critical_pressure,critical_volume,gas_constant,critical_temperature","Молекулярная физика и термодинамика","Реальные газы. Жидкости","university:1","",""
 "Внутренняя энергия реального газа","U = \nu C_V T - \frac{a \nu^2}{V}","internal_energy,amount_of_substance,molar_heat_capacity_at_constant_volume,kelvin_temperature,van_der_waals_a,volume_V","Молекулярная физика и термодинамика","Реальные газы. Жидкости","university:1","",""
@@ -214,6 +227,28 @@
 "Число Рейнольдса для потока жидкости в трубах","Re = \frac{\rho v d}{\eta}","reynolds_number,density,velocity_modulus,effective_diameter,viscosity","Молекулярная физика и термодинамика","Реальные газы. Жидкости","university:1","",""
 "Формула скорости для движения шарика в жидкости","v = \frac{2 r^2 (\rho - \rho_0) g}{9 \eta}","velocity_modulus,radius,density,density_fluid,free_fall_acceleration_modulus,viscosity","Молекулярная физика и термодинамика","Реальные газы. Жидкости","university:1","",""
 "Формула Стокса для силы сопротивления шарику в жидкости","F = 6 \pi \eta r v","force,viscosity,radius,velocity_modulus","Молекулярная физика и термодинамика","Реальные газы. Жидкости","university:1","",""
+
+
+
+"Электрическая ёмкость уединённого проводника","C = \frac{Q}{\varphi}","capacitance_isolated_conductor,charge_conductor,potential_conductor","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Ёмкость конденсатора","C = \frac{Q}{\varphi_1 - \varphi_2}","capacitance_capacitor,charge_conductor,potential_difference_plates","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Ёмкость уединённой проводящей сферы","C = 4\pi\varepsilon_0\varepsilon R","capacitance_sphere,electric_constant,dielectric_permittivity_medium,sphere_radius","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Ёмкость плоского конденсатора","C = \frac{\varepsilon\varepsilon_0 S}{d}","capacitance_parallel_plate,dielectric_permittivity_dielectric,electric_constant,plate_area,distance_between_plates","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Ёмкость плоского конденсатора со слоистым диэлектриком","C = \frac{\varepsilon_0 S}{\frac{d_1}{\varepsilon_1} + \frac{d_2}{\varepsilon_2} + \dots + \frac{d_n}{\varepsilon_n}}","capacitance_layered_dielectric,electric_constant,plate_area,layer_thickness_i,dielectric_permittivity_layer_i","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Ёмкость сферического конденсатора","C = \frac{4\pi\varepsilon_0\varepsilon R_1 R_2}{R_2 - R_1}","capacitance_spherical_capacitor,electric_constant,dielectric_permittivity_medium,inner_sphere_radius,outer_sphere_radius","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Ёмкость цилиндрического конденсатора","C = \frac{2\pi\varepsilon_0\varepsilon l}{\ln(R_2/R_1)}","capacitance_cylindrical_capacitor,electric_constant,dielectric_permittivity_medium,cylinder_length,inner_cylinder_radius,outer_cylinder_radius","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Ёмкость батареи последовательно соединённых конденсаторов (общий случай)","\frac{1}{C} = \sum_{i=1}^{n} \frac{1}{C_i}","resulting_capacitance_series,capacitance_i_th,number_of_capacitors","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Ёмкость двух последовательно соединённых конденсаторов","C = \frac{C_1 C_2}{C_1 + C_2}","resulting_capacitance_two_series,capacitance_first,capacitance_second","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Ёмкость n одинаковых последовательно соединённых конденсаторов","C = \frac{C_1}{n}","resulting_capacitance_n_identical_series,capacitance_each_identical,number_of_capacitors","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Ёмкость батареи параллельно соединённых конденсаторов (общий случай)","C = \sum_{i=1}^{n} C_i","resulting_capacitance_parallel,capacitance_i_th,number_of_capacitors","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Ёмкость двух параллельно соединённых конденсаторов","C = C_1 + C_2","resulting_capacitance_two_parallel,capacitance_first,capacitance_second","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Ёмкость n одинаковых параллельно соединённых конденсаторов","C = n C_1","resulting_capacitance_n_identical_parallel,capacitance_each_identical,number_of_capacitors","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Энергия заряженного проводника","W = \frac{1}{2}C\varphi^2 = \frac{1}{2}\frac{Q^2}{C} = \frac{1}{2}Q\varphi","energy_charged_conductor,capacitance_isolated_conductor,potential_conductor,charge_conductor","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Энергия заряженного конденсатора","W = \frac{1}{2}CU^2 = \frac{1}{2}\frac{Q^2}{C} = \frac{1}{2}QU","energy_charged_capacitor,capacitance_capacitor,voltage_on_plates,charge_conductor","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+"Объёмная плотность энергии электрического поля","w = \frac{1}{2}\varepsilon_0\varepsilon E^2 = \frac{1}{2}ED","volume_energy_density,electric_constant,dielectric_permittivity_medium,electric_field_strength,electric_displacement","Электричество и магнетизм","Электрическая ёмкость. Конденсаторы. Энергия заряженного проводника. Энергия электрического поля.","university:4","",""
+
+
+
 "Система дифференциальных уравнений Гамильтона","\left \{ \begin{aligned} \dot{q}_i &= \frac{\partial H}{\partial p_i} \\ \dot{p}_i = -\frac{\partial H}{\partial q_i} \end{aligned} \right","hamiltonian,generalized_coordinate,generalized_momentum","Статистическая физика","Лекция 2","university:4","",""
 "Связь вероятности с плотностью вероятности","\mathrm{d}w(g, p) = \omega(g, p) \cdot \mathrm{d}\Gamma","magnitude_probability,probability_density_rho,phase_space_volume","Статистическая физика","Лекция 2","university:4","",""
 "Среднее значение физической величины","\langle f \rangle = \int f \cdot \omega \, \mathrm{d}\Gamma","mean_value_f,function_f,probability_density_rho,phase_space_volume","Статистическая физика","Лекция 2","university:4","",""
